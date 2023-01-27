@@ -22,23 +22,20 @@ import com.csci448.hadam.monsterlab.presentation.MonsterDisplay
 import com.csci448.hadam.monsterlab.presentation.MonsterList
 import com.csci448.hadam.monsterlab.presentation.MonsterViewModel
 
+// Creates the MonsterLabScreen view and imports reference to the vm
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         var vm  = MonsterViewModel(MonsterRepo.monsters)
         setContent {
             MonsterLabTheme {
-                Surface(
-                    modifier = Modifier.fillMaxSize()
-                ) {
-                    MonsterLabScreen(vm)
-                }
+                Surface(modifier = Modifier.fillMaxSize()) { MonsterLabScreen(vm) }
             }
         }
     }
 }
 
-
+// Default preview for app calls MonsterLabScreen with the vm
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun DefaultPreview() {
@@ -48,33 +45,13 @@ fun DefaultPreview() {
     }
 }
 
-
-
-//@Composable
-//fun MonsterLabScreen() {
-//    MonsterCard()
-//}
-
+// Updates the row state of the monsters
 @Composable
 fun MonsterLabScreen(vm : MonsterViewModel) {
     Column {
-        Box(modifier = Modifier
-            .weight(0.5f)
-            .fillMaxSize()
-        )
-
-        {
-                MonsterList(MonsterRepo.monsters) {
-                    vm.selectedMonsterState.value = it
-                }
-        }
-        Box(modifier = Modifier
-            .weight(0.5f)
-            .fillMaxSize()
-        )
-
-        {
-            MonsterDisplay(vm.selectedMonsterState.value)
-        }
+        Box(modifier = Modifier.weight(0.5f).fillMaxSize())
+        { MonsterList(MonsterRepo.monsters) { vm.selectedMonsterState.value = it } }
+        Box(modifier = Modifier.weight(0.5f).fillMaxSize())
+        { MonsterDisplay(vm.selectedMonsterState.value) }
     }
 }

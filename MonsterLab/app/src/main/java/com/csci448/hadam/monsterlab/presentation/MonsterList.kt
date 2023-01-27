@@ -6,6 +6,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.csci448.hadam.monsterlab.data.Monster
 import com.csci448.hadam.monsterlab.data.MonsterRepo
 
+// Dynamic way of grabbing data from mock database, ie list of monster
 @Composable
 fun MonsterList(monsters : List<Monster>, onMonsterClicked: (Monster) -> Unit) {
     LazyColumn() {
@@ -17,6 +18,7 @@ fun MonsterList(monsters : List<Monster>, onMonsterClicked: (Monster) -> Unit) {
     }
 }
 
+// Preview to show the list of monsters will show up
 @Preview
 @Composable
 fun Monsters() {

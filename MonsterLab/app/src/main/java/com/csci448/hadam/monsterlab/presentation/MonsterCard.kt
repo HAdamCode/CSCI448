@@ -1,4 +1,6 @@
-@file:OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3Api::class)
+@file:OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3Api::class,
+    ExperimentalMaterial3Api::class
+)
 
 package com.csci448.hadam.monsterlab.presentation
 
@@ -25,7 +27,7 @@ import androidx.compose.ui.unit.sp
 import com.csci448.hadam.monsterlab.R
 import com.csci448.hadam.monsterlab.data.Monster
 
-
+// Takes in a monster and an action. If the monster is clicked, the onMonsterClicked is fired.
 @Composable
 fun MonsterCard(monster: Monster, onMonsterClicked: (Monster) -> Unit) {
     Card(modifier = Modifier.padding(8.dp), onClick = { onMonsterClicked(monster) })
@@ -57,22 +59,23 @@ fun MonsterCard(monster: Monster, onMonsterClicked: (Monster) -> Unit) {
                     color = MaterialTheme.colorScheme.onPrimaryContainer
                 )
             }
-
         }
     }
 }
 
+// Preview to show a monster card
 @Preview
 @Composable
 fun PreviewMonsterCard() {
     val youngMike = Monster(
-        R.drawable.monsters_university_character_young_mike_icons,
-        R.string.name_monster_mike,
-        R.string.description_monster_mike
+        imageId = R.drawable.monsters_university_character_young_mike_icons,
+        nameId = R.string.name_monster_mike,
+        descId = R.string.description_monster_mike
     )
     MonsterCard(youngMike, onMonsterClicked = {})
 }
 
+// Hard coded preview for second monster
 @Preview
 @Composable
 fun PreviewMonsterCard2() {

@@ -1,4 +1,6 @@
-@file:OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3Api::class)
+@file:OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3Api::class,
+    ExperimentalMaterial3Api::class, ExperimentalMaterial3Api::class
+)
 
 package com.csci448.hadam.monsterlab.presentation
 
@@ -16,6 +18,7 @@ import androidx.compose.ui.unit.sp
 import com.csci448.hadam.monsterlab.R
 import com.csci448.hadam.monsterlab.data.Monster
 
+// Takes in a monster, check if it is null then builds a view for it
 @Composable
 fun MonsterDisplay(monster : Monster?) {
     if (monster != null) {
@@ -49,7 +52,6 @@ fun MonsterDisplay(monster : Monster?) {
                        color = MaterialTheme.colorScheme.onPrimaryContainer
                    )
                }
-
            }
        }
     }
@@ -60,9 +62,9 @@ fun MonsterDisplay(monster : Monster?) {
            color = MaterialTheme.colorScheme.primaryContainer
         )
     }
-
 }
 
+// Preview to show what a non-null monster would look like
 @Preview
 @Composable
 fun Preview1() {
@@ -73,6 +75,7 @@ fun Preview1() {
     ))
 }
 
+// Preview to show what a null monster would look like
 @Preview
 @Composable
 fun Preview2() {

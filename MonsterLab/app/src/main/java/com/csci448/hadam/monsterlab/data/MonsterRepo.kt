@@ -2,8 +2,9 @@ package com.csci448.hadam.monsterlab.data
 
 import com.csci448.hadam.monsterlab.R
 
+// List of drawable monsters
 object MonsterRepo {
-    public var monsters =
+    var monsters =
         listOf(
         Monster(imageId =
         R.drawable.monsters_university_character_young_mike_icons,
