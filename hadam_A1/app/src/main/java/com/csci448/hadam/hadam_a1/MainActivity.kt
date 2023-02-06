@@ -11,8 +11,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.csci448.hadam.hadam_a1.presentation.Hunger
-import com.csci448.hadam.hadam_a1.presentation.NumPeople
+import com.csci448.hadam.hadam_a1.presentation.*
 import com.csci448.hadam.hadam_a1.ui.theme.Hadam_A1Theme
 
 class MainActivity : ComponentActivity() {
@@ -50,5 +49,9 @@ fun PizzaScreen() {
     Column {
         NumPeople()
         Hunger()
+        PizzaSelect(10)
+        CalculateButton()
+        TotalPizzas(20)
+        TotalCost(40.30)
     }
 }

@@ -19,7 +19,7 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun NumPeople() {
-    val inputvalue = remember { mutableStateOf(TextFieldValue()) }
+    val inputValue = remember { mutableStateOf(TextFieldValue()) }
     Row(modifier = Modifier.background(color = MaterialTheme.colorScheme.primary).fillMaxWidth()) {
         Text(
             text = "Number of People?",
@@ -27,8 +27,8 @@ fun NumPeople() {
                 .background(color = MaterialTheme.colorScheme.primary)
         )
         TextField(
-            value = inputvalue.value,
-            onValueChange = { inputvalue.value = it },
+            value = inputValue.value,
+            onValueChange = { inputValue.value = it },
             placeholder = {Text(text = "0")},
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
             maxLines = 1,
