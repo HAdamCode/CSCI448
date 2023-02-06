@@ -3,6 +3,7 @@ package com.csci448.hadam.hadam_a1
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -10,6 +11,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.csci448.hadam.hadam_a1.presentation.Hunger
+import com.csci448.hadam.hadam_a1.presentation.NumPeople
 import com.csci448.hadam.hadam_a1.ui.theme.Hadam_A1Theme
 
 class MainActivity : ComponentActivity() {
@@ -38,6 +41,14 @@ fun Greeting(name: String) {
 @Composable
 fun DefaultPreview() {
     Hadam_A1Theme {
-        Greeting("Android")
+        PizzaScreen()
+    }
+}
+
+@Composable
+fun PizzaScreen() {
+    Column {
+        NumPeople()
+        Hunger()
     }
 }

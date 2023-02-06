@@ -32,7 +32,7 @@ fun Hunger() {
                                 selected = (text == selectedOption),
                                 onClick = { onOptionSelected(text) }
                             )
-                            .padding(horizontal = 16.dp)
+                            .padding(horizontal = 10.dp)
                     ) {
 //                        val context = ContextAmbient.current
                         RadioButton(
@@ -45,7 +45,7 @@ fun Hunger() {
                         )
                         Text(
                             text = text,
-                            modifier = Modifier.padding(top = 14.dp, start = 4.dp)
+                            modifier = Modifier.padding(top = 14.dp, start = 2.dp)
                         )
                     }
                 }
