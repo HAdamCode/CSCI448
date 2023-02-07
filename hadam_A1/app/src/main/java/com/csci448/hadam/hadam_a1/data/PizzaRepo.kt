@@ -1,13 +1,15 @@
 package com.csci448.hadam.hadam_a1.data
 
+import com.csci448.hadam.hadam_a1.R
+
 object PizzaRepo {
     var pizzas =
         listOf(
-            Pizza("Pepperoni", 2.12),
-            Pizza("Vegetarian", 3.42),
-            Pizza("Vegan", 5.01),
-            Pizza("Meat Lovers", 2.13),
-            Pizza("Cheese", 2.06),
-            Pizza("Ham and Pineapple", 10.97)
+            Pizza(R.string.Pepperoni, 2.12),
+            Pizza(R.string.Vegetarian, 3.42),
+            Pizza(R.string.Vegan, 5.01),
+            Pizza(R.string.Meat_Lovers, 2.13),
+            Pizza(R.string.Cheese, 2.06),
+            Pizza(R.string.Ham_and_Pineapple, 10.97)
         )
 }

@@ -15,20 +15,25 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.toSize
 import com.csci448.hadam.hadam_a1.data.PizzaRepo
 
 @Composable
-fun PizzaSelect(numSlices: Int) {
-    var totalPrice = "%.2f".format(numSlices * PizzaRepo.pizzas.firstOrNull()!!.costPerPie)
+fun PizzaSelect(vm : PizzaViewModel) {
+    var numSlices = 8
+    var totalPrice = "%.2f".format(PizzaRepo.pizzas.firstOrNull()!!.costPerPie)
     var mExpanded by remember { mutableStateOf(false) }
     val mPizzas = PizzaRepo.pizzas
+    val initText = "${stringResource(id = PizzaRepo.pizzas.firstOrNull()!!.name)} " +
+    "($${totalPrice} ea)"
     var selectedPizza by remember { mutableStateOf(
-        "${PizzaRepo.pizzas.firstOrNull()!!.name} " +
-                "($${totalPrice} ea)")}
+        initText)}
     var mTextFieldSize by remember { mutableStateOf(Size.Zero)}
+    var price by remember { mutableStateOf(PizzaRepo.pizzas.first().costPerPie) }
+    vm.selectedPriceState.value = price
     val icon = if (mExpanded)
         Icons.Filled.KeyboardArrowUp
     else
@@ -55,12 +60,13 @@ fun PizzaSelect(numSlices: Int) {
                 .width(with(LocalDensity.current){mTextFieldSize.width.toDp()})
         ) {
             mPizzas.forEach { label ->
-                DropdownMenuItem(text = { Text(text = "${label.name} " +
-                        "($${"%.2f".format(label.costPerPie * numSlices)} ea)") },
+                val text = "${stringResource(id = label.name)} " +
+                        "($${"%.2f".format(label.costPerPie)} ea)"
+                DropdownMenuItem(text = { Text(text = text) },
                     onClick = {
-                    selectedPizza = "${label.name} " +
-                            "($${"%.2f".format(label.costPerPie * numSlices)} ea)"
+                    selectedPizza = text
                     mExpanded = false
+                        price = "%.2f".format(label.costPerPie).toDouble()
                 })
             }
         }
@@ -70,5 +76,6 @@ fun PizzaSelect(numSlices: Int) {
 @Composable
 @Preview
 fun PreviewPizzaSelect() {
-    PizzaSelect(10)
+    var vm = PizzaViewModel(PizzaRepo.pizzas)
+    PizzaSelect(vm)
 }

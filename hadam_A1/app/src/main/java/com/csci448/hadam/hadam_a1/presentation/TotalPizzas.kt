@@ -10,22 +10,26 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.csci448.hadam.hadam_a1.R
 
 @Composable
-fun TotalPizzas(totalPizzas: Int) {
+fun TotalPizzas(totalPizzas: Int?) {
+
     Row(modifier = Modifier
         .fillMaxWidth()
         .padding(top = 8.dp, bottom = 8.dp))
     {
-        Text(text = "Total Pizzas Needed:",
+        Text(text = stringResource(id = R.string.Total_Pizzas_Needed),
         Modifier.padding(start = 8.dp))
         Text(text = totalPizzas.toString(),
             textAlign = TextAlign.Right,
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier
+                .fillMaxWidth()
                 .padding(end = 8.dp))
     }
 }

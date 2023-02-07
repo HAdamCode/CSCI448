@@ -11,47 +11,41 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.csci448.hadam.hadam_a1.data.Pizza
+import com.csci448.hadam.hadam_a1.data.PizzaRepo
 import com.csci448.hadam.hadam_a1.presentation.*
 import com.csci448.hadam.hadam_a1.ui.theme.Hadam_A1Theme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        var vm = PizzaViewModel(PizzaRepo.pizzas)
         setContent {
             Hadam_A1Theme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    Greeting("Android")
-                }
+                Surface(modifier = Modifier.fillMaxSize()) { PizzaScreen(vm) }
             }
         }
     }
 }
 
-@Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
-}
-
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
+    var vm = PizzaViewModel(PizzaRepo.pizzas)
     Hadam_A1Theme {
-        PizzaScreen()
+        PizzaScreen(vm)
     }
 }
 
 @Composable
-fun PizzaScreen() {
+fun PizzaScreen(vm : PizzaViewModel) {
     Column {
-        NumPeople()
-        Hunger()
-        PizzaSelect(10)
-        CalculateButton()
-        TotalPizzas(20)
-        TotalCost(40.30)
+        vm.InitTotals()
+        NumPeople(vm)
+        Hunger(vm)
+        PizzaSelect(vm)
+        CalculateButton(vm) {vm.selectedTotalPizzaState.value = it}
+        TotalPizzas(vm.selectedTotalPizzaState.value)
+        TotalCost(vm.selectedTotalCostState.value)
     }
 }

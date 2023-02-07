@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">hadam_A1</string>
+    <string name="Pepperoni">Pepperoni</string>
+    <string name="Vegetarian">Vegetarian</string>
+    <string name="Vegan">Vegan</string>
+    <string name="Meat_Lovers">Meat Lovers</string>
+    <string name="Cheese">Cheese</string>
+    <string name="Ham_and_Pineapple">Ham and Pineapple</string>
+    <string name="Num_People_Question">Number of People?</string>
+    <string name="Light">Light</string>
+    <string name="Medium">Medium</string>
+    <string name="Ravenous">Ravenous</string>
+    <string name="How_hungry_is_everyone">How hungry is everyone?</string>
+    <string name="Calculate">Calculate</string>
+    <string name="Total_Pizzas_Needed">Total Pizzas Needed:</string>
+    <string name="Total_Cost">Total Cost:</string>
+
 </resources>
