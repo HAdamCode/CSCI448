@@ -12,7 +12,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.csci448.hadam.hadam_a1.R
-import com.csci448.hadam.hadam_a1.data.PizzaRepo
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -21,15 +20,15 @@ fun Hunger(vm : PizzaViewModel) {
         stringResource(id = R.string.Medium),
         stringResource(id = R.string.Ravenous))
     val (selectedOption, onOptionSelected) = remember { mutableStateOf(options[2]) }
-    vm.selectedHungerState?.value = selectedOption
-    Row() {
-        Column() {
+    vm.selectedHungerState.value = selectedOption
+    Row {
+        Column {
             Text(text = stringResource(id = R.string.How_hungry_is_everyone),
                 Modifier
                     .padding(top = 18.dp, bottom = 0.dp, start = 4.dp, end = 4.dp)
                     .background(color = MaterialTheme.colorScheme.primary)
             )
-            Row() {
+            Row {
                 options.forEach { text ->
                     Row(
                         Modifier
@@ -62,7 +61,7 @@ fun Hunger(vm : PizzaViewModel) {
 
 @Composable
 @Preview
-fun PreivewHunger() {
-    var vm = PizzaViewModel(PizzaRepo.pizzas)
+fun PreviewHunger() {
+    val vm = PizzaViewModel()
     Hunger(vm)
 }

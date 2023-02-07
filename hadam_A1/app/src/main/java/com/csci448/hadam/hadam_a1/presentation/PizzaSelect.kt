@@ -1,6 +1,5 @@
 package com.csci448.hadam.hadam_a1.presentation
 
-import android.annotation.SuppressLint
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -23,8 +22,7 @@ import com.csci448.hadam.hadam_a1.data.PizzaRepo
 
 @Composable
 fun PizzaSelect(vm : PizzaViewModel) {
-    var numSlices = 8
-    var totalPrice = "%.2f".format(PizzaRepo.pizzas.firstOrNull()!!.costPerPie)
+    val totalPrice = "%.2f".format(PizzaRepo.pizzas.firstOrNull()!!.costPerPie)
     var mExpanded by remember { mutableStateOf(false) }
     val mPizzas = PizzaRepo.pizzas
     val initText = "${stringResource(id = PizzaRepo.pizzas.firstOrNull()!!.name)} " +
@@ -76,6 +74,6 @@ fun PizzaSelect(vm : PizzaViewModel) {
 @Composable
 @Preview
 fun PreviewPizzaSelect() {
-    var vm = PizzaViewModel(PizzaRepo.pizzas)
+    val vm = PizzaViewModel()
     PizzaSelect(vm)
 }

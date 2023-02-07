@@ -1,6 +1,5 @@
 package com.csci448.hadam.hadam_a1.presentation
 
-import android.widget.Toast
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Button
@@ -16,9 +15,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.csci448.hadam.hadam_a1.R
-import com.csci448.hadam.hadam_a1.data.Pizza
-import com.csci448.hadam.hadam_a1.data.PizzaRepo
-import java.lang.StrictMath.ceil
 
 @Composable
 fun CalculateButton(vm : PizzaViewModel, onCalculateClick : (Int?) -> Unit) {
@@ -29,7 +25,7 @@ fun CalculateButton(vm : PizzaViewModel, onCalculateClick : (Int?) -> Unit) {
     ) {
 //        val context = ContextAmbient.current
         Button(
-            onClick = {onCalculateClick(vm.SetTotals())}, //Toast.makeText(this, "Test", Toast.LENGTH_LONG).show()
+            onClick = {onCalculateClick(vm.setTotals())}, //Toast.makeText(this, "Test", Toast.LENGTH_LONG).show()
             modifier = Modifier.padding(all = Dp(10F)),
             enabled = true,
             border = BorderStroke(width = 1.dp, brush = SolidColor(Color.Blue)),
@@ -44,6 +40,6 @@ fun CalculateButton(vm : PizzaViewModel, onCalculateClick : (Int?) -> Unit) {
 @Composable
 @Preview
 fun PreviewCalculateButton() {
-    var vm = PizzaViewModel(PizzaRepo.pizzas)
+    val vm = PizzaViewModel()
     CalculateButton(vm, onCalculateClick = {})
 }

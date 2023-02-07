@@ -14,12 +14,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.TextFieldValue
-import androidx.compose.ui.text.input.getSelectedText
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.csci448.hadam.hadam_a1.R
-import com.csci448.hadam.hadam_a1.data.PizzaRepo
 
 @Composable
 fun NumPeople(vm : PizzaViewModel) {
@@ -48,6 +45,6 @@ fun NumPeople(vm : PizzaViewModel) {
 @Composable
 @Preview
 fun PreviewNumPeople() {
-    var vm = PizzaViewModel(PizzaRepo.pizzas)
+    val vm = PizzaViewModel()
     NumPeople(vm)
 }

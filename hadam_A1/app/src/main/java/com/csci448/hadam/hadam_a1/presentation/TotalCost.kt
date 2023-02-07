@@ -14,7 +14,6 @@ import com.csci448.hadam.hadam_a1.R
 
 @Composable
 fun TotalCost(totalCost: Double?) {
-    var total = "%.2f".format(totalCost)
     Row(modifier = Modifier
         .fillMaxWidth()
         .padding(top = 8.dp, bottom = 8.dp))

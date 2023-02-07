@@ -5,21 +5,17 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.csci448.hadam.hadam_a1.data.Pizza
-import com.csci448.hadam.hadam_a1.data.PizzaRepo
 import com.csci448.hadam.hadam_a1.presentation.*
 import com.csci448.hadam.hadam_a1.ui.theme.Hadam_A1Theme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        var vm = PizzaViewModel(PizzaRepo.pizzas)
+        val vm = PizzaViewModel()
         setContent {
             Hadam_A1Theme {
                 Surface(modifier = Modifier.fillMaxSize()) { PizzaScreen(vm) }
@@ -31,7 +27,7 @@ class MainActivity : ComponentActivity() {
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
-    var vm = PizzaViewModel(PizzaRepo.pizzas)
+    val vm = PizzaViewModel()
     Hadam_A1Theme {
         PizzaScreen(vm)
     }
@@ -40,7 +36,7 @@ fun DefaultPreview() {
 @Composable
 fun PizzaScreen(vm : PizzaViewModel) {
     Column {
-        vm.InitTotals()
+        vm.initTotals()
         NumPeople(vm)
         Hunger(vm)
         PizzaSelect(vm)
