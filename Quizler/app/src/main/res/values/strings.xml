@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">Quizler</string>
+    <string name="label_true">True</string>
+    <string name="label_false">False</string>
+    <string name="label_next">Next</string>
+    <string name="label_previous">Previous</string>
+    <string name="question1">Colorado School of Mines is located in South Bend, IN.</string>
+    <string name="question2">The Battle of Hastings occurred in 1066.</string>
+    <string name="question3">Orange juice is the best juice.</string>
+    <string name="question4">Psych is a great show.</string>
+    <string name="question5">Peanuts are disgusting.</string>
 </resources>
