@@ -9,4 +9,7 @@
     <string name="question3">Orange juice is the best juice.</string>
     <string name="question4">Psych is a great show.</string>
     <string name="question5">Peanuts are disgusting.</string>
+    <string name="label_score_formatter">Score: %1$d</string>
+    <string name="message_correct">Your wisdom is unmatched by any in the kingdom!</string>
+    <string name="message_wrong">You must consult the elders for additional knowledge.</string>
 </resources>
