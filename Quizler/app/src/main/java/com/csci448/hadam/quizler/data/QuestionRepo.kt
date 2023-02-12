@@ -2,10 +2,10 @@ package com.csci448.hadam.quizler.data
 
 import android.util.Log
 import com.csci448.hadam.quizler.R
-import com.csci448.hadam.quizler.presentation.question.QuestionViewModel
 
 object QuestionRepo {
     private const val LOG_TAG = "448.QuestionRepo"
+
     init {
         Log.d(LOG_TAG, "Repo Init called")
     }

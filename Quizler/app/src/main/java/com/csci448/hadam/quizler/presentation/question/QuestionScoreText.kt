@@ -10,7 +10,7 @@ import com.csci448.hadam.quizler.R
 private const val LOG_TAG = "448.QuestionScoreText"
 
 @Composable
-fun QuestionScoreText(score : Int) {
+fun QuestionScoreText(score: Int) {
     Log.d(LOG_TAG, score.toString())
     Text(text = stringResource(id = R.string.label_score_formatter, score))
 }

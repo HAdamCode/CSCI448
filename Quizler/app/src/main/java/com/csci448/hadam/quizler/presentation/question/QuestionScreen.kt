@@ -45,7 +45,6 @@ fun QuestionScreen(vm: QuestionViewModel) {
                 vm.moveToNextQuestion()
             }
         }
-
     }
 }
 

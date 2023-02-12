@@ -24,7 +24,7 @@ fun QuestionDisplay(question: Question, onCorrectAnswer: () -> Unit, onWrongAnsw
         }
         Row() {
             Button(onClick = {
-                if( question.isTrue ) {
+                if (question.isTrue) {
                     onCorrectAnswer()
                 } else {
                     onWrongAnswer()
@@ -33,7 +33,7 @@ fun QuestionDisplay(question: Question, onCorrectAnswer: () -> Unit, onWrongAnsw
                 Text(text = stringResource(id = R.string.label_true))
             }
             Button(onClick = {
-                if( question.isTrue ) {
+                if (question.isTrue) {
                     onWrongAnswer()
                 } else {
                     onCorrectAnswer()
@@ -42,14 +42,11 @@ fun QuestionDisplay(question: Question, onCorrectAnswer: () -> Unit, onWrongAnsw
                 Text(text = stringResource(id = R.string.label_false))
             }
         }
-
     }
 }
 
 @Preview
 @Composable
 fun PreviewQuestionDisplay() {
-    QuestionDisplay(question = QuestionRepo.questions.first(), onCorrectAnswer = { }) {
-
-    }
+    QuestionDisplay(question = QuestionRepo.questions.first(), onCorrectAnswer = { }) {}
 }

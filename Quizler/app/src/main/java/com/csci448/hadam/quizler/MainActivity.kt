@@ -5,12 +5,7 @@ import android.os.PersistableBundle
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.ViewModelProvider
 import com.csci448.hadam.quizler.data.QuestionRepo
@@ -18,7 +13,6 @@ import com.csci448.hadam.quizler.presentation.question.QuestionScreen
 import com.csci448.hadam.quizler.presentation.question.QuestionViewModel
 import com.csci448.hadam.quizler.presentation.question.QuestionViewModelFactory
 import com.csci448.hadam.quizler.ui.theme.QuizlerTheme
-import kotlin.math.absoluteValue
 
 class MainActivity : ComponentActivity() {
     companion object {
@@ -51,6 +45,7 @@ class MainActivity : ComponentActivity() {
         outState.putInt(score, mViewModel.currentScoreState.value)
 
     }
+
     override fun onStart() {
         super.onStart()
         Log.d(LOG_TAG, "onStart() called")
@@ -105,11 +100,6 @@ class MainActivity : ComponentActivity() {
         super.onDetachedFromWindow()
         Log.d(LOG_TAG, "onDetachedFromWindow() called")
     }
-}
-
-@Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
 }
 
 @Preview(showBackground = true)

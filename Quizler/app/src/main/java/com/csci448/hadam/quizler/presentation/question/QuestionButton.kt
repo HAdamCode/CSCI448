@@ -14,7 +14,7 @@ fun QuestionButton(buttonText: String, onButtonClick: () -> Unit) {
     Log.d(LOG_TAG, buttonText)
     Row() {
         Button(onClick = onButtonClick) {
-            Text( text = buttonText )
+            Text(text = buttonText)
         }
     }
 }
@@ -22,7 +22,5 @@ fun QuestionButton(buttonText: String, onButtonClick: () -> Unit) {
 @Preview
 @Composable
 fun PreviewQuestionButton() {
-    QuestionButton(buttonText = "Next") {
-        
-    }
+    QuestionButton(buttonText = "Next") {}
 }
