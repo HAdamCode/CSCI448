@@ -9,6 +9,11 @@
     <string name="question3">Orange juice is the best juice.</string>
     <string name="question4">Psych is a great show.</string>
     <string name="question5">Peanuts are disgusting.</string>
+    <string name="question6">Who won the Heisman Trophy in 1987?</string>
+    <string name="q6_choice1">Barry Sanders</string>
+    <string name="q6_choice2">Andre Ware</string>
+    <string name="q6_choice3">Tim Brown</string>
+    <string name="q6_choice4">Bo Jackson</string>
     <string name="label_score_formatter">Score: %1$d</string>
     <string name="message_correct">Your wisdom is unmatched by any in the kingdom!</string>
     <string name="message_wrong">You must consult the elders for additional knowledge.</string>
