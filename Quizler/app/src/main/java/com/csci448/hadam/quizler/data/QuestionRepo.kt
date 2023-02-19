@@ -12,10 +12,11 @@ object QuestionRepo {
 
     var questions =
         listOf(
-            Question(R.string.question1, false),
-            Question(R.string.question2, true),
-            Question(R.string.question3, true),
-            Question(R.string.question4, true),
-            Question(R.string.question5, false),
+            Question(R.string.question1, 2),
+            Question(R.string.question2, 1),
+            Question(R.string.question3, 1),
+            Question(R.string.question4, 1),
+            Question(R.string.question5, 2),
+            Question(R.string.question6, 3, R.string.q6_choice1, R.string.q6_choice2, R.string.q6_choice3, R.string.q6_choice4),
         )
 }

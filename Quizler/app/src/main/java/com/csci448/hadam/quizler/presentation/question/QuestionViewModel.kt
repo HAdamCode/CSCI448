@@ -46,7 +46,7 @@ class QuestionViewModel(
         Log.d(LOG_TAG, "Previous question")
         mCurrentQuestionIndex--
         if (mCurrentQuestionIndex < 0) {
-            mCurrentQuestionIndex = 4
+            mCurrentQuestionIndex = mQuestions.count() - 1
         }
         mCurrentQuestionState.value = mQuestions[mCurrentQuestionIndex]
     }

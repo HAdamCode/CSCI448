@@ -23,30 +23,41 @@ fun QuestionDisplay(question: Question, onCorrectAnswer: () -> Unit, onWrongAnsw
             Text(text = stringResource(id = question.questionTextId))
         }
         Row() {
-            Button(onClick = {
-                if (question.isTrue) {
-                    onCorrectAnswer()
-                } else {
-                    onWrongAnswer()
+            QuestionButton(buttonText = stringResource(id = question.choice1Id), onButtonClick =
+            checkAnswerChoice(1, question.correctChoiceNumber, onCorrectAnswer, onWrongAnswer))
+            QuestionButton(buttonText = stringResource(id = question.choice2Id), onButtonClick =
+            checkAnswerChoice(2, question.correctChoiceNumber, onCorrectAnswer, onWrongAnswer))
+        }
+        if (question.choice3Id != null) {
+            Row() {
+                QuestionButton(buttonText = stringResource(id = question.choice3Id), onButtonClick =
+                checkAnswerChoice(3, question.correctChoiceNumber, onCorrectAnswer, onWrongAnswer))
+                if (question.choice4Id != null) {
+                    QuestionButton(buttonText = stringResource(id = question.choice4Id), onButtonClick =
+                    checkAnswerChoice(4, question.correctChoiceNumber, onCorrectAnswer, onWrongAnswer))
                 }
-            }) {
-                Text(text = stringResource(id = R.string.label_true))
-            }
-            Button(onClick = {
-                if (question.isTrue) {
-                    onWrongAnswer()
-                } else {
-                    onCorrectAnswer()
-                }
-            }) {
-                Text(text = stringResource(id = R.string.label_false))
             }
         }
     }
 }
 
+private fun checkAnswerChoice(choiceChosen:Int, correctChoice: Int, onCorrectAnswer: () -> Unit, onWrongAnswer: () -> Unit): () -> Unit{
+    return if (choiceChosen == correctChoice) {
+        onCorrectAnswer
+    }
+    else {
+        onWrongAnswer
+    }
+
+}
 @Preview
 @Composable
 fun PreviewQuestionDisplay() {
     QuestionDisplay(question = QuestionRepo.questions.first(), onCorrectAnswer = { }) {}
+}
+
+@Preview
+@Composable
+fun PreviewMultiQuestionDisplay() {
+    QuestionDisplay(question = QuestionRepo.questions.last(), onCorrectAnswer = { }) {}
 }
