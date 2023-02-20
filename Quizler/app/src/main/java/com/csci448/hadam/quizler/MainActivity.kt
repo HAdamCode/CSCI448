@@ -10,8 +10,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.ViewModelProvider
 import com.csci448.hadam.quizler.data.QuestionRepo
 import com.csci448.hadam.quizler.presentation.question.QuestionScreen
-import com.csci448.hadam.quizler.presentation.question.QuestionViewModel
-import com.csci448.hadam.quizler.presentation.question.QuestionViewModelFactory
+import com.csci448.hadam.quizler.presentation.viewmodel.QuizlerViewModel
+import com.csci448.hadam.quizler.presentation.viewmodel.QuizlerViewModelFactory
 import com.csci448.hadam.quizler.ui.theme.QuizlerTheme
 
 class MainActivity : ComponentActivity() {
@@ -21,7 +21,7 @@ class MainActivity : ComponentActivity() {
         private const val score = "score"
     }
 
-    private lateinit var mViewModel: QuestionViewModel
+    private lateinit var mViewModel: QuizlerViewModel
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,7 +29,7 @@ class MainActivity : ComponentActivity() {
         Log.d(LOG_TAG, "onCreate() called")
         val initialIndex = savedInstanceState?.getInt(index, 0) ?: 0
         val initialScore = savedInstanceState?.getInt(score, 0) ?: 0
-        val factory = QuestionViewModelFactory(initialIndex, initialScore)
+        val factory = QuizlerViewModelFactory(initialIndex, initialScore)
         mViewModel = ViewModelProvider(this, factory)[factory.getViewModelClass()]
         setContent {
             QuizlerTheme {
@@ -106,6 +106,6 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun DefaultPreview() {
     QuizlerTheme {
-        QuestionScreen(vm = QuestionViewModel(QuestionRepo.questions))
+        QuestionScreen(vm = QuizlerViewModel(QuestionRepo.questions))
     }
 }

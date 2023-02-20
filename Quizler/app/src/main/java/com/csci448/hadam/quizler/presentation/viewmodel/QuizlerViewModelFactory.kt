@@ -1,16 +1,16 @@
-package com.csci448.hadam.quizler.presentation.question
+package com.csci448.hadam.quizler.presentation.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.csci448.hadam.quizler.data.QuestionRepo
 
-class QuestionViewModelFactory(
+class QuizlerViewModelFactory(
     private var initialIndex: Int = 0,
     private var initialScore: Int = 0
 ) : ViewModelProvider.NewInstanceFactory() {
 
-    fun getViewModelClass() = QuestionViewModel::class.java
+    fun getViewModelClass() = QuizlerViewModel::class.java
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         Log.d(LOG_TAG, "Creating $modelClass")

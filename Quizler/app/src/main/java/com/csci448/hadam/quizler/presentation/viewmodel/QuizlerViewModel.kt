@@ -1,4 +1,4 @@
-package com.csci448.hadam.quizler.presentation.question
+package com.csci448.hadam.quizler.presentation.viewmodel
 
 import android.util.Log
 import androidx.compose.runtime.State
@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 import com.csci448.hadam.quizler.data.Question
 
 
-class QuestionViewModel(
+class QuizlerViewModel(
     private val mQuestions: List<Question>,
     private var mCurrentQuestionIndex: Int = 0,
     initialScore: Int = 0
@@ -32,6 +32,11 @@ class QuestionViewModel(
     private val mCurrentScoreState = mutableStateOf(initialScore)
     val currentScoreState: State<Int> get() = mCurrentScoreState
 
+    private val mQuestionStatus = MutableList(mQuestions.count()) {QuestionStatus.UNANSWERED}
+    private val mCurrentQuestionStatus = mutableStateOf(mQuestionStatus[mCurrentQuestionIndex])
+    val currentQuestionStatus: QuestionStatus
+        get() = mCurrentQuestionStatus.value
+
 
     fun moveToNextQuestion() {
         Log.d(LOG_TAG, "Next question")
@@ -40,6 +45,7 @@ class QuestionViewModel(
             mCurrentQuestionIndex = 0
         }
         mCurrentQuestionState.value = mQuestions[mCurrentQuestionIndex]
+        mCurrentQuestionStatus.value = mQuestionStatus[mCurrentQuestionIndex]
     }
 
     fun moveToPreviousQuestion() {
@@ -49,10 +55,19 @@ class QuestionViewModel(
             mCurrentQuestionIndex = mQuestions.count() - 1
         }
         mCurrentQuestionState.value = mQuestions[mCurrentQuestionIndex]
+        mCurrentQuestionStatus.value = mQuestionStatus[mCurrentQuestionIndex]
     }
 
     fun answeredCorrect() {
         Log.d(LOG_TAG, "Answered Correct")
         mCurrentScoreState.value++
+        mCurrentQuestionStatus.value = QuestionStatus.ANSWERED_CORRECT
+        mQuestionStatus[mCurrentQuestionIndex] = mCurrentQuestionStatus.value
+    }
+
+    fun answeredIncorrect() {
+        Log.d(LOG_TAG, "Answered Incorrect")
+        mCurrentQuestionStatus.value = QuestionStatus.ANSWERED_INCORRECT
+        mQuestionStatus[mCurrentQuestionIndex] = mCurrentQuestionStatus.value
     }
 }
