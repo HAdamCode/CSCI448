@@ -1,10 +1,14 @@
 package com.csci448.hadam.quizler.presentation.question
 
+import android.content.res.Configuration
 import android.util.Log
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -23,7 +27,8 @@ private const val LOG_TAG = "448.QuestionDisplay"
 fun QuestionDisplay(question: Question,
                     onCorrectAnswer: () -> Unit,
                     onWrongAnswer: () -> Unit,
-                    questionStatus: QuestionStatus) {
+                    questionStatus: QuestionStatus,
+                    orientation: Int = Configuration.ORIENTATION_PORTRAIT) {
     var enabled = false
     if (questionStatus == QuestionStatus.UNANSWERED) {
         enabled = true
@@ -31,45 +36,98 @@ fun QuestionDisplay(question: Question,
     val correctButtonColors = ButtonDefaults.buttonColors(disabledContainerColor = Gold60, disabledContentColor = Blue20)
     val incorrectButtonColors = ButtonDefaults.buttonColors(disabledContainerColor = Red40, disabledContentColor = Gold60)
     val defaultButtonColors = ButtonDefaults.buttonColors()
-    var colorToUse = ButtonDefaults.buttonColors()
+    var colorToUse: ButtonColors
     Log.d(LOG_TAG, stringResource(id = question.questionTextId))
-    Column() {
-        ElevatedCard() {
-            Text(text = stringResource(id = question.questionTextId))
-        }
-        Row() {
-            colorToUse =
-                if (questionStatus == QuestionStatus.ANSWERED_CORRECT && 1 == question.correctChoiceNumber) correctButtonColors
-                else if (questionStatus == QuestionStatus.ANSWERED_INCORRECT && 1 == question.correctChoiceNumber) incorrectButtonColors
-                else defaultButtonColors
-            QuestionButton(buttonText = stringResource(id = question.choice1Id), enabled, colorToUse, onButtonClick =
-            checkAnswerChoice(1, question.correctChoiceNumber, onCorrectAnswer, onWrongAnswer))
-            colorToUse =
-                if (questionStatus == QuestionStatus.ANSWERED_CORRECT && 2 == question.correctChoiceNumber) correctButtonColors
-                else if (questionStatus == QuestionStatus.ANSWERED_INCORRECT && 2 == question.correctChoiceNumber) incorrectButtonColors
-                else defaultButtonColors
-            QuestionButton(buttonText = stringResource(id = question.choice2Id), enabled, colorToUse, onButtonClick =
-            checkAnswerChoice(2, question.correctChoiceNumber, onCorrectAnswer, onWrongAnswer))
-        }
-        if (question.choice3Id != null) {
-            Row() {
-                colorToUse =
-                    if (questionStatus == QuestionStatus.ANSWERED_CORRECT && 3 == question.correctChoiceNumber) correctButtonColors
-                    else if (questionStatus == QuestionStatus.ANSWERED_INCORRECT && 3 == question.correctChoiceNumber) incorrectButtonColors
-                    else defaultButtonColors
-                QuestionButton(buttonText = stringResource(id = question.choice3Id), enabled, colorToUse, onButtonClick =
-                checkAnswerChoice(3, question.correctChoiceNumber, onCorrectAnswer, onWrongAnswer))
-                if (question.choice4Id != null) {
+    when (orientation) {
+        Configuration.ORIENTATION_LANDSCAPE -> {
+            Row {
+                QuestionTextCard(question)
+                Column() {
                     colorToUse =
-                        if (questionStatus == QuestionStatus.ANSWERED_CORRECT && 4 == question.correctChoiceNumber) correctButtonColors
-                        else if (questionStatus == QuestionStatus.ANSWERED_INCORRECT && 4 == question.correctChoiceNumber) incorrectButtonColors
+                        if (questionStatus == QuestionStatus.ANSWERED_CORRECT && 1 == question.correctChoiceNumber) correctButtonColors
+                        else if (questionStatus == QuestionStatus.ANSWERED_INCORRECT && 1 == question.correctChoiceNumber) incorrectButtonColors
                         else defaultButtonColors
-                    QuestionButton(buttonText = stringResource(id = question.choice4Id), enabled, colorToUse, onButtonClick =
-                    checkAnswerChoice(4, question.correctChoiceNumber, onCorrectAnswer, onWrongAnswer))
+                    QuestionChoiceButton(question, question.choice1Id, 1, enabled, colorToUse, onCorrectAnswer, onWrongAnswer)
+                    colorToUse =
+                        if (questionStatus == QuestionStatus.ANSWERED_CORRECT && 2 == question.correctChoiceNumber) correctButtonColors
+                        else if (questionStatus == QuestionStatus.ANSWERED_INCORRECT && 2 == question.correctChoiceNumber) incorrectButtonColors
+                        else defaultButtonColors
+                    QuestionChoiceButton(question, question.choice2Id, 2, enabled, colorToUse, onCorrectAnswer, onWrongAnswer)
+                    if (question.choice3Id != null) {
+                        colorToUse =
+                            if (questionStatus == QuestionStatus.ANSWERED_CORRECT && 3 == question.correctChoiceNumber) correctButtonColors
+                            else if (questionStatus == QuestionStatus.ANSWERED_INCORRECT && 3 == question.correctChoiceNumber) incorrectButtonColors
+                            else defaultButtonColors
+                        QuestionChoiceButton(question, question.choice3Id, 3, enabled, colorToUse, onCorrectAnswer, onWrongAnswer)
+                        if (question.choice4Id != null) {
+                            colorToUse =
+                                if (questionStatus == QuestionStatus.ANSWERED_CORRECT && 4 == question.correctChoiceNumber) correctButtonColors
+                                else if (questionStatus == QuestionStatus.ANSWERED_INCORRECT && 4 == question.correctChoiceNumber) incorrectButtonColors
+                                else defaultButtonColors
+                            QuestionChoiceButton(question, question.choice4Id, 4, enabled, colorToUse, onCorrectAnswer, onWrongAnswer)
+                        }
+                    }
+                }
+            }
+        }
+        else -> {
+            // create portrait composable tree here
+            Column {
+                QuestionTextCard(question)
+                Row() {
+                    colorToUse =
+                        if (questionStatus == QuestionStatus.ANSWERED_CORRECT && 1 == question.correctChoiceNumber) correctButtonColors
+                        else if (questionStatus == QuestionStatus.ANSWERED_INCORRECT && 1 == question.correctChoiceNumber) incorrectButtonColors
+                        else defaultButtonColors
+                    QuestionChoiceButton(question, question.choice1Id, 1, enabled, colorToUse, onCorrectAnswer, onWrongAnswer)
+                    colorToUse =
+                        if (questionStatus == QuestionStatus.ANSWERED_CORRECT && 2 == question.correctChoiceNumber) correctButtonColors
+                        else if (questionStatus == QuestionStatus.ANSWERED_INCORRECT && 2 == question.correctChoiceNumber) incorrectButtonColors
+                        else defaultButtonColors
+                    QuestionChoiceButton(question, question.choice2Id, 2, enabled, colorToUse, onCorrectAnswer, onWrongAnswer)
+                }
+                if (question.choice3Id != null) {
+                    Row() {
+                        colorToUse =
+                            if (questionStatus == QuestionStatus.ANSWERED_CORRECT && 3 == question.correctChoiceNumber) correctButtonColors
+                            else if (questionStatus == QuestionStatus.ANSWERED_INCORRECT && 3 == question.correctChoiceNumber) incorrectButtonColors
+                            else defaultButtonColors
+                        QuestionChoiceButton(question, question.choice3Id, 3, enabled, colorToUse, onCorrectAnswer, onWrongAnswer)
+                        if (question.choice4Id != null) {
+                            colorToUse =
+                                if (questionStatus == QuestionStatus.ANSWERED_CORRECT && 4 == question.correctChoiceNumber) correctButtonColors
+                                else if (questionStatus == QuestionStatus.ANSWERED_INCORRECT && 4 == question.correctChoiceNumber) incorrectButtonColors
+                                else defaultButtonColors
+                            QuestionChoiceButton(question, question.choice4Id, 4, enabled, colorToUse, onCorrectAnswer, onWrongAnswer)
+                        }
+                    }
                 }
             }
         }
     }
+}
+
+@Composable
+fun QuestionTextCard(question: Question) {
+    ElevatedCard() {
+        Text(text = stringResource(id = question.questionTextId))
+    }
+}
+
+@Composable
+fun QuestionChoiceButton(question: Question, id: Int, choice: Int, enabled: Boolean, colorToUse: ButtonColors, onCorrectAnswer: () -> Unit, onWrongAnswer: () -> Unit) {
+    QuestionButton(
+        buttonText = stringResource(id = id),
+        enabled,
+        colorToUse,
+        onButtonClick =
+        checkAnswerChoice(
+            choice,
+            question.correctChoiceNumber,
+            onCorrectAnswer,
+            onWrongAnswer
+        )
+    )
 }
 
 private fun checkAnswerChoice(choiceChosen:Int,
@@ -93,8 +151,7 @@ fun PreviewQuestionDisplay() {
         onWrongAnswer = {},
         QuestionStatus.ANSWERED_INCORRECT)
 }
-
-@Preview
+@Preview(showBackground = true, device = "spec:parent=pixel_4,orientation=landscape")
 @Composable
 fun PreviewMultiQuestionDisplay() {
     QuestionDisplay(question = QuestionRepo.questions.last(),
@@ -109,5 +166,6 @@ fun PreviewDisabledQuestionDisplay() {
     QuestionDisplay(question = QuestionRepo.questions.last(),
         onCorrectAnswer = { },
         onWrongAnswer = {},
-        QuestionStatus.ANSWERED_CORRECT)
+        QuestionStatus.ANSWERED_CORRECT,
+        Configuration.ORIENTATION_LANDSCAPE)
 }

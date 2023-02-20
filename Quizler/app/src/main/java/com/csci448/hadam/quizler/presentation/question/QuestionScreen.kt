@@ -5,6 +5,7 @@ import android.widget.Toast
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -18,6 +19,7 @@ private const val LOG_TAG = "448.QuestionScreen"
 fun QuestionScreen(vm: QuizlerViewModel) {
     Log.d(LOG_TAG, "The screen is being composed")
     val currentContext = LocalContext.current
+    val orientation = LocalConfiguration.current.orientation
     Column() {
         QuestionScoreText(score = vm.currentScoreState.value)
         QuestionDisplay(question = vm.currentQuestionState.value,
@@ -38,7 +40,9 @@ fun QuestionScreen(vm: QuizlerViewModel) {
                     Toast.LENGTH_SHORT
                 )
                     .show()
-            }, vm.currentQuestionStatus)
+            },
+            vm.currentQuestionStatus,
+            orientation)
         Row() {
             QuestionButton(buttonText = stringResource(id = R.string.label_previous)) {
                 vm.moveToPreviousQuestion()
