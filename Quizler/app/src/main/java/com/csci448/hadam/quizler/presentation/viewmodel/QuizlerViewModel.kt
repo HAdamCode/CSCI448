@@ -32,7 +32,7 @@ class QuizlerViewModel(
     private val mCurrentScoreState = mutableStateOf(initialScore)
     val currentScoreState: State<Int> get() = mCurrentScoreState
 
-    private val mQuestionStatus = MutableList(mQuestions.count()) {QuestionStatus.UNANSWERED}
+    private val mQuestionStatus = MutableList(mQuestions.count()) { QuestionStatus.UNANSWERED }
     private val mCurrentQuestionStatus = mutableStateOf(mQuestionStatus[mCurrentQuestionIndex])
     val currentQuestionStatus: QuestionStatus
         get() = mCurrentQuestionStatus.value

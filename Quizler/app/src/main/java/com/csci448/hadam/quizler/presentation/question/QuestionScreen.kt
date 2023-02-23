@@ -1,7 +1,6 @@
 package com.csci448.hadam.quizler.presentation.question
 
 import android.util.Log
-import android.widget.Button
 import android.widget.Toast
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -36,15 +35,16 @@ fun QuestionScreen(vm: QuizlerViewModel, onButtonClick: () -> Unit) {
             }
         }
 
-        QuestionDisplay(question = vm.currentQuestionState.value,
+        QuestionDisplay(
+            question = vm.currentQuestionState.value,
             onCheatAnswer = {
-            vm.answeredCheated()
-            Toast.makeText(
-                currentContext,
-                "Cheaters never prosper.",
-                Toast.LENGTH_SHORT
-            ).show()
-        },
+                vm.answeredCheated()
+                Toast.makeText(
+                    currentContext,
+                    "Cheaters never prosper.",
+                    Toast.LENGTH_SHORT
+                ).show()
+            },
             onCorrectAnswer = {
                 vm.answeredCorrect()
                 Toast.makeText(
@@ -64,7 +64,8 @@ fun QuestionScreen(vm: QuizlerViewModel, onButtonClick: () -> Unit) {
                     .show()
             },
             vm.currentQuestionStatus,
-            orientation)
+            orientation
+        )
         Row() {
             QuestionButton(buttonText = stringResource(id = R.string.label_previous)) {
                 vm.moveToPreviousQuestion()
@@ -79,6 +80,6 @@ fun QuestionScreen(vm: QuizlerViewModel, onButtonClick: () -> Unit) {
 @Preview
 @Composable
 fun PreviewQuestionScreen() {
-    var vm = QuizlerViewModel(QuestionRepo.questions);
+    val vm = QuizlerViewModel(QuestionRepo.questions);
     QuestionScreen(vm, onButtonClick = {})
 }

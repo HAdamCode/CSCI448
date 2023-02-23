@@ -6,7 +6,6 @@ import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.ViewModelProvider
 import com.csci448.hadam.quizler.data.QuestionRepo
@@ -14,10 +13,7 @@ import com.csci448.hadam.quizler.presentation.question.QuestionScreen
 import com.csci448.hadam.quizler.presentation.viewmodel.QuizlerViewModel
 import com.csci448.hadam.quizler.presentation.viewmodel.QuizlerViewModelFactory
 import com.csci448.hadam.quizler.ui.theme.QuizlerTheme
-import androidx.navigation.NavController
-import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-import androidx.navigation.findNavController
 import com.csci448.hadam.quizler.presentation.navigation.QuizlerNavHost
 
 class MainActivity : ComponentActivity() {

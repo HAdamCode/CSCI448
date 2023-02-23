@@ -14,9 +14,9 @@ import com.csci448.hadam.quizler.presentation.viewmodel.QuizlerViewModel
 @Composable
 fun CheatScreen(viewModel: QuizlerViewModel) {
     Column() {
-        Text(text = "Are you sure you want to cheat?")
-        Button(onClick = {viewModel.cheated()}) {
-            Text(text = "Cheat!")
+        Text(text = stringResource(id = R.string.want_to_cheat))
+        Button(onClick = { viewModel.cheated() }) {
+            Text(text = stringResource(id = R.string.cheat))
         }
         if (viewModel.currentQuestionStatus == QuestionStatus.CHEATED) {
             val question = QuestionRepo.questions[viewModel.currentQuestionIndex]

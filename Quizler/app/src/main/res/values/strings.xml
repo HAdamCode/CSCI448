@@ -17,4 +17,6 @@
     <string name="label_score_formatter">Score: %1$d</string>
     <string name="message_correct">Your wisdom is unmatched by any in the kingdom!</string>
     <string name="message_wrong">You must consult the elders for additional knowledge.</string>
+    <string name="want_to_cheat">Are you sure you want to cheat?</string>
+    <string name="cheat">Cheat!</string>
 </resources>

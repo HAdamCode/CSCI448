@@ -10,13 +10,16 @@ import androidx.compose.ui.unit.dp
 private const val LOG_TAG = "448.QuestionButton"
 
 @Composable
-fun QuestionButton(buttonText: String,
-                   enabled: Boolean = true,
-                   colors: ButtonColors = ButtonDefaults.buttonColors(),
-                   onButtonClick: () -> Unit) {
+fun QuestionButton(
+    buttonText: String,
+    enabled: Boolean = true,
+    colors: ButtonColors = ButtonDefaults.buttonColors(),
+    onButtonClick: () -> Unit
+) {
     Log.d(LOG_TAG, buttonText)
     Row() {
-        ElevatedButton(onClick = onButtonClick,
+        ElevatedButton(
+            onClick = onButtonClick,
             enabled = enabled,
             colors = colors,
             elevation = ButtonDefaults.elevatedButtonElevation(
@@ -24,7 +27,9 @@ fun QuestionButton(buttonText: String,
                 pressedElevation = 8.dp,
                 focusedElevation = 2.dp,
                 hoveredElevation = 2.dp,
-                disabledElevation = 0.dp)) {
+                disabledElevation = 0.dp
+            )
+        ) {
             Text(text = buttonText)
         }
     }

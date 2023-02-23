@@ -5,7 +5,7 @@ import androidx.navigation.NavController
 import com.csci448.hadam.quizler.presentation.question.QuestionScreen
 import com.csci448.hadam.quizler.presentation.viewmodel.QuizlerViewModel
 
-object QuestionScreenSpec: IScreenSpec {
+object QuestionScreenSpec : IScreenSpec {
     override val route: String = "question"
 
     @Composable
