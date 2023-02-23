@@ -70,4 +70,12 @@ class QuizlerViewModel(
         mCurrentQuestionStatus.value = QuestionStatus.ANSWERED_INCORRECT
         mQuestionStatus[mCurrentQuestionIndex] = mCurrentQuestionStatus.value
     }
+
+    fun cheated() {
+        mCurrentQuestionStatus.value = QuestionStatus.CHEATED
+    }
+
+    fun answeredCheated() {
+        mCurrentQuestionStatus.value = QuestionStatus.ANSWERED_CHEATED
+    }
 }

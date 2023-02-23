@@ -25,12 +25,13 @@ private const val LOG_TAG = "448.QuestionDisplay"
 
 @Composable
 fun QuestionDisplay(question: Question,
+                    onCheatAnswer: () -> Unit,
                     onCorrectAnswer: () -> Unit,
                     onWrongAnswer: () -> Unit,
                     questionStatus: QuestionStatus,
                     orientation: Int = Configuration.ORIENTATION_PORTRAIT) {
     var enabled = false
-    if (questionStatus == QuestionStatus.UNANSWERED) {
+    if (questionStatus == QuestionStatus.UNANSWERED || questionStatus == QuestionStatus.CHEATED) {
         enabled = true
     }
     val correctButtonColors = ButtonDefaults.buttonColors(disabledContainerColor = Gold60, disabledContentColor = Blue20)
@@ -47,24 +48,24 @@ fun QuestionDisplay(question: Question,
                         if (questionStatus == QuestionStatus.ANSWERED_CORRECT && 1 == question.correctChoiceNumber) correctButtonColors
                         else if (questionStatus == QuestionStatus.ANSWERED_INCORRECT && 1 == question.correctChoiceNumber) incorrectButtonColors
                         else defaultButtonColors
-                    QuestionChoiceButton(question, question.choice1Id, 1, enabled, colorToUse, onCorrectAnswer, onWrongAnswer)
+                    QuestionChoiceButton(question, questionStatus, question.choice1Id, 1, enabled, colorToUse, onCheatAnswer, onCorrectAnswer, onWrongAnswer)
                     colorToUse =
                         if (questionStatus == QuestionStatus.ANSWERED_CORRECT && 2 == question.correctChoiceNumber) correctButtonColors
                         else if (questionStatus == QuestionStatus.ANSWERED_INCORRECT && 2 == question.correctChoiceNumber) incorrectButtonColors
                         else defaultButtonColors
-                    QuestionChoiceButton(question, question.choice2Id, 2, enabled, colorToUse, onCorrectAnswer, onWrongAnswer)
+                    QuestionChoiceButton(question, questionStatus, question.choice2Id, 2, enabled, colorToUse, onCheatAnswer, onCorrectAnswer, onWrongAnswer)
                     if (question.choice3Id != null) {
                         colorToUse =
                             if (questionStatus == QuestionStatus.ANSWERED_CORRECT && 3 == question.correctChoiceNumber) correctButtonColors
                             else if (questionStatus == QuestionStatus.ANSWERED_INCORRECT && 3 == question.correctChoiceNumber) incorrectButtonColors
                             else defaultButtonColors
-                        QuestionChoiceButton(question, question.choice3Id, 3, enabled, colorToUse, onCorrectAnswer, onWrongAnswer)
+                        QuestionChoiceButton(question, questionStatus, question.choice3Id, 3, enabled, colorToUse, onCheatAnswer, onCorrectAnswer, onWrongAnswer)
                         if (question.choice4Id != null) {
                             colorToUse =
                                 if (questionStatus == QuestionStatus.ANSWERED_CORRECT && 4 == question.correctChoiceNumber) correctButtonColors
                                 else if (questionStatus == QuestionStatus.ANSWERED_INCORRECT && 4 == question.correctChoiceNumber) incorrectButtonColors
                                 else defaultButtonColors
-                            QuestionChoiceButton(question, question.choice4Id, 4, enabled, colorToUse, onCorrectAnswer, onWrongAnswer)
+                            QuestionChoiceButton(question, questionStatus, question.choice4Id, 4, enabled, colorToUse, onCheatAnswer, onCorrectAnswer, onWrongAnswer)
                         }
                     }
                 }
@@ -79,12 +80,12 @@ fun QuestionDisplay(question: Question,
                         if (questionStatus == QuestionStatus.ANSWERED_CORRECT && 1 == question.correctChoiceNumber) correctButtonColors
                         else if (questionStatus == QuestionStatus.ANSWERED_INCORRECT && 1 == question.correctChoiceNumber) incorrectButtonColors
                         else defaultButtonColors
-                    QuestionChoiceButton(question, question.choice1Id, 1, enabled, colorToUse, onCorrectAnswer, onWrongAnswer)
+                    QuestionChoiceButton(question, questionStatus, question.choice1Id, 1, enabled, colorToUse, onCheatAnswer, onCorrectAnswer, onWrongAnswer)
                     colorToUse =
                         if (questionStatus == QuestionStatus.ANSWERED_CORRECT && 2 == question.correctChoiceNumber) correctButtonColors
                         else if (questionStatus == QuestionStatus.ANSWERED_INCORRECT && 2 == question.correctChoiceNumber) incorrectButtonColors
                         else defaultButtonColors
-                    QuestionChoiceButton(question, question.choice2Id, 2, enabled, colorToUse, onCorrectAnswer, onWrongAnswer)
+                    QuestionChoiceButton(question, questionStatus, question.choice2Id, 2, enabled, colorToUse, onCheatAnswer, onCorrectAnswer, onWrongAnswer)
                 }
                 if (question.choice3Id != null) {
                     Row() {
@@ -92,13 +93,13 @@ fun QuestionDisplay(question: Question,
                             if (questionStatus == QuestionStatus.ANSWERED_CORRECT && 3 == question.correctChoiceNumber) correctButtonColors
                             else if (questionStatus == QuestionStatus.ANSWERED_INCORRECT && 3 == question.correctChoiceNumber) incorrectButtonColors
                             else defaultButtonColors
-                        QuestionChoiceButton(question, question.choice3Id, 3, enabled, colorToUse, onCorrectAnswer, onWrongAnswer)
+                        QuestionChoiceButton(question, questionStatus, question.choice3Id, 3, enabled, colorToUse, onCheatAnswer, onCorrectAnswer, onWrongAnswer)
                         if (question.choice4Id != null) {
                             colorToUse =
                                 if (questionStatus == QuestionStatus.ANSWERED_CORRECT && 4 == question.correctChoiceNumber) correctButtonColors
                                 else if (questionStatus == QuestionStatus.ANSWERED_INCORRECT && 4 == question.correctChoiceNumber) incorrectButtonColors
                                 else defaultButtonColors
-                            QuestionChoiceButton(question, question.choice4Id, 4, enabled, colorToUse, onCorrectAnswer, onWrongAnswer)
+                            QuestionChoiceButton(question, questionStatus, question.choice4Id, 4, enabled, colorToUse, onCheatAnswer, onCorrectAnswer, onWrongAnswer)
                         }
                     }
                 }
@@ -115,7 +116,7 @@ fun QuestionTextCard(question: Question) {
 }
 
 @Composable
-fun QuestionChoiceButton(question: Question, id: Int, choice: Int, enabled: Boolean, colorToUse: ButtonColors, onCorrectAnswer: () -> Unit, onWrongAnswer: () -> Unit) {
+fun QuestionChoiceButton(question: Question, questionStatus: QuestionStatus, id: Int, choice: Int, enabled: Boolean, colorToUse: ButtonColors, onCheatAnswer: () -> Unit, onCorrectAnswer: () -> Unit, onWrongAnswer: () -> Unit) {
     QuestionButton(
         buttonText = stringResource(id = id),
         enabled,
@@ -124,6 +125,8 @@ fun QuestionChoiceButton(question: Question, id: Int, choice: Int, enabled: Bool
         checkAnswerChoice(
             choice,
             question.correctChoiceNumber,
+            questionStatus,
+            onCheatAnswer,
             onCorrectAnswer,
             onWrongAnswer
         )
@@ -132,10 +135,15 @@ fun QuestionChoiceButton(question: Question, id: Int, choice: Int, enabled: Bool
 
 private fun checkAnswerChoice(choiceChosen:Int,
                               correctChoice: Int,
+                              questionStatus: QuestionStatus,
+                              onCheatAnswer: () -> Unit,
                               onCorrectAnswer: () -> Unit,
                               onWrongAnswer: () -> Unit):
             () -> Unit{
-    return if (choiceChosen == correctChoice) {
+    return if (questionStatus == QuestionStatus.CHEATED) {
+        onCheatAnswer
+    }
+    else if (choiceChosen == correctChoice) {
         onCorrectAnswer
     }
     else {
@@ -147,6 +155,7 @@ private fun checkAnswerChoice(choiceChosen:Int,
 @Composable
 fun PreviewQuestionDisplay() {
     QuestionDisplay(question = QuestionRepo.questions.first(),
+        onCheatAnswer = { },
         onCorrectAnswer = { },
         onWrongAnswer = {},
         QuestionStatus.ANSWERED_INCORRECT)
@@ -155,6 +164,7 @@ fun PreviewQuestionDisplay() {
 @Composable
 fun PreviewMultiQuestionDisplay() {
     QuestionDisplay(question = QuestionRepo.questions.last(),
+        onCheatAnswer = { },
         onCorrectAnswer = { },
         onWrongAnswer = {},
         QuestionStatus.UNANSWERED)
@@ -164,6 +174,7 @@ fun PreviewMultiQuestionDisplay() {
 @Composable
 fun PreviewDisabledQuestionDisplay() {
     QuestionDisplay(question = QuestionRepo.questions.last(),
+        onCheatAnswer = { },
         onCorrectAnswer = { },
         onWrongAnswer = {},
         QuestionStatus.ANSWERED_CORRECT,

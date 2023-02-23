@@ -37,6 +37,14 @@ fun QuestionScreen(vm: QuizlerViewModel, onButtonClick: () -> Unit) {
         }
 
         QuestionDisplay(question = vm.currentQuestionState.value,
+            onCheatAnswer = {
+            vm.answeredCheated()
+            Toast.makeText(
+                currentContext,
+                "Cheaters never prosper.",
+                Toast.LENGTH_SHORT
+            ).show()
+        },
             onCorrectAnswer = {
                 vm.answeredCorrect()
                 Toast.makeText(
