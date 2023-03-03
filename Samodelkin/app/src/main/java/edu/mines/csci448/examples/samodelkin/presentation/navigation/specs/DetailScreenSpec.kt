@@ -5,14 +5,17 @@ import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.navigation.*
+import edu.mines.csci448.examples.samodelkin.R
 import edu.mines.csci448.examples.samodelkin.presentation.detail.SamodelkinDetailScreen
 import edu.mines.csci448.examples.samodelkin.presentation.viewmodel.SamodelkinViewModel
+import java.util.*
 
 object DetailScreenSpec : IScreenSpec {
     private const val LOG_TAG = "448.DetailScreenSpec"
 
     private const val ROUTE_BASE = "detail"
     private const val ARG_UUID_NAME = "uuid"
+    override val title = R.string.app_name
 
     private fun buildFullRoute(argVal: String): String {
         var fullRoute = ROUTE_BASE
@@ -43,9 +46,13 @@ object DetailScreenSpec : IScreenSpec {
         navBackStackEntry: NavBackStackEntry,
         context: Context
     ) {
-        samodelkinViewModel.currentCharacterState.collectAsState().value?.let { SamodelkinDetailScreen(character = it) }
-        samodelkinViewModel.characters[0]
-        SamodelkinDetailScreen(character = samodelkinViewModel.characters.)
+        val uuid = UUID.fromString(navBackStackEntry.arguments?.getString(ARG_UUID_NAME) ?: "")
+
+        val character = samodelkinViewModel.currentCharacterState.collectAsState(null)
+
+        samodelkinViewModel.loadCharacterByUUID(uuid)
+
+        character.value?.let { SamodelkinDetailScreen(character = it) }
     }
 
 }
