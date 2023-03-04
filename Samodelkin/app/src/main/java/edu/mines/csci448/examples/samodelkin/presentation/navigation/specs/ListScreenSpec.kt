@@ -1,6 +1,11 @@
 package edu.mines.csci448.examples.samodelkin.presentation.navigation.specs
 
 import android.content.Context
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AddCircle
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NamedNavArgument
@@ -34,4 +39,18 @@ object ListScreenSpec : IScreenSpec {
         )
     }
 
+    @Composable
+    override fun TopAppBarActions(
+        samodelkinViewModel: SamodelkinViewModel,
+        navController: NavHostController,
+        navBackStackEntry: NavBackStackEntry?,
+        context: Context
+    ) {
+        IconButton(onClick = { navController.navigate(route = NewCharacterScreenSpec.route) }) {
+            Icon(
+                imageVector = Icons.Filled.AddCircle,
+                contentDescription = stringResource(R.string.menu_add_character_desc)
+            )
+        }
+    }
 }

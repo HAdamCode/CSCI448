@@ -73,6 +73,21 @@ sealed interface IScreenSpec {
             }
         } else {
             { }
-        }, title = { Text(text = stringResource(id = title)) })
+        }, title = { Text(text = stringResource(id = title)) },
+            actions = {
+                TopAppBarActions(
+                    samodelkinViewModel,
+                    navController,
+                    navBackStackEntry,
+                    context
+                )
+            })
     }
+
+    @Composable
+    abstract fun TopAppBarActions(
+        samodelkinViewModel: SamodelkinViewModel,
+        navController: NavHostController,
+        navBackStackEntry: NavBackStackEntry?,
+        context: Context)
 }

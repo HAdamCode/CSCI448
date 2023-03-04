@@ -2,8 +2,13 @@ package edu.mines.csci448.examples.samodelkin.presentation.navigation.specs
 
 import android.content.Context
 import android.util.Log
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.ui.res.stringResource
 import androidx.navigation.*
 import edu.mines.csci448.examples.samodelkin.R
 import edu.mines.csci448.examples.samodelkin.presentation.detail.SamodelkinDetailScreen
@@ -55,4 +60,24 @@ object DetailScreenSpec : IScreenSpec {
         character.value?.let { SamodelkinDetailScreen(character = it) }
     }
 
+    @Composable
+    override fun TopAppBarActions(
+        samodelkinViewModel: SamodelkinViewModel,
+        navController: NavHostController,
+        navBackStackEntry: NavBackStackEntry?,
+        context: Context
+    ) {
+        val character = samodelkinViewModel.currentCharacterState
+
+        IconButton(onClick =
+        {
+            character.value?.let { samodelkinViewModel.deleteCharacter(it) }
+            navController.popBackStack()
+        }) {
+            Icon(
+                imageVector = Icons.Filled.Delete,
+                contentDescription = stringResource(R.string.menu_delete_character_desc)
+            )
+        }
+    }
 }

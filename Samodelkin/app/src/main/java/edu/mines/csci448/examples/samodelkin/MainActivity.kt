@@ -18,6 +18,7 @@ import androidx.navigation.compose.rememberNavController
 import edu.mines.csci448.examples.samodelkin.data.SamodelkinRepo
 import edu.mines.csci448.examples.samodelkin.presentation.list.SamodelkinListScreen
 import edu.mines.csci448.examples.samodelkin.presentation.navigation.SamodelkinNavHost
+import edu.mines.csci448.examples.samodelkin.presentation.navigation.SamodelkinTopBar
 import edu.mines.csci448.examples.samodelkin.presentation.viewmodel.SamodelkinViewModel
 import edu.mines.csci448.examples.samodelkin.presentation.viewmodel.SamodelkinViewModelFactory
 import edu.mines.csci448.examples.samodelkin.ui.theme.SamodelkinTheme
@@ -118,8 +119,11 @@ private fun MainActivityContent(samodelkinViewModel: SamodelkinViewModel) {
             modifier = Modifier.fillMaxSize(),
             color = MaterialTheme.colorScheme.background
         ) {
-            Scaffold() {
+            Scaffold(topBar = {SamodelkinTopBar(samodelkinViewModel = samodelkinViewModel,
+                navController = navController,
+                context = context)}) {
                 SamodelkinNavHost(Modifier.padding(it), navController, samodelkinViewModel, context )
+
             }
         }
     }
