@@ -11,10 +11,11 @@ import edu.mines.csci448.examples.samodelkin.presentation.navigation.specs.IScre
 import edu.mines.csci448.examples.samodelkin.presentation.viewmodel.SamodelkinViewModel
 
 @Composable
-fun SamodelkinNavHost(modifier: Modifier = Modifier,
-                      navController: NavHostController,
-                      samodelkinViewModel: SamodelkinViewModel,
-                      context: Context
+fun SamodelkinNavHost(
+    modifier: Modifier = Modifier,
+    navController: NavHostController,
+    samodelkinViewModel: SamodelkinViewModel,
+    context: Context
 ) {
     NavHost(
         modifier = modifier,
@@ -26,9 +27,9 @@ fun SamodelkinNavHost(modifier: Modifier = Modifier,
             startDestination = IScreenSpec.startDestination
         ) {
             IScreenSpec.allScreens.forEach { (_, screen) ->
-                if(screen != null) {
+                if (screen != null) {
                     composable(
-                        route = screen.route, 
+                        route = screen.route,
                         arguments = screen.arguments
                     ) { navBackStackEntry ->
                         screen.Content(

@@ -16,8 +16,10 @@ import edu.mines.csci448.examples.samodelkin.util.CharacterGenerator
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SamodelkinCharacterListItem(character: SamodelkinCharacter,
-                                onSelectCharacter: (SamodelkinCharacter) -> Unit) {
+fun SamodelkinCharacterListItem(
+    character: SamodelkinCharacter,
+    onSelectCharacter: (SamodelkinCharacter) -> Unit
+) {
     val fontSize = 14.sp
 
     Card(

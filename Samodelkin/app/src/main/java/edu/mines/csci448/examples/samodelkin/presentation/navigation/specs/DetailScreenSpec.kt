@@ -24,7 +24,7 @@ object DetailScreenSpec : IScreenSpec {
 
     private fun buildFullRoute(argVal: String): String {
         var fullRoute = ROUTE_BASE
-        if(argVal == ARG_UUID_NAME) {
+        if (argVal == ARG_UUID_NAME) {
             fullRoute += "/{$argVal}"
             Log.d(LOG_TAG, "Built base route $fullRoute")
         } else {

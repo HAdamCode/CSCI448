@@ -18,7 +18,10 @@ sealed interface IScreenSpec {
         private const val LOG_TAG = "448.IScreenSpec"
 
         val allScreens = IScreenSpec::class.sealedSubclasses.associate {
-            Log.d(LOG_TAG, "allScreens: mapping route \"${it.objectInstance?.route ?: ""}\" to object \"${it.objectInstance}\"")
+            Log.d(
+                LOG_TAG,
+                "allScreens: mapping route \"${it.objectInstance?.route ?: ""}\" to object \"${it.objectInstance}\""
+            )
             it.objectInstance?.route to it.objectInstance
         }
         const val root = "samodelkin"
@@ -89,5 +92,6 @@ sealed interface IScreenSpec {
         samodelkinViewModel: SamodelkinViewModel,
         navController: NavHostController,
         navBackStackEntry: NavBackStackEntry?,
-        context: Context)
+        context: Context
+    )
 }

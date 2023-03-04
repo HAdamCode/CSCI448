@@ -6,7 +6,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import edu.mines.csci448.examples.samodelkin.data.SamodelkinRepo
 
-class SamodelkinViewModelFactory(private val context: Context) : ViewModelProvider.NewInstanceFactory() {
+class SamodelkinViewModelFactory(private val context: Context) :
+    ViewModelProvider.NewInstanceFactory() {
     companion object {
         private const val LOG_TAG = "448.SamodelkinViewModelFactory"
     }
@@ -15,7 +16,7 @@ class SamodelkinViewModelFactory(private val context: Context) : ViewModelProvid
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         Log.d(LOG_TAG, "create() called")
-        if(modelClass.isAssignableFrom(getViewModelClass())) {
+        if (modelClass.isAssignableFrom(getViewModelClass())) {
             Log.d(LOG_TAG, "creating ViewModel: ${getViewModelClass()}")
             return modelClass
                 .getConstructor(List::class.java)

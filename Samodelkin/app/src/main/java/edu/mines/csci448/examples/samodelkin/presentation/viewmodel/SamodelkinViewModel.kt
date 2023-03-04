@@ -22,7 +22,8 @@ class SamodelkinViewModel(characters: List<SamodelkinCharacter>) : ViewModel() {
     val characters: List<SamodelkinCharacter>
         get() = mCharacters.toList()
 
-    private val mCurrentCharacterState: MutableStateFlow<SamodelkinCharacter?> = MutableStateFlow(null)
+    private val mCurrentCharacterState: MutableStateFlow<SamodelkinCharacter?> =
+        MutableStateFlow(null)
 
     val currentCharacterState: StateFlow<SamodelkinCharacter?>
         get() = mCurrentCharacterState.asStateFlow()
@@ -36,7 +37,7 @@ class SamodelkinViewModel(characters: List<SamodelkinCharacter>) : ViewModel() {
         Log.d(LOG_TAG, "loadCharacterByUUID($uuid)")
         mCurrentCharacterState.value = null
         mCharacters.forEach { character ->
-            if(character.id == uuid) {
+            if (character.id == uuid) {
                 Log.d(LOG_TAG, "Character found! $character")
                 mCurrentCharacterState.value = character
                 return
@@ -63,9 +64,9 @@ class SamodelkinViewModel(characters: List<SamodelkinCharacter>) : ViewModel() {
     fun deleteCharacter(characterToDelete: SamodelkinCharacter) {
         Log.d(LOG_TAG, "deleting character $characterToDelete")
         mCharacters.forEach { character ->
-            if(character.id == characterToDelete.id) {
+            if (character.id == characterToDelete.id) {
                 mCharacters.remove(character)
-                if(mCurrentCharacterState.value == character) {
+                if (mCurrentCharacterState.value == character) {
                     mCurrentCharacterState.value = null
                 }
                 Log.d(LOG_TAG, "character deleted")

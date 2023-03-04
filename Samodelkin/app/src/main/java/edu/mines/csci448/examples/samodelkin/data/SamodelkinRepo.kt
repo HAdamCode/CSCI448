@@ -14,7 +14,7 @@ class SamodelkinRepo private constructor(context: Context?) {
          */
         fun getInstance(context: Context? = null): SamodelkinRepo {
             var instance = INSTANCE
-            if(instance == null) {
+            if (instance == null) {
                 instance = SamodelkinRepo(context)
                 INSTANCE = instance
             }
@@ -27,7 +27,7 @@ class SamodelkinRepo private constructor(context: Context?) {
     init {
         Log.d(LOG_TAG, "initializing repository list")
         val characterList = mutableListOf<SamodelkinCharacter>()
-        for(i in 1..10) {
+        for (i in 1..10) {
             characterList += CharacterGenerator.generateRandomCharacter(context)
         }
         characters = characterList.toList()

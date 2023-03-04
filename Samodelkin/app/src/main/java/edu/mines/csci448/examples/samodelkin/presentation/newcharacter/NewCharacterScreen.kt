@@ -4,7 +4,6 @@ import android.content.res.Configuration
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Card
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -18,10 +17,12 @@ import edu.mines.csci448.examples.samodelkin.presentation.detail.SamodelkinChara
 import edu.mines.csci448.examples.samodelkin.util.CharacterGenerator
 
 @Composable
-fun NewCharacterScreen(character: SamodelkinCharacter,
-                       onGenerateRandomCharacter: () -> Unit,
-                       onSaveCharacter: (SamodelkinCharacter) -> Unit) {
-    when(LocalConfiguration.current.orientation) {
+fun NewCharacterScreen(
+    character: SamodelkinCharacter,
+    onGenerateRandomCharacter: () -> Unit,
+    onSaveCharacter: (SamodelkinCharacter) -> Unit
+) {
+    when (LocalConfiguration.current.orientation) {
         Configuration.ORIENTATION_LANDSCAPE -> {
             Row(
                 modifier = Modifier
@@ -50,7 +51,7 @@ fun NewCharacterScreen(character: SamodelkinCharacter,
                     Spacer(modifier = Modifier.height(16.dp))
                     NewCharacterButton(
                         text = stringResource(R.string.save_to_codex_label),
-                        onClick = { onSaveCharacter( character ) }
+                        onClick = { onSaveCharacter(character) }
                     )
                 }
             }
@@ -88,7 +89,7 @@ fun NewCharacterScreen(character: SamodelkinCharacter,
                 Spacer(modifier = Modifier.height(16.dp))
                 NewCharacterButton(
                     text = stringResource(R.string.save_to_codex_label),
-                    onClick = { onSaveCharacter( character ) }
+                    onClick = { onSaveCharacter(character) }
                 )
             }
         }
@@ -101,7 +102,9 @@ private fun PreviewNewCharacterScreen() {
     val characterState = remember { mutableStateOf(CharacterGenerator.generateRandomCharacter()) }
     NewCharacterScreen(
         character = characterState.value,
-        onGenerateRandomCharacter = { characterState.value = CharacterGenerator.generateRandomCharacter() },
+        onGenerateRandomCharacter = {
+            characterState.value = CharacterGenerator.generateRandomCharacter()
+        },
         onSaveCharacter = { }
     )
 }
@@ -112,7 +115,9 @@ private fun PreviewNewCharacterScreenLandscape() {
     val characterState = remember { mutableStateOf(CharacterGenerator.generateRandomCharacter()) }
     NewCharacterScreen(
         character = characterState.value,
-        onGenerateRandomCharacter = { characterState.value = CharacterGenerator.generateRandomCharacter() },
+        onGenerateRandomCharacter = {
+            characterState.value = CharacterGenerator.generateRandomCharacter()
+        },
         onSaveCharacter = { }
     )
 }

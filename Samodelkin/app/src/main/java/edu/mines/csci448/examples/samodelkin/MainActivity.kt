@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.*
@@ -12,11 +11,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.compose.rememberNavController
 import edu.mines.csci448.examples.samodelkin.data.SamodelkinRepo
-import edu.mines.csci448.examples.samodelkin.presentation.list.SamodelkinListScreen
 import edu.mines.csci448.examples.samodelkin.presentation.navigation.SamodelkinNavHost
 import edu.mines.csci448.examples.samodelkin.presentation.navigation.SamodelkinTopBar
 import edu.mines.csci448.examples.samodelkin.presentation.viewmodel.SamodelkinViewModel
@@ -114,15 +111,18 @@ private fun MainActivityContent(samodelkinViewModel: SamodelkinViewModel) {
     val context = LocalContext.current
 
     SamodelkinTheme {
-        // A surface container using the 'background' color from the theme
         Surface(
             modifier = Modifier.fillMaxSize(),
             color = MaterialTheme.colorScheme.background
         ) {
-            Scaffold(topBar = {SamodelkinTopBar(samodelkinViewModel = samodelkinViewModel,
-                navController = navController,
-                context = context)}) {
-                SamodelkinNavHost(Modifier.padding(it), navController, samodelkinViewModel, context )
+            Scaffold(topBar = {
+                SamodelkinTopBar(
+                    samodelkinViewModel = samodelkinViewModel,
+                    navController = navController,
+                    context = context
+                )
+            }) {
+                SamodelkinNavHost(Modifier.padding(it), navController, samodelkinViewModel, context)
 
             }
         }

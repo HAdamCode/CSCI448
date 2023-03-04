@@ -146,7 +146,15 @@ private fun ProfessionSection(characterProfession: String) {
 }
 
 @Composable
-private fun StatsSection(orientation: Int, dexterity: Int, strength: Int, wisdom: Int, intelligence: Int, charisma: Int, constitution: Int) {
+private fun StatsSection(
+    orientation: Int,
+    dexterity: Int,
+    strength: Int,
+    wisdom: Int,
+    intelligence: Int,
+    charisma: Int,
+    constitution: Int
+) {
     when (orientation) {
         Configuration.ORIENTATION_LANDSCAPE -> {
             Column {
@@ -202,7 +210,7 @@ private fun SectionHeader(headerText: String) {
 
 @Composable
 private fun StatsDisplay(statName: String, statValue: Int) {
-    Row{
+    Row {
         Text(
             text = statName,
             modifier = Modifier.weight(0.7f)
@@ -217,7 +225,7 @@ private fun StatsDisplay(statName: String, statValue: Int) {
 
 @Composable
 private fun AvatarImage(imageSize: Dp, assetPath: String?) {
-    if(assetPath != null) {
+    if (assetPath != null) {
         AsyncImage(
             modifier = Modifier
                 .width(imageSize)

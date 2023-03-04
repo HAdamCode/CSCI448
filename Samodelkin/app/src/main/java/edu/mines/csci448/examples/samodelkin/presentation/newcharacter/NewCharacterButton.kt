@@ -10,9 +10,11 @@ import androidx.compose.ui.tooling.preview.Preview
 
 
 @Composable
-fun NewCharacterButton(text: String,
-                       enabled: Boolean = true,
-                       onClick: () -> Unit) {
+fun NewCharacterButton(
+    text: String,
+    enabled: Boolean = true,
+    onClick: () -> Unit
+) {
     Button(
         modifier = Modifier.fillMaxWidth(),
         enabled = enabled,

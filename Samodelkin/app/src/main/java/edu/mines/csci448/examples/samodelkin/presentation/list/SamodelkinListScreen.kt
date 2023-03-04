@@ -12,15 +12,20 @@ import edu.mines.csci448.examples.samodelkin.data.SamodelkinCharacter
 import edu.mines.csci448.examples.samodelkin.data.SamodelkinRepo
 
 @Composable
-fun SamodelkinListScreen(characterList: List<SamodelkinCharacter>,
-                         onSelectCharacter: (SamodelkinCharacter) -> Unit) {
+fun SamodelkinListScreen(
+    characterList: List<SamodelkinCharacter>,
+    onSelectCharacter: (SamodelkinCharacter) -> Unit
+) {
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
             .padding(8.dp)
     ) {
         items(characterList) { character ->
-            SamodelkinCharacterListItem(character = character, onSelectCharacter = onSelectCharacter)
+            SamodelkinCharacterListItem(
+                character = character,
+                onSelectCharacter = onSelectCharacter
+            )
         }
     }
 }
