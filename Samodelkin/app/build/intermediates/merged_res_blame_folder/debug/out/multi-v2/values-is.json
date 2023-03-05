@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "edu.mines.csci448.examples.samodelkin.app-mergeDebugResources-51:/values-is/values-is.xml",
+            "outputFile": "edu.mines.csci448.examples.samodelkin.app-mergeDebugResources-55:/values-is/values-is.xml",
             "map": [
                 {
                     "source": "C:\\Users\\hunte\\.gradle\\caches\\transforms-3\\24c8031572ced1a9ec505ef2513af626\\transformed\\core-1.9.0\\res\\values-is\\values-is.xml",

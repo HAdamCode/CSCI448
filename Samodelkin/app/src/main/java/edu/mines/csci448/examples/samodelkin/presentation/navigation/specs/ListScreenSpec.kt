@@ -6,13 +6,14 @@ import androidx.compose.material.icons.filled.AddCircle
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NamedNavArgument
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavHostController
 import edu.mines.csci448.examples.samodelkin.R
 import edu.mines.csci448.examples.samodelkin.presentation.list.SamodelkinListScreen
-import edu.mines.csci448.examples.samodelkin.presentation.viewmodel.SamodelkinViewModel
+import edu.mines.csci448.examples.samodelkin.presentation.viewmodel.ISamodelkinViewModel
 
 object ListScreenSpec : IScreenSpec {
 
@@ -23,15 +24,15 @@ object ListScreenSpec : IScreenSpec {
 
     @Composable
     override fun Content(
-        samodelkinViewModel: SamodelkinViewModel,
+        samodelkinViewModel: ISamodelkinViewModel,
         navController: NavHostController,
         navBackStackEntry: NavBackStackEntry,
         context: Context
     ) {
-        val characters = samodelkinViewModel.characters
+        val characters = samodelkinViewModel.characterListState.collectAsState()
 
         SamodelkinListScreen(
-            characterList = characters,
+            characterList = characters.value,
             onSelectCharacter = { character ->
                 navController.navigate("detail/${character.id}")
             }
@@ -40,7 +41,7 @@ object ListScreenSpec : IScreenSpec {
 
     @Composable
     override fun TopAppBarActions(
-        samodelkinViewModel: SamodelkinViewModel,
+        samodelkinViewModel: ISamodelkinViewModel,
         navController: NavHostController,
         navBackStackEntry: NavBackStackEntry?,
         context: Context

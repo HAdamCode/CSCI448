@@ -16,6 +16,8 @@ import androidx.navigation.compose.rememberNavController
 import edu.mines.csci448.examples.samodelkin.data.SamodelkinRepo
 import edu.mines.csci448.examples.samodelkin.presentation.navigation.SamodelkinNavHost
 import edu.mines.csci448.examples.samodelkin.presentation.navigation.SamodelkinTopBar
+import edu.mines.csci448.examples.samodelkin.presentation.viewmodel.ISamodelkinViewModel
+import edu.mines.csci448.examples.samodelkin.presentation.viewmodel.PreviewSamodelkinViewModel
 import edu.mines.csci448.examples.samodelkin.presentation.viewmodel.SamodelkinViewModel
 import edu.mines.csci448.examples.samodelkin.presentation.viewmodel.SamodelkinViewModelFactory
 import edu.mines.csci448.examples.samodelkin.ui.theme.SamodelkinTheme
@@ -25,7 +27,7 @@ class MainActivity : ComponentActivity() {
         private const val LOG_TAG = "448.MainActivity"
     }
 
-    private lateinit var mSamodelkinViewModel: SamodelkinViewModel
+    private lateinit var mSamodelkinViewModel: ISamodelkinViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -106,7 +108,7 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-private fun MainActivityContent(samodelkinViewModel: SamodelkinViewModel) {
+private fun MainActivityContent(samodelkinViewModel: ISamodelkinViewModel) {
     val navController = rememberNavController()
     val context = LocalContext.current
 
@@ -133,6 +135,6 @@ private fun MainActivityContent(samodelkinViewModel: SamodelkinViewModel) {
 @Composable
 fun DefaultPreview() {
     val context = LocalContext.current
-    val viewModel = SamodelkinViewModel(SamodelkinRepo.getInstance(context).characters)
-    MainActivityContent(samodelkinViewModel = viewModel)
+    val previewSamodelkinViewModel = PreviewSamodelkinViewModel(context = context)
+    MainActivityContent(samodelkinViewModel = previewSamodelkinViewModel)
 }

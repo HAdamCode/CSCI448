@@ -11,6 +11,7 @@ import androidx.navigation.NamedNavArgument
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavHostController
 import edu.mines.csci448.examples.samodelkin.R
+import edu.mines.csci448.examples.samodelkin.presentation.viewmodel.ISamodelkinViewModel
 import edu.mines.csci448.examples.samodelkin.presentation.viewmodel.SamodelkinViewModel
 
 sealed interface IScreenSpec {
@@ -29,7 +30,7 @@ sealed interface IScreenSpec {
 
         @Composable
         fun TopBar(
-            samodelkinViewModel: SamodelkinViewModel,
+            samodelkinViewModel: ISamodelkinViewModel,
             navController: NavHostController,
             navBackStackEntry: NavBackStackEntry?,
             context: Context
@@ -51,7 +52,7 @@ sealed interface IScreenSpec {
 
     @Composable
     fun Content(
-        samodelkinViewModel: SamodelkinViewModel,
+        samodelkinViewModel: ISamodelkinViewModel,
         navController: NavHostController,
         navBackStackEntry: NavBackStackEntry,
         context: Context
@@ -60,7 +61,7 @@ sealed interface IScreenSpec {
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
     private fun TopAppBarContent(
-        samodelkinViewModel: SamodelkinViewModel,
+        samodelkinViewModel: ISamodelkinViewModel,
         navController: NavHostController,
         navBackStackEntry: NavBackStackEntry?,
         context: Context
@@ -88,8 +89,8 @@ sealed interface IScreenSpec {
     }
 
     @Composable
-    abstract fun TopAppBarActions(
-        samodelkinViewModel: SamodelkinViewModel,
+    fun TopAppBarActions(
+        samodelkinViewModel: ISamodelkinViewModel,
         navController: NavHostController,
         navBackStackEntry: NavBackStackEntry?,
         context: Context

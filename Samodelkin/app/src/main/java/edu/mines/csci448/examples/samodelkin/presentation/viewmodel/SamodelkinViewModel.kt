@@ -3,47 +3,59 @@ package edu.mines.csci448.examples.samodelkin.presentation.viewmodel
 import android.util.Log
 import androidx.compose.runtime.toMutableStateList
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import edu.mines.csci448.examples.samodelkin.data.SamodelkinCharacter
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
+import edu.mines.csci448.examples.samodelkin.data.SamodelkinRepo
+import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.launch
 import java.util.*
 
-class SamodelkinViewModel(characters: List<SamodelkinCharacter>) : ViewModel() {
+class SamodelkinViewModel(private val samodelkinRepo: SamodelkinRepo) : ViewModel(), ISamodelkinViewModel {
     companion object {
         private const val LOG_TAG = "448.SamodelkinViewModel"
     }
 
-    private val mCharacters = characters.toMutableStateList()
+    private val mCharacters: MutableStateFlow<List<SamodelkinCharacter>> =
+        MutableStateFlow(emptyList())
+
 
     /**
      * holds list of all characters stored within the view model
      */
-    val characters: List<SamodelkinCharacter>
-        get() = mCharacters.toList()
+    override val characterListState: StateFlow<List<SamodelkinCharacter>>
+        get() = mCharacters.asStateFlow()
+
 
     private val mCurrentCharacterState: MutableStateFlow<SamodelkinCharacter?> =
         MutableStateFlow(null)
 
-    val currentCharacterState: StateFlow<SamodelkinCharacter?>
+    override val currentCharacterState: StateFlow<SamodelkinCharacter?>
         get() = mCurrentCharacterState.asStateFlow()
 
+    private val mCurrentCharacterIdState: MutableStateFlow<UUID> =
+        MutableStateFlow(UUID.randomUUID())
+
+    init {
+        viewModelScope.launch {
+            samodelkinRepo.getCharacters().collect { characterList ->
+                mCharacters.update { characterList }
+            }
+        }
+        viewModelScope.launch {
+            mCurrentCharacterIdState
+                .map { uuid -> samodelkinRepo.getCharacter(uuid) }
+                .collect { character -> mCurrentCharacterState.update { character } }
+
+        }
+    }
     /**
      * Loads a character by id into currentCharacterState, if it exists.  If id is not found
      * in list of characters, then sets currentCharacterState to null.
      * @param uuid id to use for character lookup
      */
-    fun loadCharacterByUUID(uuid: UUID) {
+    override fun loadCharacterByUUID(uuid: UUID) {
         Log.d(LOG_TAG, "loadCharacterByUUID($uuid)")
-        mCurrentCharacterState.value = null
-        mCharacters.forEach { character ->
-            if (character.id == uuid) {
-                Log.d(LOG_TAG, "Character found! $character")
-                mCurrentCharacterState.value = character
-                return
-            }
-        }
-        Log.d(LOG_TAG, "Character not found")
+        mCurrentCharacterIdState.update { uuid }
         return
     }
 
@@ -51,9 +63,9 @@ class SamodelkinViewModel(characters: List<SamodelkinCharacter>) : ViewModel() {
      * Adds the given character to the list of characters.
      * @param characterToAdd character to add to the list
      */
-    fun addCharacter(characterToAdd: SamodelkinCharacter) {
+    override fun addCharacter(characterToAdd: SamodelkinCharacter) {
         Log.d(LOG_TAG, "adding character $characterToAdd")
-        mCharacters += characterToAdd
+        samodelkinRepo.addCharacter(characterToAdd)
     }
 
     /**
@@ -61,18 +73,8 @@ class SamodelkinViewModel(characters: List<SamodelkinCharacter>) : ViewModel() {
      * Matches characters by id.  If character is not found in the list, does nothing.
      * @param characterToDelete character to delete from list
      */
-    fun deleteCharacter(characterToDelete: SamodelkinCharacter) {
+    override fun deleteCharacter(characterToDelete: SamodelkinCharacter) {
         Log.d(LOG_TAG, "deleting character $characterToDelete")
-        mCharacters.forEach { character ->
-            if (character.id == characterToDelete.id) {
-                mCharacters.remove(character)
-                if (mCurrentCharacterState.value == character) {
-                    mCurrentCharacterState.value = null
-                }
-                Log.d(LOG_TAG, "character deleted")
-                return
-            }
-        }
-        Log.d(LOG_TAG, "Character not found")
+        samodelkinRepo.deleteCharacter(characterToDelete)
     }
 }

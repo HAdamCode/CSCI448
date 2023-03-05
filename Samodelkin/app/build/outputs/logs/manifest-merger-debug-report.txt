@@ -53,9 +53,13 @@ MERGED from [androidx.lifecycle:lifecycle-runtime:2.6.0-rc01] C:\Users\hunte\.gr
 MERGED from [androidx.lifecycle:lifecycle-viewmodel-compose:2.6.0-rc01] C:\Users\hunte\.gradle\caches\transforms-3\c4e13072de124ab308bee5d4475147fd\transformed\lifecycle-viewmodel-compose-2.6.0-rc01\AndroidManifest.xml:17:1-22:12
 MERGED from [com.google.accompanist:accompanist-drawablepainter:0.25.1] C:\Users\hunte\.gradle\caches\transforms-3\2b38b5f874d29871af4a896805f2939c\transformed\accompanist-drawablepainter-0.25.1\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.compose.ui:ui:1.4.0-beta02] C:\Users\hunte\.gradle\caches\transforms-3\8efb5ba7e701a840b51e155e0d398dbe\transformed\ui-1.4.0-beta02\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.room:room-ktx:2.5.0] C:\Users\hunte\.gradle\caches\transforms-3\ec48fa701771f304132c1c779ca51e53\transformed\room-ktx-2.5.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.compose.runtime:runtime-saveable:1.4.0-beta02] C:\Users\hunte\.gradle\caches\transforms-3\bda85501835974263930920e59246449\transformed\runtime-saveable-1.4.0-beta02\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.compose.runtime:runtime:1.4.0-beta02] C:\Users\hunte\.gradle\caches\transforms-3\6ca5df278baae426e2ab7e4e15484493\transformed\runtime-1.4.0-beta02\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.room:room-runtime:2.5.0] C:\Users\hunte\.gradle\caches\transforms-3\1dca648e1d937ca0dc4bd8795b8b5e7a\transformed\room-runtime-2.5.0\AndroidManifest.xml:17:1-31:12
 MERGED from [androidx.profileinstaller:profileinstaller:1.2.1] C:\Users\hunte\.gradle\caches\transforms-3\7248ff3d608ffa38fc21b8731e18b16f\transformed\profileinstaller-1.2.1\AndroidManifest.xml:17:1-50:12
+MERGED from [androidx.sqlite:sqlite-framework:2.3.0] C:\Users\hunte\.gradle\caches\transforms-3\da9a8943b43177454ab1c33f2834ba40\transformed\sqlite-framework-2.3.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.sqlite:sqlite:2.3.0] C:\Users\hunte\.gradle\caches\transforms-3\e99301e4aa7ce3ce934c64265a0ea410\transformed\sqlite-2.3.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\hunte\.gradle\caches\transforms-3\a4aa7fbb1abaa741d90f2d6d053f630c\transformed\versionedparcelable-1.1.1\AndroidManifest.xml:17:1-27:12
 MERGED from [androidx.arch.core:core-runtime:2.2.0-rc01] C:\Users\hunte\.gradle\caches\transforms-3\86d5ebbc8a653a5af60df4de2e2c78c3\transformed\core-runtime-2.2.0-rc01\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.startup:startup-runtime:1.1.1] C:\Users\hunte\.gradle\caches\transforms-3\2773a1f3963352a83ea05f1aa5de2745\transformed\startup-runtime-1.1.1\AndroidManifest.xml:17:1-33:12
@@ -94,6 +98,8 @@ MERGED from [androidx.lifecycle:lifecycle-process:2.6.0-rc01] C:\Users\hunte\.gr
 MERGED from [androidx.lifecycle:lifecycle-process:2.6.0-rc01] C:\Users\hunte\.gradle\caches\transforms-3\ad492c08d1a3d0f3e2ab1d4c305edbd7\transformed\lifecycle-process-2.6.0-rc01\AndroidManifest.xml:23:5-33:19
 MERGED from [androidx.core:core:1.9.0] C:\Users\hunte\.gradle\caches\transforms-3\24c8031572ced1a9ec505ef2513af626\transformed\core-1.9.0\AndroidManifest.xml:28:5-89
 MERGED from [androidx.core:core:1.9.0] C:\Users\hunte\.gradle\caches\transforms-3\24c8031572ced1a9ec505ef2513af626\transformed\core-1.9.0\AndroidManifest.xml:28:5-89
+MERGED from [androidx.room:room-runtime:2.5.0] C:\Users\hunte\.gradle\caches\transforms-3\1dca648e1d937ca0dc4bd8795b8b5e7a\transformed\room-runtime-2.5.0\AndroidManifest.xml:23:5-29:19
+MERGED from [androidx.room:room-runtime:2.5.0] C:\Users\hunte\.gradle\caches\transforms-3\1dca648e1d937ca0dc4bd8795b8b5e7a\transformed\room-runtime-2.5.0\AndroidManifest.xml:23:5-29:19
 MERGED from [androidx.profileinstaller:profileinstaller:1.2.1] C:\Users\hunte\.gradle\caches\transforms-3\7248ff3d608ffa38fc21b8731e18b16f\transformed\profileinstaller-1.2.1\AndroidManifest.xml:24:5-48:19
 MERGED from [androidx.profileinstaller:profileinstaller:1.2.1] C:\Users\hunte\.gradle\caches\transforms-3\7248ff3d608ffa38fc21b8731e18b16f\transformed\profileinstaller-1.2.1\AndroidManifest.xml:24:5-48:19
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\hunte\.gradle\caches\transforms-3\a4aa7fbb1abaa741d90f2d6d053f630c\transformed\versionedparcelable-1.1.1\AndroidManifest.xml:24:5-25:19
@@ -242,12 +248,20 @@ MERGED from [com.google.accompanist:accompanist-drawablepainter:0.25.1] C:\Users
 MERGED from [com.google.accompanist:accompanist-drawablepainter:0.25.1] C:\Users\hunte\.gradle\caches\transforms-3\2b38b5f874d29871af4a896805f2939c\transformed\accompanist-drawablepainter-0.25.1\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.compose.ui:ui:1.4.0-beta02] C:\Users\hunte\.gradle\caches\transforms-3\8efb5ba7e701a840b51e155e0d398dbe\transformed\ui-1.4.0-beta02\AndroidManifest.xml:20:5-44
 MERGED from [androidx.compose.ui:ui:1.4.0-beta02] C:\Users\hunte\.gradle\caches\transforms-3\8efb5ba7e701a840b51e155e0d398dbe\transformed\ui-1.4.0-beta02\AndroidManifest.xml:20:5-44
+MERGED from [androidx.room:room-ktx:2.5.0] C:\Users\hunte\.gradle\caches\transforms-3\ec48fa701771f304132c1c779ca51e53\transformed\room-ktx-2.5.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.room:room-ktx:2.5.0] C:\Users\hunte\.gradle\caches\transforms-3\ec48fa701771f304132c1c779ca51e53\transformed\room-ktx-2.5.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.compose.runtime:runtime-saveable:1.4.0-beta02] C:\Users\hunte\.gradle\caches\transforms-3\bda85501835974263930920e59246449\transformed\runtime-saveable-1.4.0-beta02\AndroidManifest.xml:20:5-44
 MERGED from [androidx.compose.runtime:runtime-saveable:1.4.0-beta02] C:\Users\hunte\.gradle\caches\transforms-3\bda85501835974263930920e59246449\transformed\runtime-saveable-1.4.0-beta02\AndroidManifest.xml:20:5-44
 MERGED from [androidx.compose.runtime:runtime:1.4.0-beta02] C:\Users\hunte\.gradle\caches\transforms-3\6ca5df278baae426e2ab7e4e15484493\transformed\runtime-1.4.0-beta02\AndroidManifest.xml:20:5-44
 MERGED from [androidx.compose.runtime:runtime:1.4.0-beta02] C:\Users\hunte\.gradle\caches\transforms-3\6ca5df278baae426e2ab7e4e15484493\transformed\runtime-1.4.0-beta02\AndroidManifest.xml:20:5-44
+MERGED from [androidx.room:room-runtime:2.5.0] C:\Users\hunte\.gradle\caches\transforms-3\1dca648e1d937ca0dc4bd8795b8b5e7a\transformed\room-runtime-2.5.0\AndroidManifest.xml:21:5-44
+MERGED from [androidx.room:room-runtime:2.5.0] C:\Users\hunte\.gradle\caches\transforms-3\1dca648e1d937ca0dc4bd8795b8b5e7a\transformed\room-runtime-2.5.0\AndroidManifest.xml:21:5-44
 MERGED from [androidx.profileinstaller:profileinstaller:1.2.1] C:\Users\hunte\.gradle\caches\transforms-3\7248ff3d608ffa38fc21b8731e18b16f\transformed\profileinstaller-1.2.1\AndroidManifest.xml:21:5-22:38
 MERGED from [androidx.profileinstaller:profileinstaller:1.2.1] C:\Users\hunte\.gradle\caches\transforms-3\7248ff3d608ffa38fc21b8731e18b16f\transformed\profileinstaller-1.2.1\AndroidManifest.xml:21:5-22:38
+MERGED from [androidx.sqlite:sqlite-framework:2.3.0] C:\Users\hunte\.gradle\caches\transforms-3\da9a8943b43177454ab1c33f2834ba40\transformed\sqlite-framework-2.3.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.sqlite:sqlite-framework:2.3.0] C:\Users\hunte\.gradle\caches\transforms-3\da9a8943b43177454ab1c33f2834ba40\transformed\sqlite-framework-2.3.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.sqlite:sqlite:2.3.0] C:\Users\hunte\.gradle\caches\transforms-3\e99301e4aa7ce3ce934c64265a0ea410\transformed\sqlite-2.3.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.sqlite:sqlite:2.3.0] C:\Users\hunte\.gradle\caches\transforms-3\e99301e4aa7ce3ce934c64265a0ea410\transformed\sqlite-2.3.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\hunte\.gradle\caches\transforms-3\a4aa7fbb1abaa741d90f2d6d053f630c\transformed\versionedparcelable-1.1.1\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\hunte\.gradle\caches\transforms-3\a4aa7fbb1abaa741d90f2d6d053f630c\transformed\versionedparcelable-1.1.1\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.arch.core:core-runtime:2.2.0-rc01] C:\Users\hunte\.gradle\caches\transforms-3\86d5ebbc8a653a5af60df4de2e2c78c3\transformed\core-runtime-2.2.0-rc01\AndroidManifest.xml:20:5-44
@@ -332,6 +346,16 @@ uses-permission#edu.mines.csci448.examples.samodelkin.DYNAMIC_RECEIVER_NOT_EXPOR
 ADDED from [androidx.core:core:1.9.0] C:\Users\hunte\.gradle\caches\transforms-3\24c8031572ced1a9ec505ef2513af626\transformed\core-1.9.0\AndroidManifest.xml:26:5-97
 	android:name
 		ADDED from [androidx.core:core:1.9.0] C:\Users\hunte\.gradle\caches\transforms-3\24c8031572ced1a9ec505ef2513af626\transformed\core-1.9.0\AndroidManifest.xml:26:22-94
+service#androidx.room.MultiInstanceInvalidationService
+ADDED from [androidx.room:room-runtime:2.5.0] C:\Users\hunte\.gradle\caches\transforms-3\1dca648e1d937ca0dc4bd8795b8b5e7a\transformed\room-runtime-2.5.0\AndroidManifest.xml:24:9-28:63
+	android:exported
+		ADDED from [androidx.room:room-runtime:2.5.0] C:\Users\hunte\.gradle\caches\transforms-3\1dca648e1d937ca0dc4bd8795b8b5e7a\transformed\room-runtime-2.5.0\AndroidManifest.xml:27:13-37
+	tools:ignore
+		ADDED from [androidx.room:room-runtime:2.5.0] C:\Users\hunte\.gradle\caches\transforms-3\1dca648e1d937ca0dc4bd8795b8b5e7a\transformed\room-runtime-2.5.0\AndroidManifest.xml:28:13-60
+	android:directBootAware
+		ADDED from [androidx.room:room-runtime:2.5.0] C:\Users\hunte\.gradle\caches\transforms-3\1dca648e1d937ca0dc4bd8795b8b5e7a\transformed\room-runtime-2.5.0\AndroidManifest.xml:26:13-43
+	android:name
+		ADDED from [androidx.room:room-runtime:2.5.0] C:\Users\hunte\.gradle\caches\transforms-3\1dca648e1d937ca0dc4bd8795b8b5e7a\transformed\room-runtime-2.5.0\AndroidManifest.xml:25:13-74
 meta-data#androidx.profileinstaller.ProfileInstallerInitializer
 ADDED from [androidx.profileinstaller:profileinstaller:1.2.1] C:\Users\hunte\.gradle\caches\transforms-3\7248ff3d608ffa38fc21b8731e18b16f\transformed\profileinstaller-1.2.1\AndroidManifest.xml:30:13-32:52
 	android:value

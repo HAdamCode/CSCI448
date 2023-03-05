@@ -9,6 +9,7 @@ import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavHostController
 import edu.mines.csci448.examples.samodelkin.R
 import edu.mines.csci448.examples.samodelkin.presentation.newcharacter.NewCharacterScreen
+import edu.mines.csci448.examples.samodelkin.presentation.viewmodel.ISamodelkinViewModel
 import edu.mines.csci448.examples.samodelkin.presentation.viewmodel.SamodelkinViewModel
 import edu.mines.csci448.examples.samodelkin.util.CharacterGenerator
 
@@ -22,7 +23,7 @@ object NewCharacterScreenSpec : IScreenSpec {
 
     @Composable
     override fun Content(
-        samodelkinViewModel: SamodelkinViewModel,
+        samodelkinViewModel: ISamodelkinViewModel,
         navController: NavHostController,
         navBackStackEntry: NavBackStackEntry,
         context: Context
@@ -33,7 +34,7 @@ object NewCharacterScreenSpec : IScreenSpec {
         NewCharacterScreen(
             character = characterState.value,
             onGenerateRandomCharacter = {
-                characterState.value = CharacterGenerator.generateRandomCharacter(context)
+                characterState.value = CharacterGenerator.generateRandomCharacter(context) // TODO get rid of duplicate code
             },
             onSaveCharacter = {
                 samodelkinViewModel.addCharacter(characterState.value)
@@ -47,7 +48,7 @@ object NewCharacterScreenSpec : IScreenSpec {
 
     @Composable
     override fun TopAppBarActions(
-        samodelkinViewModel: SamodelkinViewModel,
+        samodelkinViewModel: ISamodelkinViewModel,
         navController: NavHostController,
         navBackStackEntry: NavBackStackEntry?,
         context: Context

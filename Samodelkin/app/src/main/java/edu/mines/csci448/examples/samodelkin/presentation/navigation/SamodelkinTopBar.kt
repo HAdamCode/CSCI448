@@ -5,11 +5,12 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import edu.mines.csci448.examples.samodelkin.presentation.navigation.specs.IScreenSpec
+import edu.mines.csci448.examples.samodelkin.presentation.viewmodel.ISamodelkinViewModel
 import edu.mines.csci448.examples.samodelkin.presentation.viewmodel.SamodelkinViewModel
 
 @Composable
 fun SamodelkinTopBar(
-    samodelkinViewModel: SamodelkinViewModel,
+    samodelkinViewModel: ISamodelkinViewModel,
     navController: NavHostController,
     context: Context
 ) {

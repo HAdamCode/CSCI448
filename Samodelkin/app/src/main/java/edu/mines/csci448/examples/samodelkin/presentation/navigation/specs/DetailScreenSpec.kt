@@ -12,6 +12,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.navigation.*
 import edu.mines.csci448.examples.samodelkin.R
 import edu.mines.csci448.examples.samodelkin.presentation.detail.SamodelkinDetailScreen
+import edu.mines.csci448.examples.samodelkin.presentation.viewmodel.ISamodelkinViewModel
 import edu.mines.csci448.examples.samodelkin.presentation.viewmodel.SamodelkinViewModel
 import java.util.*
 
@@ -46,7 +47,7 @@ object DetailScreenSpec : IScreenSpec {
 
     @Composable
     override fun Content(
-        samodelkinViewModel: SamodelkinViewModel,
+        samodelkinViewModel: ISamodelkinViewModel,
         navController: NavHostController,
         navBackStackEntry: NavBackStackEntry,
         context: Context
@@ -62,7 +63,7 @@ object DetailScreenSpec : IScreenSpec {
 
     @Composable
     override fun TopAppBarActions(
-        samodelkinViewModel: SamodelkinViewModel,
+        samodelkinViewModel: ISamodelkinViewModel,
         navController: NavHostController,
         navBackStackEntry: NavBackStackEntry?,
         context: Context
