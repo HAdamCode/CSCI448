@@ -15,10 +15,10 @@ interface SamodelkinDao {
     fun addCharacter(samodelkinCharacter: SamodelkinCharacter)
 
     @Query("SELECT * FROM character")
-    fun getCharacters() : Flow<List<SamodelkinCharacter>>
+    fun getCharacters(): Flow<List<SamodelkinCharacter>>
 
     @Query("SELECT * FROM character WHERE id=(:id)")
-    suspend fun getCharacterById(id: UUID) : SamodelkinCharacter?
+    suspend fun getCharacterById(id: UUID): SamodelkinCharacter?
 
     @Delete
     fun deleteCrime(samodelkinCharacter: SamodelkinCharacter)

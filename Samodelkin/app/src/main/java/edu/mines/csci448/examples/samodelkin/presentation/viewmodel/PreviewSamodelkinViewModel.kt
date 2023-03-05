@@ -2,10 +2,7 @@ package edu.mines.csci448.examples.samodelkin.presentation.viewmodel
 
 import android.content.Context
 import android.util.Log
-import androidx.compose.runtime.toMutableStateList
-import androidx.lifecycle.ViewModel
 import edu.mines.csci448.examples.samodelkin.data.SamodelkinCharacter
-import edu.mines.csci448.examples.samodelkin.data.SamodelkinRepo
 import edu.mines.csci448.examples.samodelkin.util.CharacterGenerator
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -20,8 +17,6 @@ class PreviewSamodelkinViewModel(context: Context) : ISamodelkinViewModel {
     private val mCharacters: MutableList<SamodelkinCharacter> =
         mutableListOf()
 
-
-
     /**
      * holds list of all characters stored within the view model
      */
@@ -30,14 +25,11 @@ class PreviewSamodelkinViewModel(context: Context) : ISamodelkinViewModel {
     override val characterListState: StateFlow<List<SamodelkinCharacter>>
         get() = mCharacterListState.asStateFlow()
 
-
-
     private val mCurrentCharacterState: MutableStateFlow<SamodelkinCharacter?> =
         MutableStateFlow(null)
 
     override val currentCharacterState: StateFlow<SamodelkinCharacter?>
         get() = mCurrentCharacterState
-
 
     init {
         repeat(10) {
@@ -45,6 +37,7 @@ class PreviewSamodelkinViewModel(context: Context) : ISamodelkinViewModel {
             addCharacter(CharacterGenerator.generateRandomCharacter(context))
         }
     }
+
     /**
      * Loads a character by id into currentCharacterState, if it exists.  If id is not found
      * in list of characters, then sets currentCharacterState to null.

@@ -25,5 +25,4 @@ class SamodelkinViewModelFactory(private val context: Context) :
         Log.e(LOG_TAG, "Unknown ViewModel: $modelClass")
         throw IllegalArgumentException("Unknown ViewModel")
     }
-
 }

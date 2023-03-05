@@ -1,7 +1,6 @@
 package edu.mines.csci448.examples.samodelkin.presentation.viewmodel
 
 import android.util.Log
-import androidx.compose.runtime.toMutableStateList
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import edu.mines.csci448.examples.samodelkin.data.SamodelkinCharacter
@@ -10,7 +9,8 @@ import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import java.util.*
 
-class SamodelkinViewModel(private val samodelkinRepo: SamodelkinRepo) : ViewModel(), ISamodelkinViewModel {
+class SamodelkinViewModel(private val samodelkinRepo: SamodelkinRepo) : ViewModel(),
+    ISamodelkinViewModel {
     companion object {
         private const val LOG_TAG = "448.SamodelkinViewModel"
     }
@@ -24,7 +24,6 @@ class SamodelkinViewModel(private val samodelkinRepo: SamodelkinRepo) : ViewMode
      */
     override val characterListState: StateFlow<List<SamodelkinCharacter>>
         get() = mCharacters.asStateFlow()
-
 
     private val mCurrentCharacterState: MutableStateFlow<SamodelkinCharacter?> =
         MutableStateFlow(null)
@@ -45,9 +44,9 @@ class SamodelkinViewModel(private val samodelkinRepo: SamodelkinRepo) : ViewMode
             mCurrentCharacterIdState
                 .map { uuid -> samodelkinRepo.getCharacter(uuid) }
                 .collect { character -> mCurrentCharacterState.update { character } }
-
         }
     }
+
     /**
      * Loads a character by id into currentCharacterState, if it exists.  If id is not found
      * in list of characters, then sets currentCharacterState to null.

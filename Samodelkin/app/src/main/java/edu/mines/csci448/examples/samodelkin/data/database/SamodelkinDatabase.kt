@@ -27,5 +27,6 @@ abstract class SamodelkinDatabase : RoomDatabase() {
             }
         }
     }
+
     abstract val samodelkinDao: SamodelkinDao
 }

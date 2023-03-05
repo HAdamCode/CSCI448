@@ -4,7 +4,6 @@ import android.content.Context
 import android.util.Log
 import edu.mines.csci448.examples.samodelkin.data.database.SamodelkinDao
 import edu.mines.csci448.examples.samodelkin.data.database.SamodelkinDatabase
-import edu.mines.csci448.examples.samodelkin.util.CharacterGenerator
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.Flow
@@ -43,7 +42,7 @@ private constructor(
     }
 
     fun getCharacters(): Flow<List<SamodelkinCharacter>> = samodelkinDao.getCharacters()
-    suspend fun getCharacter(id: UUID) : SamodelkinCharacter? = samodelkinDao.getCharacterById(id)
+    suspend fun getCharacter(id: UUID): SamodelkinCharacter? = samodelkinDao.getCharacterById(id)
     fun addCharacter(samodelkinCharacter: SamodelkinCharacter) {
         coroutineScope.launch {
             samodelkinDao.addCharacter(samodelkinCharacter)

@@ -9,7 +9,6 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import edu.mines.csci448.examples.samodelkin.presentation.navigation.specs.IScreenSpec
 import edu.mines.csci448.examples.samodelkin.presentation.viewmodel.ISamodelkinViewModel
-import edu.mines.csci448.examples.samodelkin.presentation.viewmodel.SamodelkinViewModel
 
 @Composable
 fun SamodelkinNavHost(

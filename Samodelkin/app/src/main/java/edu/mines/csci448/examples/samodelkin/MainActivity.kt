@@ -13,12 +13,10 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.compose.rememberNavController
-import edu.mines.csci448.examples.samodelkin.data.SamodelkinRepo
 import edu.mines.csci448.examples.samodelkin.presentation.navigation.SamodelkinNavHost
 import edu.mines.csci448.examples.samodelkin.presentation.navigation.SamodelkinTopBar
 import edu.mines.csci448.examples.samodelkin.presentation.viewmodel.ISamodelkinViewModel
 import edu.mines.csci448.examples.samodelkin.presentation.viewmodel.PreviewSamodelkinViewModel
-import edu.mines.csci448.examples.samodelkin.presentation.viewmodel.SamodelkinViewModel
 import edu.mines.csci448.examples.samodelkin.presentation.viewmodel.SamodelkinViewModelFactory
 import edu.mines.csci448.examples.samodelkin.ui.theme.SamodelkinTheme
 
@@ -125,7 +123,6 @@ private fun MainActivityContent(samodelkinViewModel: ISamodelkinViewModel) {
                 )
             }) {
                 SamodelkinNavHost(Modifier.padding(it), navController, samodelkinViewModel, context)
-
             }
         }
     }

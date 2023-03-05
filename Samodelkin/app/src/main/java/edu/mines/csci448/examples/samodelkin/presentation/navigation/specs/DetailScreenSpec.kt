@@ -13,7 +13,6 @@ import androidx.navigation.*
 import edu.mines.csci448.examples.samodelkin.R
 import edu.mines.csci448.examples.samodelkin.presentation.detail.SamodelkinDetailScreen
 import edu.mines.csci448.examples.samodelkin.presentation.viewmodel.ISamodelkinViewModel
-import edu.mines.csci448.examples.samodelkin.presentation.viewmodel.SamodelkinViewModel
 import java.util.*
 
 object DetailScreenSpec : IScreenSpec {

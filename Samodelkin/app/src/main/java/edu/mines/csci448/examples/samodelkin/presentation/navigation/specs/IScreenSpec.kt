@@ -12,7 +12,6 @@ import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavHostController
 import edu.mines.csci448.examples.samodelkin.R
 import edu.mines.csci448.examples.samodelkin.presentation.viewmodel.ISamodelkinViewModel
-import edu.mines.csci448.examples.samodelkin.presentation.viewmodel.SamodelkinViewModel
 
 sealed interface IScreenSpec {
     companion object {

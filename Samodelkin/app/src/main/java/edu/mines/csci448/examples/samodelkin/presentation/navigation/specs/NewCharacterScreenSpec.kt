@@ -10,7 +10,6 @@ import androidx.navigation.NavHostController
 import edu.mines.csci448.examples.samodelkin.R
 import edu.mines.csci448.examples.samodelkin.presentation.newcharacter.NewCharacterScreen
 import edu.mines.csci448.examples.samodelkin.presentation.viewmodel.ISamodelkinViewModel
-import edu.mines.csci448.examples.samodelkin.presentation.viewmodel.SamodelkinViewModel
 import edu.mines.csci448.examples.samodelkin.util.CharacterGenerator
 
 object NewCharacterScreenSpec : IScreenSpec {
@@ -34,7 +33,8 @@ object NewCharacterScreenSpec : IScreenSpec {
         NewCharacterScreen(
             character = characterState.value,
             onGenerateRandomCharacter = {
-                characterState.value = CharacterGenerator.generateRandomCharacter(context) // TODO get rid of duplicate code
+                characterState.value =
+                    CharacterGenerator.generateRandomCharacter(context) // TODO get rid of duplicate code
             },
             onSaveCharacter = {
                 samodelkinViewModel.addCharacter(characterState.value)
