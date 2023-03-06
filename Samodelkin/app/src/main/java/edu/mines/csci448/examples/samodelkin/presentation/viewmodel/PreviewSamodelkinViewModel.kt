@@ -63,7 +63,7 @@ class PreviewSamodelkinViewModel(context: Context) : ISamodelkinViewModel {
      */
     override fun addCharacter(characterToAdd: SamodelkinCharacter) {
         Log.d(LOG_TAG, "adding character $characterToAdd")
-        mCharacters += characterToAdd
+        mCharacterListState.value += characterToAdd
     }
 
     /**
