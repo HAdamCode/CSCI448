@@ -76,7 +76,7 @@ class PreviewSamodelkinViewModel(context: Context) : ISamodelkinViewModel {
         mCharacters.forEach { character ->
             if (character.id == characterToDelete.id) {
                 mCharacters.remove(character)
-                if (currentCharacterState.value == character) {
+                if (mCurrentCharacterState.value == character) {
                     mCurrentCharacterState.value = null
                 }
                 Log.d(LOG_TAG, "character deleted")
