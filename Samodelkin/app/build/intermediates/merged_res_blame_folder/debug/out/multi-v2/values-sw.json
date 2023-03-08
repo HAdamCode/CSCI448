@@ -4,24 +4,24 @@
             "outputFile": "edu.mines.csci448.examples.samodelkin.app-mergeDebugResources-55:/values-sw/values-sw.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\hunte\\.gradle\\caches\\transforms-3\\8efb5ba7e701a840b51e155e0d398dbe\\transformed\\ui-1.4.0-beta02\\res\\values-sw\\values-sw.xml",
+                    "source": "C:\\Users\\Hunter\\.gradle\\caches\\transforms-3\\24c8031572ced1a9ec505ef2513af626\\transformed\\core-1.9.0\\res\\values-sw\\values-sw.xml",
                     "from": {
-                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "105,199,280,381,482,568,649,750,841,923,993,1064,1149,1236,1310,1387,1457",
-                        "endColumns": "93,80,100,100,85,80,100,90,81,69,70,84,86,73,76,69,120",
-                        "endOffsets": "194,275,376,477,563,644,745,836,918,988,1059,1144,1231,1305,1382,1452,1573"
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "100",
+                        "endOffsets": "151"
                     },
                     "to": {
-                        "startLines": "2,3,30,31,33,35,36,37,38,39,40,41,42,44,48,49,50",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "105,199,3208,3309,3486,3651,3732,3833,3924,4006,4076,4147,4232,4402,4768,4845,4915",
-                        "endColumns": "93,80,100,100,85,80,100,90,81,69,70,84,86,73,76,69,120",
-                        "endOffsets": "194,275,3304,3405,3567,3727,3828,3919,4001,4071,4142,4227,4314,4471,4840,4910,5031"
+                        "startLines": "46",
+                        "startColumns": "4",
+                        "startOffsets": "4557",
+                        "endColumns": "100",
+                        "endOffsets": "4653"
                     }
                 },
                 {
-                    "source": "C:\\Users\\hunte\\.gradle\\caches\\transforms-3\\59229e90a94d9a4bd5630e4730573130\\transformed\\material3-1.1.0-alpha07\\res\\values-sw\\values-sw.xml",
+                    "source": "C:\\Users\\Hunter\\.gradle\\caches\\transforms-3\\59229e90a94d9a4bd5630e4730573130\\transformed\\material3-1.1.0-alpha07\\res\\values-sw\\values-sw.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -38,20 +38,20 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\hunte\\.gradle\\caches\\transforms-3\\24c8031572ced1a9ec505ef2513af626\\transformed\\core-1.9.0\\res\\values-sw\\values-sw.xml",
+                    "source": "C:\\Users\\Hunter\\.gradle\\caches\\transforms-3\\8efb5ba7e701a840b51e155e0d398dbe\\transformed\\ui-1.4.0-beta02\\res\\values-sw\\values-sw.xml",
                     "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "100",
-                        "endOffsets": "151"
+                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "105,199,280,381,482,568,649,750,841,923,993,1064,1149,1236,1310,1387,1457",
+                        "endColumns": "93,80,100,100,85,80,100,90,81,69,70,84,86,73,76,69,120",
+                        "endOffsets": "194,275,376,477,563,644,745,836,918,988,1059,1144,1231,1305,1382,1452,1573"
                     },
                     "to": {
-                        "startLines": "46",
-                        "startColumns": "4",
-                        "startOffsets": "4557",
-                        "endColumns": "100",
-                        "endOffsets": "4653"
+                        "startLines": "2,3,30,31,33,35,36,37,38,39,40,41,42,44,48,49,50",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "105,199,3208,3309,3486,3651,3732,3833,3924,4006,4076,4147,4232,4402,4768,4845,4915",
+                        "endColumns": "93,80,100,100,85,80,100,90,81,69,70,84,86,73,76,69,120",
+                        "endOffsets": "194,275,3304,3405,3567,3727,3828,3919,4001,4071,4142,4227,4314,4471,4840,4910,5031"
                     }
                 }
             ]
