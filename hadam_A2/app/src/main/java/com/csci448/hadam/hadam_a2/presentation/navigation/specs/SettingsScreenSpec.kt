@@ -22,6 +22,6 @@ object SettingsScreenSpec : IScreenSpec {
         navBackStackEntry: NavBackStackEntry,
         context: Context
     ) {
-        SettingsScreen(tttViewModel = tttViewModel)
+        SettingsScreen(tttViewModel = tttViewModel, context)
     }
 }

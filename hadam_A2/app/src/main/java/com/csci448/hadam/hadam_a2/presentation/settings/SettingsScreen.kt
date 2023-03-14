@@ -1,5 +1,7 @@
 package com.csci448.hadam.hadam_a2.presentation.settings
 
+import android.content.Context
+import android.widget.Toast
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -14,7 +16,7 @@ import com.csci448.hadam.hadam_a2.presentation.viewmodel.ITTTViewModel
 import com.csci448.hadam.hadam_a2.presentation.viewmodel.TTTViewModel
 
 @Composable
-fun SettingsScreen(tttViewModel: ITTTViewModel) {
+fun SettingsScreen(tttViewModel: ITTTViewModel, context: Context) {
     val gameList = tttViewModel.gameListState.collectAsState().value
     Column(modifier = Modifier.fillMaxWidth()) {
         val mOnePlayerGameCheck = tttViewModel.mOnePlayerGameCheck
@@ -79,7 +81,10 @@ fun SettingsScreen(tttViewModel: ITTTViewModel) {
             )
             Switch(
                 checked = mXGoesFirst.value,
-                onCheckedChange = { mXGoesFirst.value = it },
+                onCheckedChange = {
+                    mXGoesFirst.value = it
+                    tttViewModel.switchXGoesFirst()
+                },
                 modifier = Modifier.padding(13.dp)
             )
         }
@@ -92,6 +97,7 @@ fun SettingsScreen(tttViewModel: ITTTViewModel) {
                     for (game in gameList) {
                         tttViewModel.deleteGame(game)
                     }
+                    Toast.makeText(context, "Game history cleared", Toast.LENGTH_SHORT).show()
                 }, modifier = Modifier
                     .fillMaxWidth()
                     .padding(20.dp)

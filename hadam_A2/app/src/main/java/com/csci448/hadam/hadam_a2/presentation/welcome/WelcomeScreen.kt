@@ -8,7 +8,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.modifier.modifierLocalConsumer
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -32,7 +31,7 @@ fun WelcomeScreen(navController: NavController) {
                     .weight(1f),
                     verticalAlignment = Alignment.CenterVertically) {
                     Column(modifier = Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
-                        Image(painter = painterResource(id = R.drawable.tictactoe), contentDescription = "Tic Tac Toe")
+                        Image(painter = painterResource(id = R.drawable.welcomeicon), contentDescription = "Tic Tac Toe")
                     }
                 }
                 Row(modifier = Modifier) {
@@ -67,7 +66,7 @@ fun WelcomeScreen(navController: NavController) {
         } else -> {
         Row(modifier = Modifier.fillMaxWidth(),verticalAlignment = Alignment.CenterVertically) {
             Column(modifier = Modifier.weight(1f).fillMaxWidth(),horizontalAlignment = Alignment.CenterHorizontally) {
-                Image(painter = painterResource(id = R.drawable.tictactoe), contentDescription = "Tic Tac Toe")
+                Image(painter = painterResource(id = R.drawable.welcomeicon), contentDescription = "Tic Tac Toe")
             }
             Column(modifier = Modifier.weight(1f).fillMaxWidth()) {
                 Button(onClick = {navController.navigate(GameScreenSpec.route)}, modifier = Modifier

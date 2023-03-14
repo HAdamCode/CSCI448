@@ -23,6 +23,6 @@ object GameScreenSpec : IScreenSpec {
         navBackStackEntry: NavBackStackEntry,
         context: Context
     ) {
-        GameScreen(tttViewModel)
+        GameScreen(tttViewModel, context)
     }
 }

@@ -17,6 +17,8 @@ interface ITTTViewModel {
     val mWinner: MutableState<Int>
     val mTurn: MutableState<Int>
     val cells: MutableList<TTTCells>
+    val firstPersonImageId: MutableState<Int>
+    val secondPersonImageId: MutableState<Int>
 //    val currentNumGamesState: StateFlow<Int?>
     fun loadGameByUUID(uuid: UUID)
     fun addGame(gameToAdd: TTTGame)
@@ -24,5 +26,6 @@ interface ITTTViewModel {
     fun changeImage(imageId: Int, cellPostition: Int)
 
     fun resetGame()
+    fun switchXGoesFirst()
 //    fun getNumWins()
 }

@@ -1,7 +1,9 @@
 package com.csci448.hadam.hadam_a2.presentation.game
 
+import android.content.Context
 import android.content.res.Configuration
 import android.graphics.drawable.GradientDrawable.Orientation
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -37,7 +39,7 @@ fun computeGameWin(tttViewModel: ITTTViewModel) {
         for (j in 3 * i..(3 * i) + 2) {
             if (tttViewModel.cells[j].imageId == null) {
                 break
-            } else if (tttViewModel.cells[j].imageId == R.drawable.tictactoe) {
+            } else if (tttViewModel.cells[j].imageId == tttViewModel.firstPersonImageId.value) {
                 player1++
             } else {
                 player2++
@@ -59,7 +61,7 @@ fun computeGameWin(tttViewModel: ITTTViewModel) {
         if (tttViewModel.cells[i].imageId == null) {
             continue
         } else if (tttViewModel.cells[i].imageId == tttViewModel.cells[i + 3].imageId && tttViewModel.cells[i].imageId == tttViewModel.cells[i + 6].imageId) {
-            if (tttViewModel.cells[i].imageId == R.drawable.tictactoe) {
+            if (tttViewModel.cells[i].imageId == tttViewModel.firstPersonImageId.value) {
                 tttViewModel.mExistsWinner.value = true
                 tttViewModel.mWinner.value = 1
                 break
@@ -72,7 +74,7 @@ fun computeGameWin(tttViewModel: ITTTViewModel) {
     }
     if (tttViewModel.cells[0].imageId != null) {
         if (tttViewModel.cells[0].imageId == tttViewModel.cells[4].imageId && tttViewModel.cells[8].imageId == tttViewModel.cells[0].imageId) {
-            if (tttViewModel.cells[0].imageId == R.drawable.tictactoe) {
+            if (tttViewModel.cells[0].imageId == tttViewModel.firstPersonImageId.value) {
                 tttViewModel.mExistsWinner.value = true
                 tttViewModel.mWinner.value = 1
             } else {
@@ -83,7 +85,7 @@ fun computeGameWin(tttViewModel: ITTTViewModel) {
     }
     if (tttViewModel.cells[2].imageId != null) {
         if (tttViewModel.cells[2].imageId == tttViewModel.cells[4].imageId && tttViewModel.cells[2].imageId == tttViewModel.cells[6].imageId) {
-            if (tttViewModel.cells[2].imageId == R.drawable.tictactoe) {
+            if (tttViewModel.cells[2].imageId == tttViewModel.firstPersonImageId.value) {
                 tttViewModel.mExistsWinner.value = true
                 tttViewModel.mWinner.value = 1
             } else {
@@ -105,7 +107,7 @@ fun computeGameWin(tttViewModel: ITTTViewModel) {
 }
 
 @Composable
-fun GameScreen(tttViewModel: ITTTViewModel) {
+fun GameScreen(tttViewModel: ITTTViewModel, context: Context) {
     computeGameWin(tttViewModel = tttViewModel)
     val mSomeoneWon = tttViewModel.mExistsWinner.value
     val turn = tttViewModel.mTurn.value
@@ -125,6 +127,35 @@ fun GameScreen(tttViewModel: ITTTViewModel) {
     }
     else {
         whoWonString = "Player ${tttViewModel.mWinner.value} Won"
+    }
+
+    if (tttViewModel.mOnePlayerGameCheck.value && tttViewModel.mTurn.value == 1 && !tttViewModel.mDifficultyCheck.value) {
+        for (i in 0..8) {
+            if (tttViewModel.cells[i].imageId == null) {
+                tttViewModel.changeImage(tttViewModel.secondPersonImageId.value, i)
+                tttViewModel.mTurn.value = (tttViewModel.mTurn.value + 1) % 2
+                break
+            }
+        }
+    }
+    else if (tttViewModel.mOnePlayerGameCheck.value && tttViewModel.mTurn.value == 1 && tttViewModel.mDifficultyCheck.value) {
+        var full = 0
+        for (i in 0..8) {
+            if (tttViewModel.cells[i].imageId == null) {
+                full++
+            }
+        }
+        while (true) {
+            if (full == 0) {
+                break
+            }
+            val i = (0..8).random()
+            if (tttViewModel.cells[i].imageId == null) {
+                tttViewModel.changeImage(tttViewModel.secondPersonImageId.value, i)
+                tttViewModel.mTurn.value = (tttViewModel.mTurn.value + 1) % 2
+                break
+            }
+        }
     }
 
     when (LocalConfiguration.current.orientation) {
@@ -183,7 +214,8 @@ fun GameScreen(tttViewModel: ITTTViewModel) {
                             modifier = Modifier.fillMaxWidth(),
                             horizontalAlignment = Alignment.CenterHorizontally
                         ) {
-                            Button(onClick = { tttViewModel.resetGame() }) {
+                            Button(onClick = { tttViewModel.resetGame()
+                            Toast.makeText(context, "Previous Game Saved And New Game Ready", Toast.LENGTH_SHORT).show()}) {
                                 Text(text = "New Game")
                             }
                         }
@@ -345,11 +377,10 @@ fun Cell(tttViewModel: ITTTViewModel, position: Int) {
                     .border(3.dp, Color.DarkGray)
                     .clickable {
                         if (tttViewModel.mTurn.value == 0) {
-                            tttViewModel.changeImage(R.drawable.tictactoe, position)
+                            tttViewModel.changeImage(tttViewModel.firstPersonImageId.value, position)
                             tttViewModel.mTurn.value = (tttViewModel.mTurn.value + 1) % 2
-//                        tttViewModel.mTurn.value %= 2
                         } else {
-                            tttViewModel.changeImage(R.drawable.ic_launcher_background, position)
+                            tttViewModel.changeImage(tttViewModel.secondPersonImageId.value, position)
                             tttViewModel.mTurn.value = (tttViewModel.mTurn.value + 1) % 2
                         }
                     }

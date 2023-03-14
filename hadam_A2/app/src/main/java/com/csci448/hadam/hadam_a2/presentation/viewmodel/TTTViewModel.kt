@@ -6,6 +6,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.csci448.hadam.hadam_a2.R
 import com.csci448.hadam.hadam_a2.data.TTTCells
 import com.csci448.hadam.hadam_a2.data.TTTGame
 import com.csci448.hadam.hadam_a2.data.TTTRepo
@@ -42,6 +43,8 @@ class TTTViewModel(private val tttRepo: TTTRepo) : ViewModel(),
     override val mWinner: MutableState<Int> = mutableStateOf(0)
     override val mTurn: MutableState<Int> = mutableStateOf(0)
     override val cells: MutableList<TTTCells> = mutableListOf()
+    override val firstPersonImageId: MutableState<Int> = mutableStateOf(R.drawable.x)
+    override val secondPersonImageId: MutableState<Int> = mutableStateOf(R.drawable.o)
 
     init {
         viewModelScope.launch {
@@ -124,7 +127,12 @@ class TTTViewModel(private val tttRepo: TTTRepo) : ViewModel(),
         }
         mExistsWinner.value = false
         mTurn.value = 0
+    }
 
+    override fun switchXGoesFirst() {
+        val temp = firstPersonImageId.value
+        firstPersonImageId.value = secondPersonImageId.value
+        secondPersonImageId.value = temp
     }
 //    override fun getNumWins() {
 //        Log.d(LOG_TAG, "incrementing number of wins")
