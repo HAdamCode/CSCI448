@@ -1,6 +1,8 @@
-There are no special instructions to run. Just go to the MainActivity.kt and run the project. 
+1) The navigations between screens was not very hard. It was the actual grid implementation that was difficult. 
 
-1) I implemented the $ symbol by doing "$" + totalCost but I easily could have tried "$${totalCost}" as well.
-2) I used GeeksForGeek for the Jetpack composable information. For the radio buttons I used a list of option, then added a RadioButton composable to each option. 
-	For the dropdown, I used an OutlinedTextField for the initial text field and its value. Then used a DropdownMenu composable for the contents of the dropdown portion.
-	I looped through the pizzas and set the DropdownMenuItem to the pizza text. 
+2) I split up all of the screens into their own packages. The navigation package brought them all together. The viewmodel
+also had its own package for the factory as well. All of these were in the presentation package. I also had a data
+package that held the database and my entity declarations. The advantages were that everything was seperated in a way that was easy to read 
+and easy to manipulate individually. Also allowed for navigation to work correctly. 
+
+3) No extra credit. Hard enough as it was. 
