@@ -6,7 +6,8 @@ import java.util.*
 
 @Entity(tableName = "game")
 data class TTTGame(
-    val win: Int,
+    val winner: String,
+    val gameType: String,
     @PrimaryKey
     val id: UUID = UUID.randomUUID()
 )

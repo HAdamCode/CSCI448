@@ -37,7 +37,7 @@ private constructor(
 
     fun getGames(): Flow<List<TTTGame>> = tttDao.getGame()
     suspend fun getGame(id: UUID): TTTGame? = tttDao.getGameById(id)
-    fun addCharacter(tttGame: TTTGame) {
+    fun addGame(tttGame: TTTGame) {
         coroutineScope.launch {
             tttDao.addGame(tttGame)
         }

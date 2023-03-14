@@ -34,10 +34,13 @@ string label_wis_short
 string menu_add_character_desc
 string menu_back_desc
 string menu_delete_character_desc
+string menu_share_character_desc
 string name_label
 string profession_label
 string race_label
 string save_to_codex_label
+string send_character_msg_formatter
+string share_camodelkin_charater
 string snackbar_character_deleted_msg
 string snackbar_character_saved_msg
 string stats_label

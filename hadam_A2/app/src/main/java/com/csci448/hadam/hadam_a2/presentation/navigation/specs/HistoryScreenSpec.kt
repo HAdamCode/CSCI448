@@ -25,6 +25,6 @@ object HistoryScreenSpec : IScreenSpec{
         context: Context
     ) {
 //        val numberOfWins = tttViewModel.currentNumGamesState.collectAsState().value
-        HistoryScreen()
+        HistoryScreen(tttViewModel)
     }
 }

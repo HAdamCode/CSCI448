@@ -18,11 +18,11 @@ object GameScreenSpec : IScreenSpec {
 
     @Composable
     override fun Content(
-        samodelkinViewModel: ITTTViewModel,
+        tttViewModel: ITTTViewModel,
         navController: NavHostController,
         navBackStackEntry: NavBackStackEntry,
         context: Context
     ) {
-        GameScreen()
+        GameScreen(tttViewModel)
     }
 }

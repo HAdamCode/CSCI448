@@ -1,10 +1,15 @@
 package com.csci448.hadam.hadam_a2.presentation.viewmodel
 
 import android.util.Log
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.csci448.hadam.hadam_a2.data.TTTCells
 import com.csci448.hadam.hadam_a2.data.TTTGame
 import com.csci448.hadam.hadam_a2.data.TTTRepo
+import com.csci448.hadam.hadam_a2.presentation.game.Cell
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import java.util.*
@@ -12,16 +17,12 @@ import java.util.*
 class TTTViewModel(private val tttRepo: TTTRepo) : ViewModel(),
     ITTTViewModel {
     companion object {
-        private const val LOG_TAG = "448.SamodelkinViewModel"
+        private const val LOG_TAG = "448.TTTViewModel"
     }
 
     private val mGames: MutableStateFlow<List<TTTGame>> =
         MutableStateFlow(emptyList())
 
-
-    /**
-     * holds list of all characters stored within the view model
-     */
     override val gameListState: StateFlow<List<TTTGame>>
         get() = mGames.asStateFlow()
 
@@ -34,11 +35,13 @@ class TTTViewModel(private val tttRepo: TTTRepo) : ViewModel(),
     private val mCurrentGameIdState: MutableStateFlow<UUID> =
         MutableStateFlow(UUID.randomUUID())
 
-//    private val mCurrentNumGamesState: MutableStateFlow<Int?> =
-//        MutableStateFlow(null)
-//
-//    override val currentNumGamesState: StateFlow<Int?>
-//        get() = mCurrentNumGamesState.asStateFlow()
+    override val mNumPlayerGameCheck: MutableState<Boolean> = mutableStateOf(true)
+    override val mDifficultyCheck: MutableState<Boolean> = mutableStateOf(false)
+    override val mXGoesFirst: MutableState<Boolean> = mutableStateOf(true)
+    override val mExistsWinner: MutableState<Boolean> = mutableStateOf(false)
+    override val mWinner: MutableState<Int> = mutableStateOf(0)
+    override val mTurn: MutableState<Int> = mutableStateOf(0)
+    override val cells: MutableList<TTTCells> = mutableListOf()
 
     init {
         viewModelScope.launch {
@@ -51,9 +54,11 @@ class TTTViewModel(private val tttRepo: TTTRepo) : ViewModel(),
                 .map { uuid -> tttRepo.getGame(uuid) }
                 .collect { game -> mCurrentGameState.update { game } }
         }
-//        viewModelScope.launch {
-//            tttRepo.getNumWins().collect { mCurrentNumGamesState.update { 0 } }
-//        }
+        for (i in 0..2) {
+            for (j in 0..2) {
+                cells.add(TTTCells(i, j, null))
+            }
+        }
     }
 
     override fun loadGameByUUID(uuid: UUID) {
@@ -64,7 +69,7 @@ class TTTViewModel(private val tttRepo: TTTRepo) : ViewModel(),
 
     override fun addGame(gameToAdd: TTTGame) {
         Log.d(LOG_TAG, "adding game $gameToAdd")
-        tttRepo.addCharacter(gameToAdd)
+        tttRepo.addGame(gameToAdd)
     }
 
     override fun deleteGame(gameToDelete: TTTGame) {
@@ -72,6 +77,19 @@ class TTTViewModel(private val tttRepo: TTTRepo) : ViewModel(),
         tttRepo.deleteCharacter(gameToDelete)
     }
 
+    override fun changeImage(imageId: Int, cellPostition: Int) {
+        cells[cellPostition].imageId = imageId
+    }
+
+    override fun resetGame() {
+        addGame(TTTGame("Player 1", "Somthing", UUID.randomUUID()))
+        for (i in 0..8) {
+            cells[i].imageId = null
+        }
+        mExistsWinner.value = false
+        mTurn.value = 0
+
+    }
 //    override fun getNumWins() {
 //        Log.d(LOG_TAG, "incrementing number of wins")
 //        tttRepo.getNumWins()
