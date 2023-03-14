@@ -9,7 +9,7 @@ import com.csci448.hadam.hadam_a2.data.TTTRepo
 class TTTViewModelFactory(private val context: Context) :
     ViewModelProvider.NewInstanceFactory() {
     companion object {
-        private const val LOG_TAG = "448.SamodelkinViewModelFactory"
+        private const val LOG_TAG = "448.TTTViewModelFactory"
     }
 
     fun getViewModelClass() = TTTViewModel::class.java

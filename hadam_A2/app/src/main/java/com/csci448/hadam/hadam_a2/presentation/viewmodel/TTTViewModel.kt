@@ -3,14 +3,12 @@ package com.csci448.hadam.hadam_a2.presentation.viewmodel
 import android.util.Log
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.csci448.hadam.hadam_a2.R
 import com.csci448.hadam.hadam_a2.data.TTTCells
 import com.csci448.hadam.hadam_a2.data.TTTGame
 import com.csci448.hadam.hadam_a2.data.TTTRepo
-import com.csci448.hadam.hadam_a2.presentation.game.Cell
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import java.util.*
@@ -134,8 +132,124 @@ class TTTViewModel(private val tttRepo: TTTRepo) : ViewModel(),
         firstPersonImageId.value = secondPersonImageId.value
         secondPersonImageId.value = temp
     }
-//    override fun getNumWins() {
-//        Log.d(LOG_TAG, "incrementing number of wins")
-//        tttRepo.getNumWins()
-//    }
+
+    override fun computeGameWin() {
+        var player1 = 0
+        var player2 = 0
+        for (i in 0..2) {
+            for (j in 3 * i..(3 * i) + 2) {
+                if (cells[j].imageId == null) {
+                    break
+                } else if (cells[j].imageId == firstPersonImageId.value) {
+                    player1++
+                } else {
+                    player2++
+                }
+            }
+            if (player1 == 3) {
+                mExistsWinner.value = true
+                mWinner.value = 1
+                break
+            } else if (player2 == 3) {
+                mExistsWinner.value = true
+                mWinner.value = 2
+                break
+            }
+            player1 = 0
+            player2 = 0
+        }
+        for (i in 0..2) {
+            if (cells[i].imageId == null) {
+                continue
+            } else if (cells[i].imageId == cells[i + 3].imageId && cells[i].imageId == cells[i + 6].imageId) {
+                if (cells[i].imageId == firstPersonImageId.value) {
+                    mExistsWinner.value = true
+                    mWinner.value = 1
+                    break
+                } else {
+                    mExistsWinner.value = true
+                    mWinner.value = 2
+                    break
+                }
+            }
+        }
+        if (cells[0].imageId != null) {
+            if (cells[0].imageId == cells[4].imageId && cells[8].imageId == cells[0].imageId) {
+                if (cells[0].imageId == firstPersonImageId.value) {
+                    mExistsWinner.value = true
+                    mWinner.value = 1
+                } else {
+                    mExistsWinner.value = true
+                    mWinner.value = 2
+                }
+            }
+        }
+        if (cells[2].imageId != null) {
+            if (cells[2].imageId == cells[4].imageId && cells[2].imageId == cells[6].imageId) {
+                if (cells[2].imageId == firstPersonImageId.value) {
+                    mExistsWinner.value = true
+                    mWinner.value = 1
+                } else {
+                    mExistsWinner.value = true
+                    mWinner.value = 2
+                }
+            }
+        }
+        var totalCells = 0
+        for (i in 0..8) {
+            if (cells[i].imageId != null) {
+                totalCells++
+            }
+        }
+        if (totalCells == 9 && !mExistsWinner.value) {
+            mExistsWinner.value = true
+            mWinner.value = 3
+        }
+    }
+
+    override fun clickBox(position: Int) {
+        if (mTurn.value == 0) {
+            changeImage(
+                firstPersonImageId.value,
+                position
+            )
+            mTurn.value = (mTurn.value + 1) % 2
+        } else {
+            changeImage(
+                secondPersonImageId.value,
+                position
+            )
+            mTurn.value = (mTurn.value + 1) % 2
+        }
+    }
+
+    override fun computerMove() {
+        if (mOnePlayerGameCheck.value && mTurn.value == 1 && !mDifficultyCheck.value) {
+            for (i in 0..8) {
+                if (cells[i].imageId == null) {
+                    changeImage(secondPersonImageId.value, i)
+                    mTurn.value = (mTurn.value + 1) % 2
+                    break
+                }
+            }
+        } else if (mOnePlayerGameCheck.value && mTurn.value == 1 && mDifficultyCheck.value) {
+            var full = 0
+            for (i in 0..8) {
+                if (cells[i].imageId == null) {
+                    full++
+                }
+            }
+            while (true) {
+                if (full == 0) {
+                    break
+                }
+                val i = (0..8).random()
+                if (cells[i].imageId == null) {
+                    changeImage(secondPersonImageId.value, i)
+                    mTurn.value = (mTurn.value + 1) % 2
+                    break
+                }
+            }
+        }
+    }
 }

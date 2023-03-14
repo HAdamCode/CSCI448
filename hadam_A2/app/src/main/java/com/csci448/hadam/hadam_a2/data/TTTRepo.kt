@@ -14,9 +14,9 @@ class TTTRepo
 private constructor(
     private val tttDao: TTTDao,
     private val coroutineScope: CoroutineScope = GlobalScope
-){
+) {
     companion object {
-        private const val LOG_TAG = "448.SamodelkinRepo"
+        private const val LOG_TAG = "448.TTTRepo"
         private var INSTANCE: TTTRepo? = null
 
         fun getInstance(context: Context): TTTRepo {
@@ -29,7 +29,6 @@ private constructor(
             return instance
         }
     }
-
 
     init {
         Log.d(LOG_TAG, "initializing repository list")
@@ -48,7 +47,4 @@ private constructor(
             tttDao.deleteGame(tttGame)
         }
     }
-
-//    fun getNumWins(): Flow<Int> = tttDao.getNumWins()
-
 }

@@ -6,14 +6,12 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.csci448.hadam.hadam_a2.presentation.viewmodel.ITTTViewModel
-import com.csci448.hadam.hadam_a2.presentation.viewmodel.TTTViewModel
+import com.csci448.hadam.hadam_a2.R
 
 @Composable
 fun SettingsScreen(tttViewModel: ITTTViewModel, context: Context) {
@@ -28,7 +26,7 @@ fun SettingsScreen(tttViewModel: ITTTViewModel, context: Context) {
                 .fillMaxWidth()
         ) {
             Text(
-                text = "One Player Game", fontSize = 25.sp, modifier = Modifier
+                text = stringResource(id = R.string.one_player_game), fontSize = 25.sp, modifier = Modifier
                     .weight(1f)
                     .padding(20.dp)
             )
@@ -44,7 +42,7 @@ fun SettingsScreen(tttViewModel: ITTTViewModel, context: Context) {
                     .fillMaxWidth()
             ) {
                 Text(
-                    text = "AI Level", fontSize = 25.sp, modifier = Modifier
+                    text = stringResource(id = R.string.ai_level), fontSize = 25.sp, modifier = Modifier
                         .weight(2f)
                         .padding(20.dp)
                 )
@@ -57,13 +55,13 @@ fun SettingsScreen(tttViewModel: ITTTViewModel, context: Context) {
                 )
                 if (mDifficultyCheck.value) {
                     Text(
-                        text = "Hard", fontSize = 25.sp, modifier = Modifier
+                        text = stringResource(id = R.string.hard), fontSize = 25.sp, modifier = Modifier
                             .weight(1f)
                             .padding(20.dp)
                     )
                 } else {
                     Text(
-                        text = "Easy", fontSize = 25.sp, modifier = Modifier
+                        text = stringResource(id = R.string.easy), fontSize = 25.sp, modifier = Modifier
                             .weight(1f)
                             .padding(20.dp)
                     )
@@ -75,7 +73,7 @@ fun SettingsScreen(tttViewModel: ITTTViewModel, context: Context) {
                 .fillMaxWidth()
         ) {
             Text(
-                text = "X Goes First", modifier = Modifier
+                text = stringResource(id = R.string.x_goes_first), modifier = Modifier
                     .weight(1f)
                     .padding(20.dp), fontSize = 25.sp
             )
@@ -102,14 +100,8 @@ fun SettingsScreen(tttViewModel: ITTTViewModel, context: Context) {
                     .fillMaxWidth()
                     .padding(20.dp)
             ) {
-                Text(text = "Erase Game History", fontSize = 18.sp)
+                Text(text = stringResource(id = R.string.erase_game_history), fontSize = 18.sp)
             }
         }
     }
 }
-
-//@Preview(showBackground = true)
-//@Composable
-//fun SettingsScreenPreview() {
-//    SettingsScreen()
-//}

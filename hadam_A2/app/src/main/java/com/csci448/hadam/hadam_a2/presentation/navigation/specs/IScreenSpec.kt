@@ -19,10 +19,9 @@ sealed interface IScreenSpec {
             )
             it.objectInstance?.route to it.objectInstance
         }
-        const val root = "samodelkin"
+        const val root = "ttt"
         val startDestination = WelcomeScreenSpec.route
     }
-
 
 
     val route: String

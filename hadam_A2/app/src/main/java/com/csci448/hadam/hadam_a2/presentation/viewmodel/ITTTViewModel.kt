@@ -1,7 +1,6 @@
 package com.csci448.hadam.hadam_a2.presentation.viewmodel
 
 import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
 import com.csci448.hadam.hadam_a2.data.TTTCells
 import com.csci448.hadam.hadam_a2.data.TTTGame
 import kotlinx.coroutines.flow.StateFlow
@@ -19,13 +18,13 @@ interface ITTTViewModel {
     val cells: MutableList<TTTCells>
     val firstPersonImageId: MutableState<Int>
     val secondPersonImageId: MutableState<Int>
-//    val currentNumGamesState: StateFlow<Int?>
     fun loadGameByUUID(uuid: UUID)
     fun addGame(gameToAdd: TTTGame)
     fun deleteGame(gameToDelete: TTTGame)
     fun changeImage(imageId: Int, cellPostition: Int)
-
     fun resetGame()
     fun switchXGoesFirst()
-//    fun getNumWins()
+    fun computeGameWin()
+    fun clickBox(position: Int)
+    fun computerMove()
 }

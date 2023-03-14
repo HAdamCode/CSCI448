@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">hadam_A2</string>
+    <string name="new_game">New Game</string>
+    <string name="game_over">Game Over!</string>
+    <string name="player_drawable">Player drawable</string>
+    <string name="computer_won">Computer Won</string>
+    <string name="one_player_game">One Player Game</string>
+    <string name="ai_level">AI Level</string>
+    <string name="hard">Hard</string>
+    <string name="easy">Easy</string>
+    <string name="x_goes_first">X Goes First</string>
+    <string name="erase_game_history">Erase Game History</string>
+    <string name="tic_tac_toe">Tic Tac Toe</string>
+    <string name="play_game">Play game</string>
+    <string name="history">History</string>
+    <string name="settings">Settings</string>
+    <string name="quit">Quit</string>
 </resources>
