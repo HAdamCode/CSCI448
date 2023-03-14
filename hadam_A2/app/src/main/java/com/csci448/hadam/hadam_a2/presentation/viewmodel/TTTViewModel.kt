@@ -35,7 +35,7 @@ class TTTViewModel(private val tttRepo: TTTRepo) : ViewModel(),
     private val mCurrentGameIdState: MutableStateFlow<UUID> =
         MutableStateFlow(UUID.randomUUID())
 
-    override val mNumPlayerGameCheck: MutableState<Boolean> = mutableStateOf(true)
+    override val mOnePlayerGameCheck: MutableState<Boolean> = mutableStateOf(true)
     override val mDifficultyCheck: MutableState<Boolean> = mutableStateOf(false)
     override val mXGoesFirst: MutableState<Boolean> = mutableStateOf(true)
     override val mExistsWinner: MutableState<Boolean> = mutableStateOf(false)
@@ -82,7 +82,43 @@ class TTTViewModel(private val tttRepo: TTTRepo) : ViewModel(),
     }
 
     override fun resetGame() {
-        addGame(TTTGame("Player 1", "Somthing", UUID.randomUUID()))
+        var gameType: String
+        if (mOnePlayerGameCheck.value) {
+            gameType = "One Player"
+            if (!mDifficultyCheck.value) {
+                gameType += " (Easy)"
+            }
+            else {
+                gameType += " (Hard)"
+            }
+        }
+        else {
+            gameType = "Two Player"
+        }
+        if (mOnePlayerGameCheck.value) {
+            if (mWinner.value == 1) {
+                addGame(TTTGame("Player 1", gameType, UUID.randomUUID()))
+            }
+            else if (mWinner.value == 2){
+                addGame(TTTGame("Computer", gameType, UUID.randomUUID()))
+            }
+            else {
+                addGame(TTTGame("Tie", gameType, UUID.randomUUID()))
+            }
+        }
+        else {
+            if (mWinner.value == 1) {
+                addGame(TTTGame("Player 1", gameType, UUID.randomUUID()))
+            }
+            else if (mWinner.value == 2){
+                addGame(TTTGame("Player 2", gameType, UUID.randomUUID()))
+            }
+            else {
+                addGame(TTTGame("Tie", gameType, UUID.randomUUID()))
+            }
+        }
+
+
         for (i in 0..8) {
             cells[i].imageId = null
         }

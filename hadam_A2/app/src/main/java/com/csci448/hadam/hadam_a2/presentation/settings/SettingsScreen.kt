@@ -17,7 +17,7 @@ import com.csci448.hadam.hadam_a2.presentation.viewmodel.TTTViewModel
 fun SettingsScreen(tttViewModel: ITTTViewModel) {
     val gameList = tttViewModel.gameListState.collectAsState().value
     Column(modifier = Modifier.fillMaxWidth()) {
-        val mNumPlayerGameCheck = tttViewModel.mNumPlayerGameCheck
+        val mOnePlayerGameCheck = tttViewModel.mOnePlayerGameCheck
         val mDifficultyCheck = tttViewModel.mDifficultyCheck
         val mXGoesFirst = tttViewModel.mXGoesFirst
 
@@ -31,12 +31,12 @@ fun SettingsScreen(tttViewModel: ITTTViewModel) {
                     .padding(20.dp)
             )
             Switch(
-                checked = mNumPlayerGameCheck.value,
-                onCheckedChange = { mNumPlayerGameCheck.value = it },
+                checked = mOnePlayerGameCheck.value,
+                onCheckedChange = { mOnePlayerGameCheck.value = it },
                 modifier = Modifier.padding(13.dp)
             )
         }
-        if (mNumPlayerGameCheck.value) {
+        if (mOnePlayerGameCheck.value) {
             Row(
                 modifier = Modifier
                     .fillMaxWidth()

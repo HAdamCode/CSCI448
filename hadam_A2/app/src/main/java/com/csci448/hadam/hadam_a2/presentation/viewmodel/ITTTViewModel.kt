@@ -10,7 +10,7 @@ import java.util.*
 interface ITTTViewModel {
     val gameListState: StateFlow<List<TTTGame>>
     val currentGameState: StateFlow<TTTGame?>
-    val mNumPlayerGameCheck: MutableState<Boolean>
+    val mOnePlayerGameCheck: MutableState<Boolean>
     val mDifficultyCheck: MutableState<Boolean>
     val mXGoesFirst: MutableState<Boolean>
     val mExistsWinner: MutableState<Boolean>

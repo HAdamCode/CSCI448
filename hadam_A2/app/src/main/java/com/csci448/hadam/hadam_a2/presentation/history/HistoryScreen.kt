@@ -29,13 +29,13 @@ fun HistoryScreen(tttViewModel: ITTTViewModel) {
     var ties = 0
     for (game: TTTGame in gameList) {
         when (game.winner) {
-            "Computer Won" -> {
+            "Computer" -> {
                 computerWins++
             }
             "Player 1" -> {
                 player1Wins++
             }
-            else -> {
+            "Tie" -> {
                 ties++
             }
         }
@@ -48,24 +48,25 @@ fun HistoryScreen(tttViewModel: ITTTViewModel) {
             ) {
 
                 Text(text = "# Player Wins: $player1Wins", modifier = Modifier.padding(8.dp))
-                Text(text = "# ComputerWins: $computerWins", modifier = Modifier.padding(8.dp))
+                Text(text = "# Computer Wins: $computerWins", modifier = Modifier.padding(8.dp))
                 Text(text = "# Ties: $ties", modifier = Modifier.padding(8.dp))
             }
         }
         Row() {
-            val i = 0;
+            var i = 0;
             LazyColumn(modifier = Modifier.border(3.dp, color = Color.Black,shape = RoundedCornerShape(1.dp))) {
                 item(gameList) {
                     for (game: TTTGame in gameList) {
+                        i++
                         Row(
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .padding(10.dp)
                         ) {
-                            Column(modifier = Modifier.weight(1f)) {
+                            Column(modifier = Modifier.weight(.7f)) {
                                 Text(text = "Game: #$i")
                             }
-                            Column(modifier = Modifier.weight(1f)) {
+                            Column(modifier = Modifier.weight(1.3f)) {
                                 Text(text = game.gameType)
                             }
                             Column(modifier = Modifier.weight(1f)) {

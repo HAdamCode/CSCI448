@@ -92,22 +92,40 @@ fun computeGameWin(tttViewModel: ITTTViewModel) {
             }
         }
     }
+    var totalCells = 0
+    for (i in 0..8) {
+        if (tttViewModel.cells[i].imageId != null) {
+            totalCells++
+        }
+    }
+    if (totalCells == 9 && !tttViewModel.mExistsWinner.value) {
+        tttViewModel.mExistsWinner.value = true
+        tttViewModel.mWinner.value = 3
+    }
 }
 
 @Composable
 fun GameScreen(tttViewModel: ITTTViewModel) {
     computeGameWin(tttViewModel = tttViewModel)
     val mSomeoneWon = tttViewModel.mExistsWinner.value
-//    if (mSomeoneWon) {
-//        tttViewModel.addGame(TTTGame("Player1", "Somthing", UUID.randomUUID()))
-//    }
     val turn = tttViewModel.mTurn.value
-    val whoWonString = "Player ${tttViewModel.mWinner.value}"
-    var turnText = "Player ${turn + 1}"
-    if (!tttViewModel.mNumPlayerGameCheck.value) {
-        turnText = "Computer"
-    }
+    val whoWonString: String
+    val turnText = "Player ${turn + 1}"
 
+    if (tttViewModel.mOnePlayerGameCheck.value) {
+        if (tttViewModel.mWinner.value == 1) {
+            whoWonString = "Player ${tttViewModel.mWinner.value} Won"
+        }
+        else if (tttViewModel.mWinner.value == 2){
+            whoWonString = "Computer Won"
+        }
+        else {
+            whoWonString = "Tie"
+        }
+    }
+    else {
+        whoWonString = "Player ${tttViewModel.mWinner.value} Won"
+    }
 
     when (LocalConfiguration.current.orientation) {
         Configuration.ORIENTATION_PORTRAIT -> {
@@ -115,7 +133,7 @@ fun GameScreen(tttViewModel: ITTTViewModel) {
                 modifier = Modifier.fillMaxWidth(),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                if (mSomeoneWon)
+                if (mSomeoneWon) {
                     Row() {
                         Text(
                             text = "Game Over!",
@@ -123,7 +141,8 @@ fun GameScreen(tttViewModel: ITTTViewModel) {
                             modifier = Modifier.padding(20.dp)
                         )
                     }
-                else
+                }
+                else {
                     Row() {
                         Text(
                             text = "$turnText turn",
@@ -131,18 +150,21 @@ fun GameScreen(tttViewModel: ITTTViewModel) {
                             modifier = Modifier.padding(20.dp)
                         )
                     }
-                if (mSomeoneWon)
+                }
+                if (mSomeoneWon) {
                     Row() {
                         Text(
-                            text = "$whoWonString Won",
+                            text = whoWonString,
                             fontSize = 17.sp,
                             modifier = Modifier.padding(20.dp)
                         )
                     }
-                else
+                }
+                else {
                     Row() {
                         Text(text = "", fontSize = 15.sp, modifier = Modifier.padding(20.dp))
                     }
+                }
 
                 Row(
                     modifier = Modifier.fillMaxWidth(),
@@ -155,7 +177,7 @@ fun GameScreen(tttViewModel: ITTTViewModel) {
                         TicTacToeGrid(turn, tttViewModel)
                     }
                 }
-                if (mSomeoneWon)
+                if (mSomeoneWon) {
                     Row(modifier = Modifier.fillMaxWidth()) {
                         Column(
                             modifier = Modifier.fillMaxWidth(),
@@ -166,10 +188,12 @@ fun GameScreen(tttViewModel: ITTTViewModel) {
                             }
                         }
                     }
-                else
+                }
+                else {
                     Row() {
                         Text(text = "")
                     }
+                }
             }
         }
         else -> {
@@ -177,7 +201,7 @@ fun GameScreen(tttViewModel: ITTTViewModel) {
                 modifier = Modifier.fillMaxWidth(),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                if (mSomeoneWon)
+                if (mSomeoneWon) {
                     Row() {
                         Text(
                             text = "Game Over!",
@@ -185,7 +209,8 @@ fun GameScreen(tttViewModel: ITTTViewModel) {
                             modifier = Modifier.padding(10.dp)
                         )
                     }
-                else
+                }
+                else {
                     Row() {
                         Text(
                             text = "$turn turn",
@@ -193,7 +218,8 @@ fun GameScreen(tttViewModel: ITTTViewModel) {
                             modifier = Modifier.padding(10.dp)
                         )
                     }
-                if (mSomeoneWon)
+                }
+                if (mSomeoneWon) {
                     Row() {
                         Text(
                             text = "$whoWonString Won",
@@ -201,10 +227,12 @@ fun GameScreen(tttViewModel: ITTTViewModel) {
                             modifier = Modifier.padding(10.dp)
                         )
                     }
-                else
+                }
+                else {
                     Row() {
                         Text(text = "", fontSize = 15.sp, modifier = Modifier.padding(10.dp))
                     }
+                }
 
                 Row(
                     modifier = Modifier.fillMaxWidth(),
