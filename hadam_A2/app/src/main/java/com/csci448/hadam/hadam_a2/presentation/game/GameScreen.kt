@@ -39,7 +39,13 @@ fun GameScreen(tttViewModel: ITTTViewModel, context: Context) {
             whoWonString = "Tie"
         }
     } else {
-        whoWonString = "Player ${tttViewModel.mWinner.value} Won"
+        if (tttViewModel.mWinner.value == 1) {
+            whoWonString = "Player ${tttViewModel.mWinner.value} Won"
+        } else if (tttViewModel.mWinner.value == 2) {
+            whoWonString = "Player ${tttViewModel.mWinner.value} Won"
+        } else {
+            whoWonString = "Tie"
+        }
     }
 
     tttViewModel.computerMove()
