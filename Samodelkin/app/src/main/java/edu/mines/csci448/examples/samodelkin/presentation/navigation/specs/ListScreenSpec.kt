@@ -14,6 +14,7 @@ import androidx.navigation.NavHostController
 import edu.mines.csci448.examples.samodelkin.R
 import edu.mines.csci448.examples.samodelkin.presentation.list.SamodelkinListScreen
 import edu.mines.csci448.examples.samodelkin.presentation.viewmodel.ISamodelkinViewModel
+import kotlinx.coroutines.CoroutineScope
 
 object ListScreenSpec : IScreenSpec {
 
@@ -27,7 +28,8 @@ object ListScreenSpec : IScreenSpec {
         samodelkinViewModel: ISamodelkinViewModel,
         navController: NavHostController,
         navBackStackEntry: NavBackStackEntry,
-        context: Context
+        context: Context,
+        coroutineScope: CoroutineScope
     ) {
         val characters = samodelkinViewModel.characterListState.collectAsState()
 

@@ -8,6 +8,9 @@
         android:minSdkVersion="29"
         android:targetSdkVersion="33" />
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <permission
         android:name="edu.mines.csci448.examples.samodelkin.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
         android:protectionLevel="signature" />

@@ -106,6 +106,7 @@
     <string name="androidx_startup" translatable="false">androidx.startup</string>
     <string name="api_label">Request Character From Web</string>
     <string name="app_name">Samodelkin</string>
+    <string name="bottom_sheet_drag_handle_description">Drag handle</string>
     <string name="cancel_api_label">Cancel Request</string>
     <string name="charisma_label">Charisma</string>
     <string name="close_drawer">"Close navigation menu"</string>
@@ -141,6 +142,7 @@
     <string name="date_picker_year_picker_pane_title">Year picker visible</string>
     <string name="date_range_input_invalid_range_input">Invalid date range input</string>
     <string name="date_range_input_title">Enter dates</string>
+    <string name="date_range_picker_day_in_range">In range</string>
     <string name="date_range_picker_end_headline">End date</string>
     <string name="date_range_picker_scroll_to_next_month">Scroll to show the next month</string>
     <string name="date_range_picker_scroll_to_previous_month">Scroll to show the previous month</string>
@@ -208,6 +210,7 @@
     <string name="time_picker_period_toggle_description">Select AM or PM</string>
     <string name="time_picker_pm">PM</string>
     <string name="tooltip_long_press_label">Show tooltip</string>
+    <string name="tooltip_pane_description">Tooltip</string>
     <string name="wisdom_label">Wisdom</string>
     <style name="DialogWindowTheme">
         <item name="android:windowClipToOutline">false</item>
@@ -299,14 +302,23 @@
         <attr format="reference" name="fontProviderCerts"/>
         
         <attr name="fontProviderFetchStrategy">
-            
+            <!-- The blocking font fetch works as follows.
+              First, check the local cache, then if the requested font is not cached, request the
+              font from the provider and wait until it is finished.  You can change the length of
+              the timeout by modifying fontProviderFetchTimeout.  If the timeout happens, the
+              default typeface will be used instead. -->
             <enum name="blocking" value="0"/>
-            
+            <!-- The async font fetch works as follows.
+              First, check the local cache, then if the requeted font is not cached, trigger a
+              request the font and continue with layout inflation. Once the font fetch succeeds, the
+              target text view will be refreshed with the downloaded font data. The
+              fontProviderFetchTimeout will be ignored if async loading is specified. -->
             <enum name="async" value="1"/>
         </attr>
         
         <attr format="integer" name="fontProviderFetchTimeout">
-            
+            <!-- A special value for the timeout. In this case, the blocking font fetching will not
+              timeout and wait until a reply is received from the font provider. -->
             <enum name="forever" value="-1"/>
         </attr>
         

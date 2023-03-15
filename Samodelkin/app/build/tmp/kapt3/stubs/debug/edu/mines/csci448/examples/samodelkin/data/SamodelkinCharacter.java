@@ -19,6 +19,7 @@ public final class SamodelkinCharacter {
     private final int charisma = 0;
     @org.jetbrains.annotations.Nullable()
     @androidx.room.ColumnInfo(name = "avatar")
+    @com.google.gson.annotations.SerializedName(value = "avatar")
     private final java.lang.String avatarAssetPath = null;
     @org.jetbrains.annotations.NotNull()
     @androidx.room.PrimaryKey()

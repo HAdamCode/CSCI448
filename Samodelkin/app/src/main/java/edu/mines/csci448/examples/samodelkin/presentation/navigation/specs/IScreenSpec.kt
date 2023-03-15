@@ -12,6 +12,7 @@ import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavHostController
 import edu.mines.csci448.examples.samodelkin.R
 import edu.mines.csci448.examples.samodelkin.presentation.viewmodel.ISamodelkinViewModel
+import kotlinx.coroutines.CoroutineScope
 
 sealed interface IScreenSpec {
     companion object {
@@ -54,7 +55,8 @@ sealed interface IScreenSpec {
         samodelkinViewModel: ISamodelkinViewModel,
         navController: NavHostController,
         navBackStackEntry: NavBackStackEntry,
-        context: Context
+        context: Context,
+        coroutineScope: CoroutineScope
     )
 
     @OptIn(ExperimentalMaterial3Api::class)

@@ -1,9 +1,8 @@
 package edu.mines.csci448.examples.samodelkin.presentation.navigation.specs
 
 import android.content.Context
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NamedNavArgument
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavHostController
@@ -11,6 +10,10 @@ import edu.mines.csci448.examples.samodelkin.R
 import edu.mines.csci448.examples.samodelkin.presentation.newcharacter.NewCharacterScreen
 import edu.mines.csci448.examples.samodelkin.presentation.viewmodel.ISamodelkinViewModel
 import edu.mines.csci448.examples.samodelkin.util.CharacterGenerator
+import edu.mines.csci448.examples.samodelkin.util.CharacterGenerator.generateRandomCharacter
+import edu.mines.csci448.examples.samodelkin.util.NetworkConnectionUtil
+import edu.mines.csci448.examples.samodelkin.util.api.SamodelkinFetchr
+import kotlinx.coroutines.CoroutineScope
 
 object NewCharacterScreenSpec : IScreenSpec {
     private const val LOG_TAG = "448.NewCharacterScreenSpec"
@@ -25,16 +28,29 @@ object NewCharacterScreenSpec : IScreenSpec {
         samodelkinViewModel: ISamodelkinViewModel,
         navController: NavHostController,
         navBackStackEntry: NavBackStackEntry,
-        context: Context
+        context: Context,
+        coroutineScope: CoroutineScope
     ) {
         val characterState = remember {
-            mutableStateOf(CharacterGenerator.generateRandomCharacter(context))
+            mutableStateOf(generateRandomCharacter(context))
+        }
+        val samodelkinFetchr = remember { SamodelkinFetchr() }
+        val apiCharacterState = samodelkinFetchr.characterState
+            .collectAsStateWithLifecycle(context = coroutineScope.coroutineContext)
+        LaunchedEffect(key1 = apiCharacterState.value) {
+            val apiCharacter = apiCharacterState.value
+            if (apiCharacter != null) {
+                characterState.value = apiCharacter
+            }
+            else {
+                characterState.value = generateRandomCharacter()
+            }
         }
         NewCharacterScreen(
             character = characterState.value,
             onGenerateRandomCharacter = {
                 characterState.value =
-                    CharacterGenerator.generateRandomCharacter(context) // TODO get rid of duplicate code
+                    CharacterGenerator.generateRandomCharacter(context)
             },
             onSaveCharacter = {
                 samodelkinViewModel.addCharacter(characterState.value)
@@ -42,7 +58,9 @@ object NewCharacterScreenSpec : IScreenSpec {
                     route = ListScreenSpec.buildRoute(),
                     inclusive = false
                 )
-            }
+            },
+            apiButtonIsEnabled = NetworkConnectionUtil.isNetworkAvailableAndConnected(context),
+            onRequestApiCharacter = { samodelkinFetchr.getCharacter() }
         )
     }
 

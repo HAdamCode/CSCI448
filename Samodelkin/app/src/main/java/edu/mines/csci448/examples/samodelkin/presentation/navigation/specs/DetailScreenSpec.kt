@@ -19,6 +19,7 @@ import androidx.navigation.*
 import edu.mines.csci448.examples.samodelkin.R
 import edu.mines.csci448.examples.samodelkin.presentation.detail.SamodelkinDetailScreen
 import edu.mines.csci448.examples.samodelkin.presentation.viewmodel.ISamodelkinViewModel
+import kotlinx.coroutines.CoroutineScope
 import java.util.*
 
 object DetailScreenSpec : IScreenSpec {
@@ -55,7 +56,8 @@ object DetailScreenSpec : IScreenSpec {
         samodelkinViewModel: ISamodelkinViewModel,
         navController: NavHostController,
         navBackStackEntry: NavBackStackEntry,
-        context: Context
+        context: Context,
+        coroutineScope: CoroutineScope
     ) {
         val uuid = UUID.fromString(navBackStackEntry.arguments?.getString(ARG_UUID_NAME) ?: "")
 

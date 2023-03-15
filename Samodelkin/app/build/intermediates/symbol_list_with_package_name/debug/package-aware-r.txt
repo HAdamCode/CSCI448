@@ -188,6 +188,7 @@ mipmap ic_launcher
 string androidx_startup
 string api_label
 string app_name
+string bottom_sheet_drag_handle_description
 string cancel_api_label
 string charisma_label
 string close_drawer
@@ -219,6 +220,7 @@ string date_picker_today_description
 string date_picker_year_picker_pane_title
 string date_range_input_invalid_range_input
 string date_range_input_title
+string date_range_picker_day_in_range
 string date_range_picker_end_headline
 string date_range_picker_scroll_to_next_month
 string date_range_picker_scroll_to_previous_month
@@ -286,6 +288,7 @@ string time_picker_minute_suffix
 string time_picker_period_toggle_description
 string time_picker_pm
 string tooltip_long_press_label
+string tooltip_pane_description
 string wisdom_label
 style DialogWindowTheme
 style FloatingDialogTheme
