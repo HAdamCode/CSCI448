@@ -1,6 +1,5 @@
 package edu.mines.csci448.examples.samodelkin.presentation.newcharacter
 
-import android.content.Context
 import android.content.res.Configuration
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Card
@@ -9,7 +8,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -17,7 +15,6 @@ import edu.mines.csci448.examples.samodelkin.R
 import edu.mines.csci448.examples.samodelkin.data.SamodelkinCharacter
 import edu.mines.csci448.examples.samodelkin.presentation.detail.SamodelkinCharacterDetails
 import edu.mines.csci448.examples.samodelkin.util.CharacterGenerator
-import edu.mines.csci448.examples.samodelkin.util.NetworkConnectionUtil
 
 @Composable
 fun NewCharacterScreen(

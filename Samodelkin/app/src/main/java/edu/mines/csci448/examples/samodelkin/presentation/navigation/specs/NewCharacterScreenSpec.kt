@@ -41,8 +41,7 @@ object NewCharacterScreenSpec : IScreenSpec {
             val apiCharacter = apiCharacterState.value
             if (apiCharacter != null) {
                 characterState.value = apiCharacter
-            }
-            else {
+            } else {
                 characterState.value = generateRandomCharacter()
             }
         }

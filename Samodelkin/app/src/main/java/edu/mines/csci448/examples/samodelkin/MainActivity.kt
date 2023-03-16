@@ -124,7 +124,13 @@ private fun MainActivityContent(samodelkinViewModel: ISamodelkinViewModel) {
                     context = context
                 )
             }) {
-                SamodelkinNavHost(Modifier.padding(it), navController, samodelkinViewModel, context, coroutineScope)
+                SamodelkinNavHost(
+                    Modifier.padding(it),
+                    navController,
+                    samodelkinViewModel,
+                    context,
+                    coroutineScope
+                )
             }
         }
     }

@@ -24,7 +24,7 @@ object CharacterGenerator {
     private fun con() = 3.roll(7)
     private fun avatar(context: Context?): String? {
         val assetFile = context?.assets?.list("characters")?.random()
-        return if(assetFile != null) {
+        return if (assetFile != null) {
             "file:///android_asset/characters/$assetFile"
         } else {
             null
@@ -35,14 +35,16 @@ object CharacterGenerator {
      * creates a SamodelkinCharacter with random stats
      * @param context current context used for asset loading of avatar images
      */
-    fun generateRandomCharacter(context: Context? = null) = SamodelkinCharacter(name = name(),
-                                                                                race = race(),
-                                                                                profession = profession(),
-                                                                                dexterity = dex(),
-                                                                                wisdom = wis(),
-                                                                                strength = str(),
-                                                                                intelligence = inl(),
-                                                                                charisma = cha(),
-                                                                                constitution = con(),
-                                                                                avatarAssetPath = avatar(context))
+    fun generateRandomCharacter(context: Context? = null) = SamodelkinCharacter(
+        name = name(),
+        race = race(),
+        profession = profession(),
+        dexterity = dex(),
+        wisdom = wis(),
+        strength = str(),
+        intelligence = inl(),
+        charisma = cha(),
+        constitution = con(),
+        avatarAssetPath = avatar(context)
+    )
 }

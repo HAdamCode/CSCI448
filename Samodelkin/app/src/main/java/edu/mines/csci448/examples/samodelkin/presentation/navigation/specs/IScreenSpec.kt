@@ -40,7 +40,6 @@ sealed interface IScreenSpec {
                 samodelkinViewModel, navController,
                 navBackStackEntry, context
             )
-
         }
     }
 
@@ -86,7 +85,8 @@ sealed interface IScreenSpec {
                     navBackStackEntry,
                     context
                 )
-            })
+            }
+        )
     }
 
     @Composable

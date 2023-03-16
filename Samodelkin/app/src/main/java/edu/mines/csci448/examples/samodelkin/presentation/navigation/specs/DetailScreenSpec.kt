@@ -1,19 +1,13 @@
 package edu.mines.csci448.examples.samodelkin.presentation.navigation.specs
 
 import android.content.Context
-import android.content.Intent
-import android.content.Intent.ACTION_SEND
-import android.provider.Settings.Global.getString
-
 import android.util.Log
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
-import androidx.compose.material.icons.filled.Share
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.*
 import edu.mines.csci448.examples.samodelkin.R

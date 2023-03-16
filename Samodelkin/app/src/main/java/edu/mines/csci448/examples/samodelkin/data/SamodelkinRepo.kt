@@ -33,12 +33,8 @@ private constructor(
         }
     }
 
-//    val characters: List<SamodelkinCharacter>
-
     init {
         Log.d(LOG_TAG, "initializing repository list")
-        val characterList = mutableListOf<SamodelkinCharacter>()
-//        characters = characterList.toList()
     }
 
     fun getCharacters(): Flow<List<SamodelkinCharacter>> = samodelkinDao.getCharacters()
