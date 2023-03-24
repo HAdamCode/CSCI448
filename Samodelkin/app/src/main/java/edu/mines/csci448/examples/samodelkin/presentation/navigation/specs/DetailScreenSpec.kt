@@ -1,9 +1,12 @@
 package edu.mines.csci448.examples.samodelkin.presentation.navigation.specs
 
 import android.content.Context
+import android.content.Intent
+import android.content.Intent.ACTION_SEND
 import android.util.Log
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.Share
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
@@ -71,34 +74,34 @@ object DetailScreenSpec : IScreenSpec {
     ) {
         val character = samodelkinViewModel.currentCharacterState
 
-//        IconButton(onClick = {
-//            val characterVal = character.value
-//            if (characterVal != null) {
-//                val intent = Intent().apply {
-//                    action = ACTION_SEND
-//                    type = "text/plain"
-//                    putExtra(Intent.EXTRA_SUBJECT, "Check out my new SamodelkinCharacter!")
-//                    val message = context.resources.getString(
-//                        R.string.send_character_msg_formatter,
-//                        characterVal.name,
-//                        characterVal.race,
-//                        characterVal.profession
-//                    )
-//                    putExtra(Intent.EXTRA_TEXT, message)
-//                }
-//
-//                val chooser = Intent.createChooser(intent, "Share SamodelkinCharater")
-//                if (intent.resolveActivity(context.packageManager) != null) {
-//                    context.startActivity(chooser)
-//                }
-//                context.startActivity(intent)
-//            }
-//        }) {
-//            Icon(
-//                imageVector = Icons.Filled.Share,
-//                contentDescription = stringResource(R.string.menu_share_character_desc)
-//            )
-//        }
+        IconButton(onClick = {
+            val characterVal = character.value
+            if (characterVal != null) {
+                val intent = Intent().apply {
+                    action = ACTION_SEND
+                    type = "text/plain"
+                    putExtra(Intent.EXTRA_SUBJECT, "Check out my new SamodelkinCharacter!")
+                    val message = context.resources.getString(
+                        R.string.send_character_msg_formatter,
+                        characterVal.name,
+                        characterVal.race,
+                        characterVal.profession
+                    )
+                    putExtra(Intent.EXTRA_TEXT, message)
+                }
+
+                val chooser = Intent.createChooser(intent, "Share SamodelkinCharater")
+                if (intent.resolveActivity(context.packageManager) != null) {
+                    context.startActivity(chooser)
+                }
+                context.startActivity(intent)
+            }
+        }) {
+            Icon(
+                imageVector = Icons.Filled.Share,
+                contentDescription = stringResource(R.string.menu_share_character_desc)
+            )
+        }
         IconButton(onClick =
         {
             character.value?.let { samodelkinViewModel.deleteCharacter(it) }
