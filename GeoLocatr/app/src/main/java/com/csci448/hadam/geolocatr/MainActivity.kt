@@ -1,6 +1,5 @@
 package com.csci448.hadam.geolocatr
 
-import android.location.Location
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
@@ -14,12 +13,8 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.core.content.PackageManagerCompat.LOG_TAG
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.csci448.hadam.geolocatr.ui.theme.GeoLocatrTheme
 import com.google.android.gms.location.LocationSettingsStates
@@ -28,6 +23,7 @@ class MainActivity : ComponentActivity() {
     companion object {
         private const val LOG_TAG = "448.MainActivity"
     }
+
     private lateinit var locationUtility: LocationUtility
     private lateinit var permissionLauncher: ActivityResultLauncher<Array<String>>
     private lateinit var locationLauncher: ActivityResultLauncher<IntentSenderRequest>
@@ -72,7 +68,10 @@ class MainActivity : ComponentActivity() {
                         location = locationState.value,
                         locationAvailable = availableState.value,
                         onGetLocation = {
-                            locationUtility.checkPermissionAndGetLocation(this@MainActivity, permissionLauncher)
+                            locationUtility.checkPermissionAndGetLocation(
+                                this@MainActivity,
+                                permissionLauncher
+                            )
                         },
                         address = addressState.value
                     )

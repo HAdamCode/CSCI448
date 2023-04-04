@@ -20,10 +20,10 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import java.io.IOException
-import kotlin.contracts.contract
+
 private const val LOG_TAG = "448.GeoLocatr"
 
-class LocationUtility(context: Context) {
+class LocationUtility(private val context: Context) {
     private val mCurrentLocationStateFlow: MutableStateFlow<Location?> = MutableStateFlow(null)
     val currentLocationStateFlow: StateFlow<Location?>
         get() = mCurrentLocationStateFlow.asStateFlow()
@@ -35,9 +35,7 @@ class LocationUtility(context: Context) {
     private val mIsLocationAvailableStateFlow = MutableStateFlow(false)
     val isLocationAvailableStateFlow: StateFlow<Boolean> = mIsLocationAvailableStateFlow
 
-
     private val geocoder = Geocoder(context)
-    private val context = context
 
     fun checkPermissionAndGetLocation(
         activity: Activity,
@@ -65,7 +63,11 @@ class LocationUtility(context: Context) {
                     ACCESS_COARSE_LOCATION
                 )
             ) {
-                Toast.makeText(context, "You should totes allow us to track you", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    context,
+                    "You should totes allow us to track you",
+                    Toast.LENGTH_SHORT
+                ).show()
             } else {
                 permissionLauncher.launch(arrayOf(ACCESS_FINE_LOCATION, ACCESS_COARSE_LOCATION))
             }
@@ -95,16 +97,18 @@ class LocationUtility(context: Context) {
         val addressTextBuilder = StringBuilder()
         if (location != null) {
             try {
-                val addresses = geocoder.getFromLocation(location.latitude,
+                val addresses = geocoder.getFromLocation(
+                    location.latitude,
                     location.longitude,
-                    1)
+                    1
+                )
                 if (addresses != null && addresses.isNotEmpty()) {
                     val address = addresses[0]
                     for (i in 0..address.maxAddressLineIndex) {
                         if (i > 0) {
                             addressTextBuilder.append("\n")
                         }
-                        addressTextBuilder.append( address.getAddressLine(i) )
+                        addressTextBuilder.append(address.getAddressLine(i))
                     }
                 }
             } catch (e: IOException) {

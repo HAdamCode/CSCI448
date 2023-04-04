@@ -22,20 +22,25 @@ import com.google.maps.android.compose.MarkerState
 import com.google.maps.android.compose.rememberCameraPositionState
 
 @Composable
-fun LocationScreen(location: Location?, locationAvailable: Boolean, onGetLocation: () -> Unit, address: String ) {
+fun LocationScreen(
+    location: Location?,
+    locationAvailable: Boolean,
+    onGetLocation: () -> Unit,
+    address: String
+) {
     val cameraPositionState = rememberCameraPositionState {
-        position = CameraPosition.fromLatLngZoom(LatLng(0.0,0.0), 0f)
+        position = CameraPosition.fromLatLngZoom(LatLng(0.0, 0.0), 0f)
     }
     val context = LocalContext.current
     LaunchedEffect(location) {
-        if(location != null) {
+        if (location != null) {
             // include all points that should be within the bounds of the zoom
             // convex hull
             val bounds = LatLngBounds.Builder()
                 .include(LatLng(location.latitude, location.longitude)).build()
-                    // add padding
-                    val padding = context.resources
-                    .getDimensionPixelSize(R.dimen.map_inset_padding)
+            // add padding
+            val padding = context.resources
+                .getDimensionPixelSize(R.dimen.map_inset_padding)
             // create a camera update to smoothly move the map view
             val cameraUpdate = CameraUpdateFactory.newLatLngBounds(bounds, padding)
             // move our camera!
@@ -56,7 +61,7 @@ fun LocationScreen(location: Location?, locationAvailable: Boolean, onGetLocatio
             modifier = Modifier.fillMaxSize(),
             cameraPositionState = cameraPositionState
         ) {
-            if(location != null) {
+            if (location != null) {
                 val markerState = MarkerState().apply {
                     position = LatLng(location.latitude, location.longitude)
                 }
