@@ -1,11 +1,11 @@
 <resources>
-    <string name="app_name">Monster Lab</string>
+    <string name="app_name">MonsterLab</string>
     <string name="name_monster_mike">Mike Wazowski</string>
     <string name="description_monster_mike">Eager to scare!</string>
     <string name="title_activity_card">Card</string>
     <string name="title_activity_image">Image</string>
     <string name="title_activity_painter">painter</string>
-    <string name="title_activity_main">MainActivity</string>
+<!--    <string name="title_activity_main">MainActivity</string>-->
     <string name="title_activity_monster_card._card">MonsterCard.Card</string>
     <string name="name_monster_don_carlton">Don Carlton</string>
     <string name="description_monster_don_carlton">President of Oozma Kappa, former salesman</string>

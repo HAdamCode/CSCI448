@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">hadam_A2</string>
+    <string name="app_name">TicTacToe</string>
     <string name="new_game">New Game</string>
     <string name="game_over">Game Over!</string>
     <string name="player_drawable">Player drawable</string>
