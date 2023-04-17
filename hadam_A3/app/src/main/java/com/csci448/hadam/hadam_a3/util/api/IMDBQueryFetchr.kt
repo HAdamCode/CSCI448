@@ -1,6 +1,7 @@
 package com.csci448.hadam.hadam_a3.util.api
 
 import android.util.Log
+import com.csci448.hadam.hadam_a3.data.autocomplete.AutoComplete
 import com.csci448.hadam.hadam_a3.data.titlevideo.TitleVideo
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -13,6 +14,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.UUID
 
 class IMDBQueryFetchr {
     companion object {
@@ -21,48 +23,41 @@ class IMDBQueryFetchr {
 
     fun getTitleVideo() {
         Log.e(LOG_TAG, "onFailure() called")
-        val imdbRequest = imdbApiService.getTitleVideo("Game of Th")
+        val imdbRequest = imdbApiService.getTitleVideo()
 
-        imdbRequest.enqueue(object : Callback<TitleVideo> {
-            override fun onFailure(call: Call<TitleVideo>, t: Throwable) {
+        imdbRequest.enqueue(object : Callback<AutoComplete> {
+            override fun onFailure(call: Call<AutoComplete>, t: Throwable) {
                 Log.e(LOG_TAG, "onFailure() called $t")
             }
 
 
             override fun onResponse(
-                call: Call<TitleVideo>,
-                response: Response<TitleVideo>
+                call: Call<AutoComplete>,
+                response: Response<AutoComplete>
             ) {
                 Log.d(LOG_TAG, "onResponse() called")
-                val allSearch = response.body()
-                allSearch?.let {
-//                    for (movie in allSearch) {
-//                        if (movie.title != null && movie.poster != null) {
-//
-//                        }
-//                        Log.i("Response : ", "$movie")
-//                    }
-                    mTitleVideo.update { allSearch }
-//                    recyclerView_mainActivity.adapter?.notifyDataSetChanged()
+                val responseCharacter = response.body()
+                if (responseCharacter == null) {
+                    Log.d(LOG_TAG, "response character is null")
+                    mAutoComplete.update { null }
+                } else {
+//                    val newCharacter = responseCharacter.copy(
+//                        avatarAssetPath = "file:///android_asset/characters/${responseCharacter.avatarAssetPath}",
+//                        id = UUID.randomUUID()
+//                    )
+                    Log.d(LOG_TAG, responseCharacter.name)
+                    mAutoComplete.update { responseCharacter }
                 }
-                if (allSearch != null) {
-                    Log.d(LOG_TAG, allSearch.resource.title)
-                }
-                else {
-                    Log.d(LOG_TAG, "onResponse() failed inside me")
-
-                }
-//                mTitleVideo.update { response.body() }
             }
         })
 
     }
 
     private val imdbApiService: IMDBApiService
-    private val mTitleVideo = MutableStateFlow<TitleVideo?>(null)
+    private val mAutoComplete = MutableStateFlow<AutoComplete?>(null)
 
-    val titleVideo: StateFlow<TitleVideo?>
-        get() = mTitleVideo.asStateFlow()
+    val autoComplete: StateFlow<AutoComplete?>
+        get() = mAutoComplete.asStateFlow()
 
     init {
         val retrofit = Retrofit.Builder()

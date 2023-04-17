@@ -22,7 +22,7 @@ class IMDBFetchr {
     }
 
     fun getTitleVideo() {
-        val imdbRequest = imdbApiService.getTitleVideo()
+        val imdbRequest = imdbApiService.getTitleVideo("test")
         imdbRequest.enqueue(object : Callback<TitleVideo> {
             override fun onFailure(call: Call<TitleVideo>, t: Throwable) {
                 Log.e(LOG_TAG, "onFailure() called $t")

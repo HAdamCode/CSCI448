@@ -8,8 +8,9 @@ import java.util.*
 
 @Entity(tableName = "titlevideo")
 data class TitleVideo(
-    val meta: Meta?,
-    val resource: Resource?,
+//    val meta: Meta?,
+//    val resource: Resource?,
+    val video: String,
     @PrimaryKey
     val id: UUID = UUID.randomUUID()
 )

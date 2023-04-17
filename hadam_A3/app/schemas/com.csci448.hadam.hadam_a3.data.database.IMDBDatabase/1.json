@@ -2,12 +2,18 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "faf1a892bd59040757e0067e8be937d5",
+    "identityHash": "0e9a7a691a28298303fc3e673715a02d",
     "entities": [
       {
         "tableName": "titlevideo",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`video` TEXT NOT NULL, `id` TEXT NOT NULL, PRIMARY KEY(`id`))",
         "fields": [
+          {
+            "fieldPath": "video",
+            "columnName": "video",
+            "affinity": "TEXT",
+            "notNull": true
+          },
           {
             "fieldPath": "id",
             "columnName": "id",
@@ -28,7 +34,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'faf1a892bd59040757e0067e8be937d5')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '0e9a7a691a28298303fc3e673715a02d')"
     ]
   }
 }
