@@ -1,28 +1,24 @@
 package com.csci448.hadam.hadam_a3.data.database
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
-import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.csci448.hadam.hadam_a3.data.AutoCompleteSuggestion
-import com.csci448.hadam.hadam_a3.data.TitleVideo
+import com.csci448.hadam.hadam_a3.data.titlevideo.TitleVideo
+import kotlinx.coroutines.flow.Flow
+import java.util.*
 
+@Dao
 interface IMDBDao {
-    @Dao
-    interface AutoCompleteSuggestionDao {
-        @Query("SELECT * FROM autoCompleteSuggestions WHERE query=:query")
-        suspend fun getAutoCompleteSuggestions(query: String): List<AutoCompleteSuggestion>
+    @Insert
+    fun addVideo(titleVideo: TitleVideo)
 
-        @Insert(onConflict = OnConflictStrategy.REPLACE)
-        suspend fun insertAutoCompleteSuggestions(suggestions: List<AutoCompleteSuggestion>)
-    }
+    @Query("SELECT * FROM titlevideo")
+    fun getVideos(): Flow<List<TitleVideo>>
 
-    @Dao
-    interface TitleVideoDao {
-        @Query("SELECT * FROM titleVideos WHERE id=:id")
-        suspend fun getTitleVideos(id: String): TitleVideo?
+    @Query("SELECT * FROM titlevideo WHERE id=(:id)")
+    suspend fun getVideoById(id: UUID): TitleVideo?
 
-        @Insert(onConflict = OnConflictStrategy.REPLACE)
-        suspend fun insertTitleVideos(video: TitleVideo)
-    }
+    @Delete
+    fun deleteVideo(titleVideo: TitleVideo)
 }
