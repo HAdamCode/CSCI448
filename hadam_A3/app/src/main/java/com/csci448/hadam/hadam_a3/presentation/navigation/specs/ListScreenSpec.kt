@@ -1,8 +1,13 @@
 package com.csci448.hadam.hadam_a3.presentation.navigation.specs
 
 import android.content.Context
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AddCircle
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.ui.res.stringResource
 import androidx.navigation.NamedNavArgument
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavHostController
@@ -42,11 +47,11 @@ object ListScreenSpec: IScreenSpec {
         navBackStackEntry: NavBackStackEntry?,
         context: Context
     ) {
-//        IconButton(onClick = { navController.navigate(route = NewVideoScreenSpec.route) }) {
-//            Icon(
-//                imageVector = Icons.Filled.AddCircle,
-//                contentDescription = stringResource(R.string.app_name)
-//            )
-//        }
+        IconButton(onClick = { navController.navigate(route = NewVideoScreenSpec.route) }) {
+            Icon(
+                imageVector = Icons.Filled.AddCircle,
+                contentDescription = stringResource(R.string.app_name)
+            )
+        }
     }
 }
