@@ -7,8 +7,8 @@ public final class ThemeKt {
     private static final androidx.compose.material3.ColorScheme DarkColorScheme = null;
     private static final androidx.compose.material3.ColorScheme LightColorScheme = null;
     
-    @androidx.compose.runtime.Composable()
-    public static final void SamodelkinTheme(boolean darkTheme, boolean dynamicColor, @org.jetbrains.annotations.NotNull()
+    @androidx.compose.runtime.Composable
+    public static final void SamodelkinTheme(boolean darkTheme, boolean dynamicColor, @org.jetbrains.annotations.NotNull
     kotlin.jvm.functions.Function0<kotlin.Unit> content) {
     }
 }

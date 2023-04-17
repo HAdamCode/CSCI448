@@ -6,13 +6,13 @@ import java.lang.System;
 public final class SamodelkinListScreenKt {
     private static final java.lang.String LOG_TAG = "448.SamodelkinViewModel";
     
-    @androidx.compose.runtime.Composable()
-    public static final void SamodelkinListScreen(@org.jetbrains.annotations.NotNull()
-    java.util.List<edu.mines.csci448.examples.samodelkin.data.SamodelkinCharacter> characterList, @org.jetbrains.annotations.NotNull()
+    @androidx.compose.runtime.Composable
+    public static final void SamodelkinListScreen(@org.jetbrains.annotations.NotNull
+    java.util.List<edu.mines.csci448.examples.samodelkin.data.SamodelkinCharacter> characterList, @org.jetbrains.annotations.NotNull
     kotlin.jvm.functions.Function1<? super edu.mines.csci448.examples.samodelkin.data.SamodelkinCharacter, kotlin.Unit> onSelectCharacter) {
     }
     
-    @androidx.compose.runtime.Composable()
+    @androidx.compose.runtime.Composable
     @androidx.compose.ui.tooling.preview.Preview(showBackground = true)
     private static final void PreviewSamodelkinListScreen() {
     }

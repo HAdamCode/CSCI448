@@ -6,7 +6,7 @@ import java.lang.System;
 public final class SamodelkinRepo {
     private final edu.mines.csci448.examples.samodelkin.data.database.SamodelkinDao samodelkinDao = null;
     private final kotlinx.coroutines.CoroutineScope coroutineScope = null;
-    @org.jetbrains.annotations.NotNull()
+    @org.jetbrains.annotations.NotNull
     public static final edu.mines.csci448.examples.samodelkin.data.SamodelkinRepo.Companion Companion = null;
     private static final java.lang.String LOG_TAG = "448.SamodelkinRepo";
     private static edu.mines.csci448.examples.samodelkin.data.SamodelkinRepo INSTANCE;
@@ -15,23 +15,23 @@ public final class SamodelkinRepo {
         super();
     }
     
-    @org.jetbrains.annotations.NotNull()
+    @org.jetbrains.annotations.NotNull
     public final kotlinx.coroutines.flow.Flow<java.util.List<edu.mines.csci448.examples.samodelkin.data.SamodelkinCharacter>> getCharacters() {
         return null;
     }
     
-    @org.jetbrains.annotations.Nullable()
-    public final java.lang.Object getCharacter(@org.jetbrains.annotations.NotNull()
-    java.util.UUID id, @org.jetbrains.annotations.NotNull()
+    @org.jetbrains.annotations.Nullable
+    public final java.lang.Object getCharacter(@org.jetbrains.annotations.NotNull
+    java.util.UUID id, @org.jetbrains.annotations.NotNull
     kotlin.coroutines.Continuation<? super edu.mines.csci448.examples.samodelkin.data.SamodelkinCharacter> continuation) {
         return null;
     }
     
-    public final void addCharacter(@org.jetbrains.annotations.NotNull()
+    public final void addCharacter(@org.jetbrains.annotations.NotNull
     edu.mines.csci448.examples.samodelkin.data.SamodelkinCharacter samodelkinCharacter) {
     }
     
-    public final void deleteCharacter(@org.jetbrains.annotations.NotNull()
+    public final void deleteCharacter(@org.jetbrains.annotations.NotNull
     edu.mines.csci448.examples.samodelkin.data.SamodelkinCharacter samodelkinCharacter) {
     }
     
@@ -45,8 +45,8 @@ public final class SamodelkinRepo {
         /**
          * @param context
          */
-        @org.jetbrains.annotations.NotNull()
-        public final edu.mines.csci448.examples.samodelkin.data.SamodelkinRepo getInstance(@org.jetbrains.annotations.NotNull()
+        @org.jetbrains.annotations.NotNull
+        public final edu.mines.csci448.examples.samodelkin.data.SamodelkinRepo getInstance(@org.jetbrains.annotations.NotNull
         android.content.Context context) {
             return null;
         }

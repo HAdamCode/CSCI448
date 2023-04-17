@@ -7,6 +7,7 @@ import java.util.*
 interface IIMDBViewModel {
     val videoListState: StateFlow<List<TitleVideo>>
     val currentVideoState: StateFlow<TitleVideo?>
+    val currentVideoSearchState: StateFlow<String?>
     fun loadVideoByUUID(uuid: UUID)
     fun addVideo(videoToAdd: TitleVideo)
     fun deleteVideo(videoToDelete: TitleVideo)

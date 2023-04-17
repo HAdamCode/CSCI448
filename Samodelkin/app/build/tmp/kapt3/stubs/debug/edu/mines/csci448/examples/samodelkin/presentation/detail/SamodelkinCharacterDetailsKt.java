@@ -6,41 +6,41 @@ import java.lang.System;
 public final class SamodelkinCharacterDetailsKt {
     private static final java.lang.String LOG_TAG = "448.SamodelkinCharacterDetails";
     
-    @androidx.compose.runtime.Composable()
-    public static final void SamodelkinCharacterDetails(@org.jetbrains.annotations.NotNull()
+    @androidx.compose.runtime.Composable
+    public static final void SamodelkinCharacterDetails(@org.jetbrains.annotations.NotNull
     edu.mines.csci448.examples.samodelkin.data.SamodelkinCharacter character) {
     }
     
-    @androidx.compose.runtime.Composable()
+    @androidx.compose.runtime.Composable
     private static final void NameSection(java.lang.String characterName) {
     }
     
-    @androidx.compose.runtime.Composable()
+    @androidx.compose.runtime.Composable
     private static final void RaceSection(java.lang.String characterRace) {
     }
     
-    @androidx.compose.runtime.Composable()
+    @androidx.compose.runtime.Composable
     private static final void ProfessionSection(java.lang.String characterProfession) {
     }
     
-    @androidx.compose.runtime.Composable()
+    @androidx.compose.runtime.Composable
     private static final void StatsSection(int orientation, int dexterity, int strength, int wisdom, int intelligence, int charisma, int constitution) {
     }
     
-    @androidx.compose.runtime.Composable()
+    @androidx.compose.runtime.Composable
     private static final void SectionHeader(java.lang.String headerText) {
     }
     
-    @androidx.compose.runtime.Composable()
+    @androidx.compose.runtime.Composable
     private static final void StatsDisplay(java.lang.String statName, int statValue) {
     }
     
-    @androidx.compose.runtime.Composable()
+    @androidx.compose.runtime.Composable
     @androidx.compose.ui.tooling.preview.Preview(showBackground = true)
     private static final void PreviewSamodelkinCharacterDetails() {
     }
     
-    @androidx.compose.runtime.Composable()
+    @androidx.compose.runtime.Composable
     @androidx.compose.ui.tooling.preview.Preview(showBackground = true, device = "spec:parent=pixel_5,orientation=landscape")
     private static final void PreviewSamodelkinCharacterDetailsLandscape() {
     }

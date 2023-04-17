@@ -1,6 +1,7 @@
 package com.csci448.hadam.hadam_a3.presentation.navigation.specs
 
 import android.content.Context
+import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
@@ -14,6 +15,7 @@ import com.csci448.hadam.hadam_a3.presentation.newvideo.NewVideoScreen
 import com.csci448.hadam.hadam_a3.presentation.viewmodel.IIMDBViewModel
 import com.csci448.hadam.hadam_a3.util.NetworkConnectionUtil
 import com.csci448.hadam.hadam_a3.util.api.IMDBFetchr
+import com.csci448.hadam.hadam_a3.util.api.IMDBQueryFetchr
 import kotlinx.coroutines.CoroutineScope
 
 object NewVideoScreenSpec :IScreenSpec {
@@ -33,20 +35,23 @@ object NewVideoScreenSpec :IScreenSpec {
         coroutineScope: CoroutineScope
     ) {
 
-        val imdbFetchr = remember { IMDBFetchr() }
+        val imdbFetchr = remember { IMDBQueryFetchr() }
         val apiVideoState = imdbFetchr.titleVideo
             .collectAsStateWithLifecycle(context = coroutineScope.coroutineContext)
 //        val characterState = remember {
 //            mutableStateOf()
 //        }
-        LaunchedEffect(key1 = apiVideoState.value) {
-            val apiVideo = apiVideoState.value
-//            if (apiVideo != null) {
-//                characterState.value = apiVideo
-//            } else {
-//                characterState.value = generateRandomCharacter()
-//            }
-        }
+//        Log.d(LOG_TAG, "Test")
+//        LaunchedEffect(key1 = apiVideoState.value) {
+//            val apiVideo = apiVideoState.value
+////            if (apiVideo != null) {
+////                characterState.value = apiVideo
+////            } else {
+////                characterState.value = generateRandomCharacter()
+////            }
+//            Log.d(LOG_TAG, "Test1")
+//        }
+
         NewVideoScreen(
             titleVideo = apiVideoState.value,
             onSaveVideo = {
@@ -57,7 +62,7 @@ object NewVideoScreenSpec :IScreenSpec {
                 )
             },
             apiButtonIsEnabled = NetworkConnectionUtil.isNetworkAvailableAndConnected(context),
-            onRequestApiCharacter = { imdbFetchr.getTitleVideo() }
+            onRequestApiVideo = { imdbFetchr.getTitleVideo() }
         )
     }
 

@@ -29,6 +29,12 @@ class IMDBViewModel(private val imdbRepo: IMDBRepo): IIMDBViewModel, ViewModel()
     private val mCurrentVideoIdState: MutableStateFlow<UUID> =
         MutableStateFlow(UUID.randomUUID())
 
+    private val mCurrentVideoSearchState: MutableStateFlow<String?> =
+        MutableStateFlow(null)
+
+    override val currentVideoSearchState: StateFlow<String?>
+        get() = mCurrentVideoSearchState.asStateFlow()
+
     init {
         viewModelScope.launch {
             imdbRepo.getVideos().collect { videoList ->

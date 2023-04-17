@@ -1,6 +1,7 @@
 package com.csci448.hadam.hadam_a3.presentation.newvideo
 
 import android.content.res.Configuration
+import android.util.Log
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -10,6 +11,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Card
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
@@ -23,74 +25,27 @@ fun NewVideoScreen(
     titleVideo: TitleVideo?,
     onSaveVideo: (TitleVideo) -> Unit,
     apiButtonIsEnabled: Boolean,
-    onRequestApiCharacter: () -> Unit
+    onRequestApiVideo: () -> Unit
 ) {
-    when (LocalConfiguration.current.orientation) {
-        Configuration.ORIENTATION_LANDSCAPE -> {
-            Row(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(8.dp)
-            ) {
-//                Card(
-//                    modifier = Modifier.weight(0.7f)
-//                ) {
-//                    SamodelkinCharacterDetails(character = character)
-//                }
-                Spacer(modifier = Modifier.width(16.dp))
-                Column(
-                    modifier = Modifier.weight(0.3f)
-                ) {
-                    NewVideoButton(
-                        text = stringResource(R.string.app_name),
-                        enabled = apiButtonIsEnabled,
-                        onClick = onRequestApiCharacter
-                    )
-                    Spacer(modifier = Modifier.height(16.dp))
-                    NewVideoButton(
-                        text = stringResource(R.string.app_name),
-                        onClick = {
-                            if (titleVideo != null) {
-                                onSaveVideo(titleVideo)
-                            }
-                        }
-                    )
-                }
-            }
-        }
-        else -> {
+    Log.d("LOG_TAG", "New Video Screen")
+        Row(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(8.dp)
+        ) {
+            Spacer(modifier = Modifier.width(16.dp))
             Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(8.dp)
+                modifier = Modifier.weight(0.3f)
             ) {
-//                Card {
-//                    SamodelkinCharacterDetails(character = character)
-//                }
-                Spacer(modifier = Modifier.height(16.dp))
-                Row {
-//                    Box(
-//                        modifier = Modifier.weight(0.5f)
-//                    ) {
-//                        NewVideoButton(
-//                            text = stringResource(R.string.app_name),
-//                            onClick = onGenerateRandomCharacter,
-//                        )
-//                    }
-//                    Spacer(modifier = Modifier.width(16.dp))
-                    Box(
-                        modifier = Modifier.weight(0.5f)
-                    ) {
-                        NewVideoButton(
-                            text = stringResource(R.string.app_name),
-                            enabled = apiButtonIsEnabled,
-                            onClick = onRequestApiCharacter
-                        )
-                    }
-                }
+//                TextField(value = searchValue, onValueChange = {imd = it})
+                NewVideoButton(
+                    text = "Request Video",
+                    enabled = apiButtonIsEnabled,
+                    onClick = onRequestApiVideo
+                )
                 Spacer(modifier = Modifier.height(16.dp))
                 NewVideoButton(
-                    text = stringResource(R.string.app_name),
+                    text = "Save Video",
                     onClick = {
                         if (titleVideo != null) {
                             onSaveVideo(titleVideo)
@@ -98,6 +53,5 @@ fun NewVideoScreen(
                     }
                 )
             }
-        }
     }
 }

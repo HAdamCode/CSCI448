@@ -9,15 +9,15 @@ public final class SamodelkinTypeConverters {
         super();
     }
     
-    @org.jetbrains.annotations.Nullable()
-    @androidx.room.TypeConverter()
-    public final java.lang.String fromUUID(@org.jetbrains.annotations.Nullable()
+    @org.jetbrains.annotations.Nullable
+    @androidx.room.TypeConverter
+    public final java.lang.String fromUUID(@org.jetbrains.annotations.Nullable
     java.util.UUID uuid) {
         return null;
     }
     
-    @androidx.room.TypeConverter()
-    public final java.util.UUID toUUID(@org.jetbrains.annotations.Nullable()
+    @androidx.room.TypeConverter
+    public final java.util.UUID toUUID(@org.jetbrains.annotations.Nullable
     java.lang.String uuid) {
         return null;
     }
