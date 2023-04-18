@@ -42,7 +42,7 @@ fun NewVideoScreen(
 ) {
     Log.d("LOG_TAG", "New Video Screen")
     val searchTextChange = remember { mutableStateOf(searchText) }
-    Column() {
+    Column {
         Row(
             modifier = Modifier
                 .fillMaxHeight(.1f)
@@ -76,20 +76,22 @@ fun NewVideoScreen(
         LazyColumn(
             modifier = Modifier
                 .fillMaxWidth()
-                .fillMaxHeight(.9f)
+                .fillMaxHeight(.5f)
                 .padding(8.dp)
         ) {
 
             if (autoComplete != null) {
                 Log.d("NewVideoScreen", autoComplete.name)
-                items(autoComplete.movies) {
-                    NewVideoListScreen(movies = it)
+                items(autoComplete.movies) { it ->
+                    NewVideoListScreen(movies = it, onVideoClick = { it -> imdbViewModel.updateSearchVideo(movies = it)})
                 }
             }
             else {
                 Log.d("NewVideoScreen", "Nothing in autoComplete")
             }
         }
+        val videoToDisplay = imdbViewModel.currentSearchVideoToDisplayState.collectAsStateWithLifecycle().value
+        NewVideoImage(movies = videoToDisplay )
         NewVideoButton(
             text = "Save Video",
             onClick = {

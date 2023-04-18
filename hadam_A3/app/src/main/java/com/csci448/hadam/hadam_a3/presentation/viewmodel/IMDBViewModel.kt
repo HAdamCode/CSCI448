@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.csci448.hadam.hadam_a3.data.IMDBRepo
 import com.csci448.hadam.hadam_a3.data.Video
+import com.csci448.hadam.hadam_a3.data.autocomplete.Movies
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import java.util.*
@@ -34,6 +35,12 @@ class IMDBViewModel(private val imdbRepo: IMDBRepo): IIMDBViewModel, ViewModel()
 
     override val currentVideoSearchState: StateFlow<String>
         get() = mCurrentVideoSearchState.asStateFlow()
+
+    private val mCurrentSearchVideoToDisplayState: MutableStateFlow<Movies?> =
+        MutableStateFlow(null)
+
+    override val currentSearchVideoToDisplayState: StateFlow<Movies?>
+        get() = mCurrentSearchVideoToDisplayState.asStateFlow()
 
     init {
         viewModelScope.launch {
@@ -66,5 +73,9 @@ class IMDBViewModel(private val imdbRepo: IMDBRepo): IIMDBViewModel, ViewModel()
 
     override fun updateSearchState(searchText: String) {
         mCurrentVideoSearchState.update { searchText }
+    }
+
+    override fun updateSearchVideo(movies: Movies) {
+        mCurrentSearchVideoToDisplayState.update { movies }
     }
 }
