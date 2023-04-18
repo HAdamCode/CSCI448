@@ -19,6 +19,7 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AddCircle
+import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
@@ -54,7 +55,7 @@ fun NewVideoScreen(
     val searchTextChange = remember { mutableStateOf(searchText) }
     val focusManager = LocalFocusManager.current
 
-    Column (modifier = Modifier.clickable { focusManager.clearFocus()}){
+    Column {
         Row(
             modifier = Modifier
                 .fillMaxHeight(.1f)
@@ -77,10 +78,21 @@ fun NewVideoScreen(
                             imdbViewModel.updateSearchState(searchText = searchTextChange.value)
                         },
                             keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
-                            keyboardActions = KeyboardActions(onDone = { focusManager.clearFocus() }),)
+                            keyboardActions = KeyboardActions(onDone = { focusManager.clearFocus() }),
+                            trailingIcon = {
+                                Icon(Icons.Default.Clear,
+                                    contentDescription = "clear text",
+                                    modifier = Modifier
+                                        .clickable {
+                                            searchTextChange.value = ""
+                                        }
+                                )
+                            }
+                        )
                     }
                     IconButton(
-                        onClick = { onRequestApiVideo() },
+                        onClick = { onRequestApiVideo()
+                                  focusManager.clearFocus()},
                         enabled = apiButtonIsEnabled && searchTextChange.value != "",
                         modifier = Modifier.fillMaxWidth(.8f)
                     ) {
@@ -94,7 +106,6 @@ fun NewVideoScreen(
                 .fillMaxWidth()
                 .fillMaxHeight(.5f)
                 .padding(8.dp)
-                .clickable { focusManager.clearFocus()}
         ) {
 
             if (autoComplete != null) {

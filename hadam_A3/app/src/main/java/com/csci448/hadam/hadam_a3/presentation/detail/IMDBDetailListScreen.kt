@@ -48,8 +48,18 @@ fun IMDBDetailListScreen(video: Video, onVideoClick: () -> Unit) {
                     .fillMaxWidth(.5f)
             ) {
                 val minutes = video.durationInSeconds % 60
+                var minuteText = ""
+                if (minutes in 0..9) {
+                    minuteText = "0${minutes}"
+                }
+//                else if( minutes==0) {
+//                    minuteText = "00"
+//                }
+                else {
+                    minuteText = minutes.toString()
+                }
                 val hours = video.durationInSeconds / 60
-                Text(text = "${hours}:${minutes}")
+                Text(text = "${hours}:${minuteText}")
             }
             Column() {
                 IconButton(onClick = { onVideoClick() }) {
