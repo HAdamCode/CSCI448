@@ -6,10 +6,14 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Card
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -28,7 +32,7 @@ import com.csci448.hadam.hadam_a3.presentation.viewmodel.IIMDBViewModel
 
 @Composable
 fun NewVideoScreen(
-//    autoComplete: AutoComplete?,
+    autoComplete: AutoComplete?,
     searchText: String,
     imdbViewModel: IIMDBViewModel,
     onSaveVideo: () -> Unit,
@@ -37,35 +41,61 @@ fun NewVideoScreen(
     updateSearchText: (String) -> Unit,
 ) {
     Log.d("LOG_TAG", "New Video Screen")
-    var searchTextChange = remember { mutableStateOf(searchText) }
-    Row(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(8.dp)
-    ) {
-        Spacer(modifier = Modifier.width(16.dp))
-        Column(
-            modifier = Modifier.weight(0.3f)
+    val searchTextChange = remember { mutableStateOf(searchText) }
+    Column() {
+        Row(
+            modifier = Modifier
+                .fillMaxHeight(.1f)
+                .fillMaxWidth()
+                .padding(8.dp)
         ) {
-            TextField(value = searchTextChange.value, onValueChange = {
-                searchTextChange.value = it
-                imdbViewModel.updateSearchState(searchText = searchTextChange.value)
-            })
-            NewVideoButton(
-                text = "Request Video",
-                enabled = apiButtonIsEnabled,
-                onClick = onRequestApiVideo
-            )
-            Spacer(modifier = Modifier.height(16.dp))
-            NewVideoButton(
-                text = "Save Video",
-                onClick = {
-//                        if (autoComplete != null) {
-//                            onSaveVideo(autoComplete)
-//                        }
-                    onSaveVideo()
+//            Spacer(modifier = Modifier.width(16.dp))
+            Column(
+                modifier = Modifier.weight(0.2f)
+            ) {
+                Row() {
+                    Column(modifier = Modifier.fillMaxWidth(.8f)) {
+                        TextField(value = searchTextChange.value, onValueChange = {
+                            searchTextChange.value = it
+                            imdbViewModel.updateSearchState(searchText = searchTextChange.value)
+                        })
+                    }
+
+                    NewVideoButton(
+                        text = "S",
+                        enabled = apiButtonIsEnabled,
+                        onClick = onRequestApiVideo,
+                        modifier = Modifier.fillMaxWidth(.8f)
+                    )
                 }
-            )
+
+//                Spacer(modifier = Modifier.height(16.dp))
+
+            }
         }
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxWidth()
+                .fillMaxHeight(.9f)
+                .padding(8.dp)
+        ) {
+
+            if (autoComplete != null) {
+                Log.d("NewVideoScreen", autoComplete.name)
+                items(autoComplete.movies) {
+                    NewVideoListScreen(movies = it)
+                }
+            }
+            else {
+                Log.d("NewVideoScreen", "Nothing in autoComplete")
+            }
+        }
+        NewVideoButton(
+            text = "Save Video",
+            onClick = {
+                onSaveVideo()
+            },
+            modifier = Modifier.fillMaxWidth()
+        )
     }
 }

@@ -59,7 +59,7 @@ class IMDBQueryFetchr {
     private val imdbApiService: IMDBApiService
     private val mAutoComplete = MutableStateFlow<AutoComplete?>(null)
 
-    val autoComplete: StateFlow<AutoComplete?>
+    val AutoComplete: StateFlow<AutoComplete?>
         get() = mAutoComplete.asStateFlow()
 
     init {

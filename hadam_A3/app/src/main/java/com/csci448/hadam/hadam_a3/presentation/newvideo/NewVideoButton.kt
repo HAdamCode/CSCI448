@@ -11,10 +11,11 @@ import androidx.compose.ui.text.style.TextAlign
 fun NewVideoButton(
     text: String,
     enabled: Boolean = true,
-    onClick: () -> Unit
+    onClick: () -> Unit,
+    modifier: Modifier
 ) {
     Button(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = modifier,
         enabled = enabled,
         onClick = onClick
     ) {

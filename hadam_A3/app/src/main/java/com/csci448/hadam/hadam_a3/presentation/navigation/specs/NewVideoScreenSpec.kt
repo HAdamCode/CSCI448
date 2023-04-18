@@ -12,6 +12,8 @@ import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavHostController
 import com.csci448.hadam.hadam_a3.R
 import com.csci448.hadam.hadam_a3.data.Video
+import com.csci448.hadam.hadam_a3.data.autocomplete.AutoComplete
+import com.csci448.hadam.hadam_a3.data.autocomplete.Movies
 import com.csci448.hadam.hadam_a3.presentation.newvideo.NewVideoScreen
 import com.csci448.hadam.hadam_a3.presentation.viewmodel.IIMDBViewModel
 import com.csci448.hadam.hadam_a3.util.NetworkConnectionUtil
@@ -37,35 +39,31 @@ object NewVideoScreenSpec :IScreenSpec {
     ) {
 
         val imdbQueryFetchr = remember { IMDBQueryFetchr() }
-        val apiAutoComplete = imdbQueryFetchr.autoComplete
+        val apiAutoComplete = imdbQueryFetchr.AutoComplete
             .collectAsStateWithLifecycle(context = coroutineScope.coroutineContext)
+        val videoState = remember {
+            mutableStateOf(apiAutoComplete.value)
+        }
 //        val apiVideoState = imdbFetchr.titleVideo
 //            .collectAsStateWithLifecycle(context = coroutineScope.coroutineContext)
-//        val characterState = remember {
-//            mutableStateOf()
-//        }
-//        Log.d(LOG_TAG, "Test")
-//        LaunchedEffect(key1 = apiVideoState.value) {
-//            val apiVideo = apiVideoState.value
-////            if (apiVideo != null) {
-////                characterState.value = apiVideo
-////            } else {
-////                characterState.value = generateRandomCharacter()
-////            }
-//            Log.d(LOG_TAG, "Test1")
-//        }
+        LaunchedEffect(key1 = apiAutoComplete.value) {
+            val autoComplete = apiAutoComplete.value
+            if (autoComplete != null) {
+                videoState.value = autoComplete
+            }
+        }
 
         val searchText = imdbViewModel.currentVideoSearchState
             .collectAsStateWithLifecycle(context = coroutineScope.coroutineContext)
         NewVideoScreen(
-//            autoComplete = apiAutoComplete.value,
+            autoComplete = videoState.value,
             searchText = searchText.value,
             imdbViewModel = imdbViewModel,
             onSaveVideo = {
-                val video = searchText.value?.let { Video(name = it) }
-                if (video != null) {
-                    imdbViewModel.addVideo(videoToAdd = video)
-                }
+                val video = Video(name = searchText.value)
+
+                imdbViewModel.addVideo(videoToAdd = video)
+
                 navController.popBackStack(
                     route = ListScreenSpec.buildRoute(),
                     inclusive = false
