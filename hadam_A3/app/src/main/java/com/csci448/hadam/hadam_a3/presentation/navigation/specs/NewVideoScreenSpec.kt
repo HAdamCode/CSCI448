@@ -87,7 +87,7 @@ object NewVideoScreenSpec : IScreenSpec {
                 )
             },
             apiButtonIsEnabled = NetworkConnectionUtil.isNetworkAvailableAndConnected(context),
-            onRequestApiVideo = { imdbQueryFetchr.getTitleVideo(searchText.value) },
+            onRequestApiVideo = { imdbQueryFetchr.getVideo(searchText.value) },
             updateSearchText = { }
         )
     }

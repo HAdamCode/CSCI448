@@ -25,7 +25,9 @@ fun IMDBListScreen(
         items(videoList) { video ->
             VideoListItem(
                 video = video,
-                onVideoClick = {} //imdbViewModel.deleteVideo(video)
+                onVideoClick = {
+                    onSelectVideo(video)
+                }
             )
         }
     }

@@ -2,6 +2,8 @@ package com.csci448.hadam.hadam_a3.util.api
 
 import android.util.Log
 import com.csci448.hadam.hadam_a3.data.autocomplete.AutoComplete
+import com.csci448.hadam.hadam_a3.data.titlevideo.Resource
+import com.csci448.hadam.hadam_a3.data.titlevideo.TitleVideo
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -20,7 +22,7 @@ class IMDBQueryFetchr {
         private const val LOG_TAG = "448.Fetchr"
     }
 
-    fun getTitleVideo(searchText: String?) {
+    fun getVideo(searchText: String?) {
         if (searchText == null) {
             mAutoComplete.update { null }
             return
@@ -53,14 +55,49 @@ class IMDBQueryFetchr {
                 }
             }
         })
+    }
 
+    fun getTitleVideo(id: String) {
+        Log.d(LOG_TAG, id)
+        mTitleVideo.update { null }
+        val imdbRequest = imdbApiService.findVideo(id)
+
+        imdbRequest.enqueue(object : Callback<TitleVideo> {
+            override fun onFailure(call: Call<TitleVideo>, t: Throwable) {
+                Log.e(LOG_TAG, "onFailure() called $t")
+            }
+
+
+            override fun onResponse(
+                call: Call<TitleVideo>,
+                response: Response<TitleVideo>
+            ) {
+                Log.d(LOG_TAG, "onResponse() called")
+                val responseTitleVideo = response.body()
+                if (responseTitleVideo == null) {
+                    Log.d(LOG_TAG, "resource is null")
+                    mTitleVideo.update { null }
+                } else {
+//                    val newCharacter = responseCharacter.copy(
+//                        avatarAssetPath = "file:///android_asset/characters/${responseCharacter.avatarAssetPath}",
+//                        id = UUID.randomUUID()
+//                    )
+                    Log.d(LOG_TAG, responseTitleVideo.resource.title)
+                    mTitleVideo.update { responseTitleVideo }
+                }
+            }
+        })
     }
 
     private val imdbApiService: IMDBApiService
     private val mAutoComplete = MutableStateFlow<AutoComplete?>(null)
+    private val mTitleVideo = MutableStateFlow<TitleVideo?>(null)
 
     val AutoComplete: StateFlow<AutoComplete?>
         get() = mAutoComplete.asStateFlow()
+
+    val TitleVideo: StateFlow<TitleVideo?>
+        get() = mTitleVideo.asStateFlow()
 
     init {
         val retrofit = Retrofit.Builder()

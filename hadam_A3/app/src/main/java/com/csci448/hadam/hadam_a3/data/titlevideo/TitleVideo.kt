@@ -8,9 +8,6 @@ import java.util.*
 
 
 data class TitleVideo(
-//    val meta: Meta?,
-//    val resource: Resource?,
-    val video: String,
-//    @PrimaryKey
-//    val id: UUID = UUID.randomUUID()
+    @SerializedName("resource")
+    val resource: Resource,
 )
