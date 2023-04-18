@@ -107,45 +107,16 @@ object DetailScreenSpec: IScreenSpec {
         navBackStackEntry: NavBackStackEntry?,
         context: Context
     ) {
-//        val character = samodelkinViewModel.currentCharacterState
-//
-//        IconButton(onClick = {
-//            val characterVal = character.value
-//            if (characterVal != null) {
-//                val intent = Intent().apply {
-//                    action = Intent.ACTION_SEND
-//                    type = "text/plain"
-//                    putExtra(Intent.EXTRA_SUBJECT, "Check out my new SamodelkinCharacter!")
-//                    val message = context.resources.getString(
-//                        androidx.navigation.R.string.send_character_msg_formatter,
-//                        characterVal.name,
-//                        characterVal.race,
-//                        characterVal.profession
-//                    )
-//                    putExtra(Intent.EXTRA_TEXT, message)
-//                }
-//
-//                val chooser = Intent.createChooser(intent, "Share SamodelkinCharater")
-//                if (intent.resolveActivity(context.packageManager) != null) {
-//                    context.startActivity(chooser)
-//                }
-//                context.startActivity(intent)
-//            }
-//        }) {
-//            Icon(
-//                imageVector = Icons.Filled.Share,
-//                contentDescription = stringResource(androidx.navigation.R.string.menu_share_character_desc)
-//            )
-//        }
-//        IconButton(onClick =
-//        {
-//            character.value?.let { samodelkinViewModel.deleteCharacter(it) }
-//            navController.popBackStack()
-//        }) {
-//            Icon(
-//                imageVector = Icons.Filled.Delete,
-//                contentDescription = stringResource(androidx.navigation.R.string.menu_delete_character_desc)
-//            )
-//        }
+        val video = imdbViewModel.currentVideoState
+        IconButton(onClick =
+        {
+            video.value?.let { imdbViewModel.deleteVideo(it) }
+            navController.popBackStack()
+        }) {
+            Icon(
+                imageVector = Icons.Filled.Delete,
+                contentDescription = ""
+            )
+        }
     }
 }
