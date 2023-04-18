@@ -95,7 +95,8 @@ object DetailScreenSpec: IScreenSpec {
                     imdbQueryFetchr.getTitleVideo(videoToGet.id)
                 }
             },
-            titleVideo = videoState.value
+            titleVideo = videoState.value,
+            context = context
         )
         }
     }
