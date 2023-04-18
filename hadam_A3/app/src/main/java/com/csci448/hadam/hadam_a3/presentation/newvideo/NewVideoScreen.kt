@@ -2,6 +2,7 @@ package com.csci448.hadam.hadam_a3.presentation.newvideo
 
 import android.content.res.Configuration
 import android.util.Log
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -14,6 +15,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AddCircle
 import androidx.compose.material.icons.filled.Search
@@ -27,7 +30,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.csci448.hadam.hadam_a3.R
@@ -47,22 +52,32 @@ fun NewVideoScreen(
 ) {
     Log.d("LOG_TAG", "New Video Screen")
     val searchTextChange = remember { mutableStateOf(searchText) }
-    Column {
+    val focusManager = LocalFocusManager.current
+
+    Column (modifier = Modifier.clickable { focusManager.clearFocus()}){
         Row(
             modifier = Modifier
                 .fillMaxHeight(.1f)
                 .fillMaxWidth()
                 .padding(8.dp)
         ) {
+            val hideKeyboard = remember {
+                mutableStateOf(false)
+            }
             Column(
-                modifier = Modifier.weight(0.2f)
+                modifier = Modifier
+                    .weight(0.2f)
+
             ) {
                 Row() {
+
                     Column(modifier = Modifier.fillMaxWidth(.8f)) {
                         TextField(value = searchTextChange.value, onValueChange = {
                             searchTextChange.value = it
                             imdbViewModel.updateSearchState(searchText = searchTextChange.value)
-                        })
+                        },
+                            keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
+                            keyboardActions = KeyboardActions(onDone = { focusManager.clearFocus() }),)
                     }
                     IconButton(
                         onClick = { onRequestApiVideo() },
@@ -79,6 +94,7 @@ fun NewVideoScreen(
                 .fillMaxWidth()
                 .fillMaxHeight(.5f)
                 .padding(8.dp)
+                .clickable { focusManager.clearFocus()}
         ) {
 
             if (autoComplete != null) {

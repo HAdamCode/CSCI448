@@ -1,11 +1,14 @@
 package com.csci448.hadam.hadam_a3.presentation.navigation.specs
 
 import android.content.Context
+import android.content.Context.INPUT_METHOD_SERVICE
 import android.util.Log
+import android.view.inputmethod.InputMethodManager
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NamedNavArgument
 import androidx.navigation.NavBackStackEntry
@@ -88,7 +91,9 @@ object NewVideoScreenSpec : IScreenSpec {
                 )
             },
             apiButtonIsEnabled = NetworkConnectionUtil.isNetworkAvailableAndConnected(context),
-            onRequestApiVideo = { imdbQueryFetchr.getVideo(searchText.value) },
+            onRequestApiVideo = {
+                imdbQueryFetchr.getVideo(searchText.value)
+                                },
             updateSearchText = { }
         )
     }
