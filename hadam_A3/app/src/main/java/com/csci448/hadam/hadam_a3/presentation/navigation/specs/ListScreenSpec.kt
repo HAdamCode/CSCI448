@@ -36,7 +36,8 @@ object ListScreenSpec: IScreenSpec {
             videoList = videos.value,
             onSelectVideo = { video ->
                 navController.navigate("detail/${video.id}")
-            }
+            },
+            imdbViewModel = imdbViewModel
         )
     }
 

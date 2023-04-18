@@ -17,7 +17,7 @@ interface IMDBDao {
     fun getVideos(): Flow<List<Video>>
 
     @Query("SELECT * FROM video WHERE id=(:id)")
-    suspend fun getVideoById(id: UUID): Video?
+    suspend fun getVideoById(id: String): Video?
 
     @Delete
     fun deleteVideo(video: Video)

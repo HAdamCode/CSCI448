@@ -27,8 +27,8 @@ class IMDBViewModel(private val imdbRepo: IMDBRepo): IIMDBViewModel, ViewModel()
     override val currentVideoState: StateFlow<Video?>
         get() = mCurrentVideoState.asStateFlow()
 
-    private val mCurrentVideoIdState: MutableStateFlow<UUID> =
-        MutableStateFlow(UUID.randomUUID())
+    private val mCurrentVideoIdState: MutableStateFlow<String> =
+        MutableStateFlow("")
 
     private val mCurrentVideoSearchState: MutableStateFlow<String> =
         MutableStateFlow("")
@@ -55,7 +55,7 @@ class IMDBViewModel(private val imdbRepo: IMDBRepo): IIMDBViewModel, ViewModel()
         }
     }
 
-    override fun loadVideoByUUID(uuid: UUID) {
+    override fun loadVideoByUUID(uuid: String) {
         Log.d(LOG_TAG, "loadVideoByUUID($uuid)")
         mCurrentVideoIdState.update { uuid }
         return
@@ -75,7 +75,7 @@ class IMDBViewModel(private val imdbRepo: IMDBRepo): IIMDBViewModel, ViewModel()
         mCurrentVideoSearchState.update { searchText }
     }
 
-    override fun updateSearchVideo(movies: Movies) {
+    override fun updateSearchVideo(movies: Movies?) {
         mCurrentSearchVideoToDisplayState.update { movies }
     }
 }

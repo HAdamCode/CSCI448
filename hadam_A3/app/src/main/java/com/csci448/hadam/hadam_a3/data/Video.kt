@@ -7,6 +7,11 @@ import java.util.UUID
 @Entity(tableName = "video")
 data class Video(
     @PrimaryKey
-    val id: UUID = UUID.randomUUID(),
-    val name: String
+    val id: String,
+    val name: String,
+    val rank: Int,
+    val year: Int,
+    val genre: String?,
+    val actors: String,
+    val imageUrl: String
 )

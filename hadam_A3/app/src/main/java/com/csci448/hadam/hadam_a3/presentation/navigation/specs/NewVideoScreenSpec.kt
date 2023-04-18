@@ -20,8 +20,9 @@ import com.csci448.hadam.hadam_a3.util.NetworkConnectionUtil
 import com.csci448.hadam.hadam_a3.util.api.IMDBFetchr
 import com.csci448.hadam.hadam_a3.util.api.IMDBQueryFetchr
 import kotlinx.coroutines.CoroutineScope
+import java.lang.Exception
 
-object NewVideoScreenSpec :IScreenSpec {
+object NewVideoScreenSpec : IScreenSpec {
     private const val LOG_TAG = "448.NewVideoScreenSpec"
 
     override val route = "newVideo"
@@ -55,14 +56,30 @@ object NewVideoScreenSpec :IScreenSpec {
 
         val searchText = imdbViewModel.currentVideoSearchState
             .collectAsStateWithLifecycle(context = coroutineScope.coroutineContext)
+        val video =
+            imdbViewModel.currentSearchVideoToDisplayState.collectAsStateWithLifecycle(context = coroutineScope.coroutineContext)
+
         NewVideoScreen(
             autoComplete = videoState.value,
             searchText = searchText.value,
             imdbViewModel = imdbViewModel,
             onSaveVideo = {
-                val video = Video(name = searchText.value)
-
-                imdbViewModel.addVideo(videoToAdd = video)
+                val videoVal = video.value
+                if (videoVal != null) {
+//                    imdbViewModel.loadVideoByUUID(videoVal.id)
+//                    if (imdbViewModel.currentVideoState.value != null) {
+                    val videoToAdd = Video(
+                        id = videoVal.id,
+                        name = videoVal.movie,
+                        rank = videoVal.rank,
+                        year = videoVal.year,
+                        genre = videoVal.type,
+                        actors = videoVal.starts,
+                        imageUrl = videoVal.link.imageUrl
+                    )
+                    imdbViewModel.addVideo(videoToAdd = videoToAdd)
+//                    }
+                }
 
                 navController.popBackStack(
                     route = ListScreenSpec.buildRoute(),

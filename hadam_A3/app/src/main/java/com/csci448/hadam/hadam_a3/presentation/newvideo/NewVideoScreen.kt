@@ -83,7 +83,7 @@ fun NewVideoScreen(
             if (autoComplete != null) {
                 Log.d("NewVideoScreen", autoComplete.name)
                 items(autoComplete.movies) { it ->
-                    NewVideoListScreen(movies = it, onVideoClick = { it -> imdbViewModel.updateSearchVideo(movies = it)})
+                    NewVideoListScreen(movies = it, onVideoClick = { imdbViewModel.updateSearchVideo(movies = it)})
                 }
             }
             else {
@@ -96,6 +96,7 @@ fun NewVideoScreen(
             text = "Save Video",
             onClick = {
                 onSaveVideo()
+                imdbViewModel.updateSearchVideo(null)
             },
             modifier = Modifier.fillMaxWidth()
         )

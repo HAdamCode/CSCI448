@@ -10,9 +10,9 @@ interface IIMDBViewModel {
     val currentVideoState: StateFlow<Video?>
     val currentVideoSearchState: StateFlow<String>
     val currentSearchVideoToDisplayState: StateFlow<Movies?>
-    fun loadVideoByUUID(uuid: UUID)
+    fun loadVideoByUUID(uuid: String)
     fun addVideo(videoToAdd: Video)
     fun deleteVideo(videoToDelete: Video)
     fun updateSearchState(searchText: String)
-    fun updateSearchVideo(movies: Movies)
+    fun updateSearchVideo(movies: Movies?)
 }

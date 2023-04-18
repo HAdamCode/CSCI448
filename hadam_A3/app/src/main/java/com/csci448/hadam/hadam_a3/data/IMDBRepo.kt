@@ -38,7 +38,7 @@ private constructor(
     }
 
     fun getVideos(): Flow<List<Video>> = imdbDao.getVideos()
-    suspend fun getVideo(id: UUID): Video? = imdbDao.getVideoById(id)
+    suspend fun getVideo(id: String): Video? = imdbDao.getVideoById(id)
     fun addVideo(video: Video) {
         coroutineScope.launch {
             imdbDao.addVideo(video)
