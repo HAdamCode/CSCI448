@@ -101,7 +101,8 @@ fun NewVideoScreen(
                 onSaveVideo()
                 imdbViewModel.updateSearchVideo(null)
             },
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth(),
+            enabled = videoToDisplay != null
         )
     }
 }
