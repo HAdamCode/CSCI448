@@ -66,18 +66,18 @@ object NewVideoScreenSpec : IScreenSpec {
             onSaveVideo = {
                 val videoVal = video.value
                 if (videoVal != null) {
-                    imdbViewModel.loadVideoByUUID(videoVal.id)
-                    if (imdbViewModel.currentVideoState.value != null) {
-                        val videoToAdd = Video(
-                            id = videoVal.id,
-                            name = videoVal.movie,
-                            rank = videoVal.rank,
-                            year = videoVal.year,
-                            genre = videoVal.type,
-                            actors = videoVal.starts,
-                            imageUrl = if (videoVal.link != null)  videoVal.link.imageUrl else "",
-                            favorite = false
-                        )
+                    val videoToAdd = Video(
+                        id = videoVal.id,
+                        name = videoVal.movie,
+                        rank = videoVal.rank,
+                        year = videoVal.year,
+                        genre = videoVal.type,
+                        actors = videoVal.starts,
+                        imageUrl = if (videoVal.link != null) videoVal.link.imageUrl else "",
+                        favorite = false
+                    )
+                    val exists = imdbViewModel.videoListState.value.contains(videoToAdd)
+                    if (!exists) {
                         imdbViewModel.addVideo(videoToAdd = videoToAdd)
                     }
                 }

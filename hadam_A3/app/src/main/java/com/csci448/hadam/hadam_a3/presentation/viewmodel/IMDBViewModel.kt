@@ -95,7 +95,6 @@ class IMDBViewModel(private val imdbRepo: IMDBRepo): IIMDBViewModel, ViewModel()
         else {
             mCurrentFavoriteState.update { false }
             imdbRepo.toggleFavorite(id, false)
-
         }
     }
 }
