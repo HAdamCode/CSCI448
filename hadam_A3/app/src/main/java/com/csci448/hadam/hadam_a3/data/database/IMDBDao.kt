@@ -21,4 +21,7 @@ interface IMDBDao {
 
     @Delete
     fun deleteVideo(video: Video)
+
+    @Query("UPDATE video SET favorite=(:isFavorite) WHERE id=(:id)")
+    fun toggleFavorite(id: String, isFavorite: Boolean)
 }

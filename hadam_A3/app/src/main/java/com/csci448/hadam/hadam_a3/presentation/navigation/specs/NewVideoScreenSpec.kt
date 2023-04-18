@@ -27,7 +27,7 @@ object NewVideoScreenSpec : IScreenSpec {
 
     override val route = "newVideo"
     override val arguments: List<NamedNavArgument> = emptyList()
-    override val title = R.string.app_name
+    override val title = R.string.new_video_name
     override fun buildRoute(vararg args: String?): String = route
 
     @Composable
@@ -75,7 +75,8 @@ object NewVideoScreenSpec : IScreenSpec {
                         year = videoVal.year,
                         genre = videoVal.type,
                         actors = videoVal.starts,
-                        imageUrl = videoVal.link.imageUrl
+                        imageUrl = videoVal.link.imageUrl,
+                        favorite = false
                     )
                     imdbViewModel.addVideo(videoToAdd = videoToAdd)
 //                    }

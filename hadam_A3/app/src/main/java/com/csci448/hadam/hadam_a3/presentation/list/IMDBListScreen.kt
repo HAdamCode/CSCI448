@@ -7,6 +7,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.csci448.hadam.hadam_a3.data.Video
 import com.csci448.hadam.hadam_a3.presentation.viewmodel.IIMDBViewModel
 import com.csci448.hadam.hadam_a3.presentation.viewmodel.IMDBViewModel
@@ -27,7 +28,11 @@ fun IMDBListScreen(
                 video = video,
                 onVideoClick = {
                     onSelectVideo(video)
-                }
+                },
+                onFavoriteClick = {
+                    imdbViewModel.toggleFavorite(video.id)
+                },
+                isFavorite = video.favorite
             )
         }
     }

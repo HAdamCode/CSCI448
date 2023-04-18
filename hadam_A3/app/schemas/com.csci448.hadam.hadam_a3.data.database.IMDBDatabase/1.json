@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "edeaff0881a437fbbf55de2a347eed9e",
+    "identityHash": "8842242d7aaf8c8b14b7c26976633357",
     "entities": [
       {
         "tableName": "video",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `name` TEXT NOT NULL, `rank` INTEGER NOT NULL, `year` INTEGER NOT NULL, `genre` TEXT, `actors` TEXT NOT NULL, `imageUrl` TEXT NOT NULL, PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `name` TEXT NOT NULL, `rank` INTEGER NOT NULL, `year` INTEGER NOT NULL, `genre` TEXT, `actors` TEXT NOT NULL, `imageUrl` TEXT NOT NULL, `favorite` INTEGER NOT NULL, PRIMARY KEY(`id`))",
         "fields": [
           {
             "fieldPath": "id",
@@ -49,6 +49,12 @@
             "columnName": "imageUrl",
             "affinity": "TEXT",
             "notNull": true
+          },
+          {
+            "fieldPath": "favorite",
+            "columnName": "favorite",
+            "affinity": "INTEGER",
+            "notNull": true
           }
         ],
         "primaryKey": {
@@ -64,7 +70,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'edeaff0881a437fbbf55de2a347eed9e')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '8842242d7aaf8c8b14b7c26976633357')"
     ]
   }
 }

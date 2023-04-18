@@ -42,6 +42,12 @@ class IMDBViewModel(private val imdbRepo: IMDBRepo): IIMDBViewModel, ViewModel()
     override val currentSearchVideoToDisplayState: StateFlow<Movies?>
         get() = mCurrentSearchVideoToDisplayState.asStateFlow()
 
+    private val mCurrentFavoriteState: MutableStateFlow<Boolean> =
+        MutableStateFlow(false)
+
+    override val currentFavoriteState: StateFlow<Boolean>
+        get() = mCurrentFavoriteState.asStateFlow()
+
     init {
         viewModelScope.launch {
             imdbRepo.getVideos().collect { videoList ->
@@ -77,5 +83,17 @@ class IMDBViewModel(private val imdbRepo: IMDBRepo): IIMDBViewModel, ViewModel()
 
     override fun updateSearchVideo(movies: Movies?) {
         mCurrentSearchVideoToDisplayState.update { movies }
+    }
+
+    override fun toggleFavorite(id: String) {
+        if (!mCurrentFavoriteState.value) {
+            mCurrentFavoriteState.update { true }
+            imdbRepo.toggleFavorite(id, true)
+        }
+        else {
+            mCurrentFavoriteState.update { false }
+            imdbRepo.toggleFavorite(id, false)
+
+        }
     }
 }

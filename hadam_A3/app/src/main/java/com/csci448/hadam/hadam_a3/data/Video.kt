@@ -13,5 +13,6 @@ data class Video(
     val year: Int,
     val genre: String?,
     val actors: String,
-    val imageUrl: String
+    val imageUrl: String,
+    val favorite: Boolean
 )

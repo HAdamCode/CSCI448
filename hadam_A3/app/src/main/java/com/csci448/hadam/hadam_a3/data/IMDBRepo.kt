@@ -50,4 +50,10 @@ private constructor(
             imdbDao.deleteVideo(video)
         }
     }
+
+    fun toggleFavorite(id: String, isFavorite: Boolean) {
+        coroutineScope.launch {
+            imdbDao.toggleFavorite(id, isFavorite)
+        }
+    }
 }

@@ -19,7 +19,7 @@ import kotlinx.coroutines.CoroutineScope
 object ListScreenSpec: IScreenSpec {
     override val route = "list"
     override val arguments: List<NamedNavArgument> = emptyList()
-    override val title = R.string.app_name
+    override val title = R.string.list_name
     override fun buildRoute(vararg args: String?) = route
 
     @Composable
@@ -51,7 +51,7 @@ object ListScreenSpec: IScreenSpec {
         IconButton(onClick = { navController.navigate(route = NewVideoScreenSpec.route) }) {
             Icon(
                 imageVector = Icons.Filled.AddCircle,
-                contentDescription = stringResource(R.string.app_name)
+                contentDescription = stringResource(R.string.list_name)
             )
         }
     }

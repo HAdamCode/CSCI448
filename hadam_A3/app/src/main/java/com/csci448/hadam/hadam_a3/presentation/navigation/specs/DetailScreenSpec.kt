@@ -33,7 +33,7 @@ object DetailScreenSpec: IScreenSpec {
 
     private const val ROUTE_BASE = "detail"
     private const val ARG_UUID_NAME = "uuid"
-    override val title = R.string.app_name
+    override val title = R.string.detail_name
 
     private fun buildFullRoute(argVal: String): String {
         var fullRoute = ROUTE_BASE
