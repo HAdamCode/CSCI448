@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
@@ -34,7 +35,7 @@ fun IMDBDetailScreen(
     titleVideo: TitleVideo?,
     context: Context
 ) {
-    Column() {
+    Column(modifier = Modifier.padding(start = 20.dp, top = 5.dp)) {
         Row() {
             if (video.imageUrl != "") {
                 AsyncImage(
@@ -45,29 +46,34 @@ fun IMDBDetailScreen(
                         .padding(start = 5.dp)
                 )
             }
-            Column() {
+            Column(modifier = Modifier.padding(start = 20.dp)) {
                 Text(text = video.name, fontWeight = FontWeight.Bold)
-                Spacer(modifier = Modifier.width(16.dp))
+                Spacer(modifier = Modifier.height(16.dp))
                 Text(text = video.actors)
-                Spacer(modifier = Modifier.width(16.dp))
-                Row() {
-                    Text(text = "Year: ", fontWeight = FontWeight.Bold)
-                    Text(text = video.year.toString())
+                Spacer(modifier = Modifier.height(16.dp))
+                if (video.year != 0) {
+                    Row() {
+                        Text(text = "Year: ", fontWeight = FontWeight.Bold)
+                        Text(text = video.year.toString())
+                    }
                 }
-                Spacer(modifier = Modifier.width(16.dp))
+                Spacer(modifier = Modifier.height(16.dp))
                 Row() {
                     Text(text = "IMDB Rank: ", fontWeight = FontWeight.Bold)
                     Text(text = video.rank.toString())
                 }
-                Spacer(modifier = Modifier.width(16.dp))
-                Row() {
-                    Text(text = "Genre: ", fontWeight = FontWeight.Bold)
-                    Text(text = video.genre.toString())
+                Spacer(modifier = Modifier.height(16.dp))
+                if (video.genre != null) {
+                    Row() {
+                        Text(text = "Genre: ", fontWeight = FontWeight.Bold)
+                        Text(text = video.genre.toString())
+                    }
                 }
             }
         }
+        Spacer(modifier = Modifier.height(8.dp))
         Button(
-            modifier = Modifier.padding(start = 130.dp),
+            modifier = Modifier.padding(start = 115.dp),
             enabled = apiButtonIsEnabled,
             onClick = onFindButtonClick
         ) {
@@ -76,11 +82,11 @@ fun IMDBDetailScreen(
                 textAlign = TextAlign.Center
             )
         }
+        Spacer(modifier = Modifier.height(8.dp))
         LazyColumn(
             modifier = Modifier
-                .fillMaxWidth()
+                .fillMaxWidth(.95f)
                 .fillMaxHeight()
-                .padding(8.dp)
         ) {
             if (titleVideo != null) {
                 items(titleVideo.resource.videos) { it ->

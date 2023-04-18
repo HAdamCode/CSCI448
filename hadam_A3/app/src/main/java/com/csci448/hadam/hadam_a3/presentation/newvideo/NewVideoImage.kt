@@ -12,10 +12,13 @@ import com.csci448.hadam.hadam_a3.data.autocomplete.Movies
 
 @Composable
 fun NewVideoImage(movies: Movies?) {
-    Card(modifier = Modifier
-        .fillMaxHeight(.8f)
-        .fillMaxWidth()) {
-        if (movies != null) {
+    if (movies != null) {
+        Card(
+            modifier = Modifier
+                .fillMaxHeight(.8f)
+                .fillMaxWidth()
+                .padding(start = 10.dp, end = 10.dp)
+        ) {
             AsyncImage(
                 model = movies.link?.imageUrl,
                 contentDescription = "",

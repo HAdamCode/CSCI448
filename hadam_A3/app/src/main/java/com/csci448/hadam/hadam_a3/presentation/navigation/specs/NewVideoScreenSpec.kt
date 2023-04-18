@@ -1,6 +1,8 @@
 package com.csci448.hadam.hadam_a3.presentation.navigation.specs
 
 import android.content.Context
+import android.widget.Toast
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
@@ -74,6 +76,10 @@ object NewVideoScreenSpec : IScreenSpec {
                     if (!exists) {
                         imdbViewModel.addVideo(videoToAdd = videoToAdd)
                     }
+                    else {
+                        Toast.makeText(context, "${videoToAdd.name} already exists.",
+                            Toast.LENGTH_LONG).show()
+                    }
                 }
 
                 navController.popBackStack(
@@ -85,7 +91,6 @@ object NewVideoScreenSpec : IScreenSpec {
             onRequestApiVideo = {
                 imdbQueryFetchr.getVideo(searchText.value)
             },
-            updateSearchText = { }
         )
     }
 
