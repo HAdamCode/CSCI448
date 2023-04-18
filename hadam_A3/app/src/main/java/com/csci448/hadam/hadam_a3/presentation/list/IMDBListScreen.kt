@@ -6,12 +6,12 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.csci448.hadam.hadam_a3.data.titlevideo.TitleVideo
+import com.csci448.hadam.hadam_a3.data.Video
 
 @Composable
 fun IMDBListScreen(
-    videoList: List<TitleVideo>,
-    onSelectVideo: (TitleVideo) -> Unit
+    videoList: List<Video>,
+    onSelectVideo: (Video) -> Unit
 ) {
     LazyColumn(
         modifier = Modifier

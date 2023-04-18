@@ -2,7 +2,6 @@ package com.csci448.hadam.hadam_a3.util.api
 
 import com.csci448.hadam.hadam_a3.data.autocomplete.AutoComplete
 import retrofit2.Call
-import com.csci448.hadam.hadam_a3.data.titlevideo.TitleVideo
 import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.Query
@@ -18,5 +17,5 @@ interface IMDBApiService {
         "X-RapidAPI-Host: imdb8.p.rapidapi.com"
     )
     @GET("auto-complete")
-    fun getTitleVideo(@Query): Call<AutoComplete>
+    fun getVideo(@Query("q") searchText: String): Call<AutoComplete>
 }

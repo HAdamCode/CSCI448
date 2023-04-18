@@ -5,9 +5,9 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.csci448.hadam.hadam_a3.data.titlevideo.TitleVideo
+import com.csci448.hadam.hadam_a3.data.Video
 
-@Database(entities = [TitleVideo::class], version = 1)
+@Database(entities = [Video::class], version = 1)
 @TypeConverters(IMDBTypeConverters::class)
 abstract class IMDBDatabase : RoomDatabase() {
     companion object {

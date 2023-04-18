@@ -2,7 +2,6 @@ package com.csci448.hadam.hadam_a3.util.api
 
 import android.util.Log
 import com.csci448.hadam.hadam_a3.data.autocomplete.AutoComplete
-import com.csci448.hadam.hadam_a3.data.titlevideo.TitleVideo
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -21,9 +20,13 @@ class IMDBQueryFetchr {
         private const val LOG_TAG = "448.Fetchr"
     }
 
-    fun getTitleVideo() {
-        Log.e(LOG_TAG, "onFailure() called")
-        val imdbRequest = imdbApiService.getTitleVideo()
+    fun getTitleVideo(searchText: String?) {
+        if (searchText == null) {
+            mAutoComplete.update { null }
+            return
+        }
+        Log.e(LOG_TAG, searchText)
+        val imdbRequest = imdbApiService.getVideo(searchText)
 
         imdbRequest.enqueue(object : Callback<AutoComplete> {
             override fun onFailure(call: Call<AutoComplete>, t: Throwable) {
@@ -61,7 +64,7 @@ class IMDBQueryFetchr {
 
     init {
         val retrofit = Retrofit.Builder()
-            .baseUrl("https://www.omdbapi.com/")
+            .baseUrl(IMDBApiService.BASE_API_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
         imdbApiService = retrofit.create(IMDBApiService::class.java)

@@ -13,45 +13,59 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Card
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.csci448.hadam.hadam_a3.R
-import com.csci448.hadam.hadam_a3.data.titlevideo.TitleVideo
+import com.csci448.hadam.hadam_a3.data.Video
+import com.csci448.hadam.hadam_a3.data.autocomplete.AutoComplete
+import com.csci448.hadam.hadam_a3.presentation.viewmodel.IIMDBViewModel
 
 @Composable
 fun NewVideoScreen(
-    titleVideo: TitleVideo?,
-    onSaveVideo: (TitleVideo) -> Unit,
+//    autoComplete: AutoComplete?,
+    searchText: String,
+    imdbViewModel: IIMDBViewModel,
+    onSaveVideo: () -> Unit,
     apiButtonIsEnabled: Boolean,
-    onRequestApiVideo: () -> Unit
+    onRequestApiVideo: () -> Unit,
+    updateSearchText: (String) -> Unit,
 ) {
     Log.d("LOG_TAG", "New Video Screen")
-        Row(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(8.dp)
+    var searchTextChange = remember { mutableStateOf(searchText) }
+    Row(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(8.dp)
+    ) {
+        Spacer(modifier = Modifier.width(16.dp))
+        Column(
+            modifier = Modifier.weight(0.3f)
         ) {
-            Spacer(modifier = Modifier.width(16.dp))
-            Column(
-                modifier = Modifier.weight(0.3f)
-            ) {
-//                TextField(value = searchValue, onValueChange = {imd = it})
-                NewVideoButton(
-                    text = "Request Video",
-                    enabled = apiButtonIsEnabled,
-                    onClick = onRequestApiVideo
-                )
-                Spacer(modifier = Modifier.height(16.dp))
-                NewVideoButton(
-                    text = "Save Video",
-                    onClick = {
-                        if (titleVideo != null) {
-                            onSaveVideo(titleVideo)
-                        }
-                    }
-                )
-            }
+            TextField(value = searchTextChange.value, onValueChange = {
+                searchTextChange.value = it
+                imdbViewModel.updateSearchState(searchText = searchTextChange.value)
+            })
+            NewVideoButton(
+                text = "Request Video",
+                enabled = apiButtonIsEnabled,
+                onClick = onRequestApiVideo
+            )
+            Spacer(modifier = Modifier.height(16.dp))
+            NewVideoButton(
+                text = "Save Video",
+                onClick = {
+//                        if (autoComplete != null) {
+//                            onSaveVideo(autoComplete)
+//                        }
+                    onSaveVideo()
+                }
+            )
+        }
     }
 }

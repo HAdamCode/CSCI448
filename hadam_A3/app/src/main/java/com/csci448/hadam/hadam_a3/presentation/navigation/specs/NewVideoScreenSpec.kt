@@ -11,6 +11,7 @@ import androidx.navigation.NamedNavArgument
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavHostController
 import com.csci448.hadam.hadam_a3.R
+import com.csci448.hadam.hadam_a3.data.Video
 import com.csci448.hadam.hadam_a3.presentation.newvideo.NewVideoScreen
 import com.csci448.hadam.hadam_a3.presentation.viewmodel.IIMDBViewModel
 import com.csci448.hadam.hadam_a3.util.NetworkConnectionUtil
@@ -35,9 +36,11 @@ object NewVideoScreenSpec :IScreenSpec {
         coroutineScope: CoroutineScope
     ) {
 
-        val imdbFetchr = remember { IMDBQueryFetchr() }
-        val apiVideoState = imdbFetchr.titleVideo
+        val imdbQueryFetchr = remember { IMDBQueryFetchr() }
+        val apiAutoComplete = imdbQueryFetchr.autoComplete
             .collectAsStateWithLifecycle(context = coroutineScope.coroutineContext)
+//        val apiVideoState = imdbFetchr.titleVideo
+//            .collectAsStateWithLifecycle(context = coroutineScope.coroutineContext)
 //        val characterState = remember {
 //            mutableStateOf()
 //        }
@@ -52,17 +55,25 @@ object NewVideoScreenSpec :IScreenSpec {
 //            Log.d(LOG_TAG, "Test1")
 //        }
 
+        val searchText = imdbViewModel.currentVideoSearchState
+            .collectAsStateWithLifecycle(context = coroutineScope.coroutineContext)
         NewVideoScreen(
-            titleVideo = apiVideoState.value,
+//            autoComplete = apiAutoComplete.value,
+            searchText = searchText.value,
+            imdbViewModel = imdbViewModel,
             onSaveVideo = {
-                apiVideoState.value?.let { it1 -> imdbViewModel.addVideo(it1) }
+                val video = searchText.value?.let { Video(name = it) }
+                if (video != null) {
+                    imdbViewModel.addVideo(videoToAdd = video)
+                }
                 navController.popBackStack(
                     route = ListScreenSpec.buildRoute(),
                     inclusive = false
                 )
             },
             apiButtonIsEnabled = NetworkConnectionUtil.isNetworkAvailableAndConnected(context),
-            onRequestApiVideo = { imdbFetchr.getTitleVideo() }
+            onRequestApiVideo = { imdbQueryFetchr.getTitleVideo(searchText.value) },
+            updateSearchText = { }
         )
     }
 

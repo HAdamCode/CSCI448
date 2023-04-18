@@ -6,11 +6,11 @@ import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 import java.util.*
 
-@Entity(tableName = "titlevideo")
+
 data class TitleVideo(
 //    val meta: Meta?,
 //    val resource: Resource?,
     val video: String,
-    @PrimaryKey
-    val id: UUID = UUID.randomUUID()
+//    @PrimaryKey
+//    val id: UUID = UUID.randomUUID()
 )

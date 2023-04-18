@@ -4,7 +4,6 @@ import android.content.Context
 import android.util.Log
 import com.csci448.hadam.hadam_a3.data.database.IMDBDao
 import com.csci448.hadam.hadam_a3.data.database.IMDBDatabase
-import com.csci448.hadam.hadam_a3.data.titlevideo.TitleVideo
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.Flow
@@ -38,17 +37,17 @@ private constructor(
         Log.d(LOG_TAG, "initializing repository list")
     }
 
-    fun getVideos(): Flow<List<TitleVideo>> = imdbDao.getVideos()
-    suspend fun getVideo(id: UUID): TitleVideo? = imdbDao.getVideoById(id)
-    fun addVideo(titleVideo: TitleVideo) {
+    fun getVideos(): Flow<List<Video>> = imdbDao.getVideos()
+    suspend fun getVideo(id: UUID): Video? = imdbDao.getVideoById(id)
+    fun addVideo(video: Video) {
         coroutineScope.launch {
-            imdbDao.addVideo(titleVideo)
+            imdbDao.addVideo(video)
         }
     }
 
-    fun deleteVideo(titleVideo: TitleVideo) {
+    fun deleteVideo(video: Video) {
         coroutineScope.launch {
-            imdbDao.deleteVideo(titleVideo)
+            imdbDao.deleteVideo(video)
         }
     }
 }

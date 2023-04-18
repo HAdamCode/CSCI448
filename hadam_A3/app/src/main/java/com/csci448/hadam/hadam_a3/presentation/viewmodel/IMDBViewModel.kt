@@ -4,7 +4,7 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.csci448.hadam.hadam_a3.data.IMDBRepo
-import com.csci448.hadam.hadam_a3.data.titlevideo.TitleVideo
+import com.csci448.hadam.hadam_a3.data.Video
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import java.util.*
@@ -14,25 +14,25 @@ class IMDBViewModel(private val imdbRepo: IMDBRepo): IIMDBViewModel, ViewModel()
         private const val LOG_TAG = "448.IMDBViewModel"
     }
 
-    private val mVideos: MutableStateFlow<List<TitleVideo>> =
+    private val mVideos: MutableStateFlow<List<Video>> =
         MutableStateFlow(emptyList())
 
-    override val videoListState: StateFlow<List<TitleVideo>>
+    override val videoListState: StateFlow<List<Video>>
         get() = mVideos.asStateFlow()
 
-    private val mCurrentVideoState: MutableStateFlow<TitleVideo?> =
+    private val mCurrentVideoState: MutableStateFlow<Video?> =
         MutableStateFlow(null)
 
-    override val currentVideoState: StateFlow<TitleVideo?>
+    override val currentVideoState: StateFlow<Video?>
         get() = mCurrentVideoState.asStateFlow()
 
     private val mCurrentVideoIdState: MutableStateFlow<UUID> =
         MutableStateFlow(UUID.randomUUID())
 
-    private val mCurrentVideoSearchState: MutableStateFlow<String?> =
-        MutableStateFlow(null)
+    private val mCurrentVideoSearchState: MutableStateFlow<String> =
+        MutableStateFlow("")
 
-    override val currentVideoSearchState: StateFlow<String?>
+    override val currentVideoSearchState: StateFlow<String>
         get() = mCurrentVideoSearchState.asStateFlow()
 
     init {
@@ -54,14 +54,17 @@ class IMDBViewModel(private val imdbRepo: IMDBRepo): IIMDBViewModel, ViewModel()
         return
     }
 
-    override fun addVideo(videoToAdd: TitleVideo) {
+    override fun addVideo(videoToAdd: Video) {
         Log.d(LOG_TAG, "adding video $videoToAdd")
         imdbRepo.addVideo(videoToAdd)
     }
 
-    override fun deleteVideo(VideoToDelete: TitleVideo) {
-        Log.d(LOG_TAG, "deleting video $VideoToDelete")
-        imdbRepo.deleteVideo(VideoToDelete)
+    override fun deleteVideo(videoToDelete: Video) {
+        Log.d(LOG_TAG, "deleting video $videoToDelete")
+        imdbRepo.deleteVideo(videoToDelete)
     }
 
+    override fun updateSearchState(searchText: String) {
+        mCurrentVideoSearchState.update { searchText }
+    }
 }
