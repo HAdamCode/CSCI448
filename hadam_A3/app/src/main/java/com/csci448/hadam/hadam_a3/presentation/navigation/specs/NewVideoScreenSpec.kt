@@ -66,20 +66,20 @@ object NewVideoScreenSpec : IScreenSpec {
             onSaveVideo = {
                 val videoVal = video.value
                 if (videoVal != null) {
-//                    imdbViewModel.loadVideoByUUID(videoVal.id)
-//                    if (imdbViewModel.currentVideoState.value != null) {
-                    val videoToAdd = Video(
-                        id = videoVal.id,
-                        name = videoVal.movie,
-                        rank = videoVal.rank,
-                        year = videoVal.year,
-                        genre = videoVal.type,
-                        actors = videoVal.starts,
-                        imageUrl = videoVal.link.imageUrl,
-                        favorite = false
-                    )
-                    imdbViewModel.addVideo(videoToAdd = videoToAdd)
-//                    }
+                    imdbViewModel.loadVideoByUUID(videoVal.id)
+                    if (imdbViewModel.currentVideoState.value != null) {
+                        val videoToAdd = Video(
+                            id = videoVal.id,
+                            name = videoVal.movie,
+                            rank = videoVal.rank,
+                            year = videoVal.year,
+                            genre = videoVal.type,
+                            actors = videoVal.starts,
+                            imageUrl = if (videoVal.link != null)  videoVal.link.imageUrl else "",
+                            favorite = false
+                        )
+                        imdbViewModel.addVideo(videoToAdd = videoToAdd)
+                    }
                 }
 
                 navController.popBackStack(

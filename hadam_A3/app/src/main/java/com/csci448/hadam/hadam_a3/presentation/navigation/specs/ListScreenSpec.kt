@@ -34,8 +34,8 @@ object ListScreenSpec: IScreenSpec {
 
         IMDBListScreen(
             videoList = videos.value,
-            onSelectVideo = { video ->
-                navController.navigate("detail/${video.id}")
+            onSelectVideo = { id ->
+                navController.navigate("detail/${id}")
             },
             imdbViewModel = imdbViewModel
         )

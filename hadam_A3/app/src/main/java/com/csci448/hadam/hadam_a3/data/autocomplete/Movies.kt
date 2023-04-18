@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class Movies(
     @SerializedName("i")
-    val link: Link,
+    val link: Link?,
     val id: String,
     @SerializedName("l")
     val movie: String,

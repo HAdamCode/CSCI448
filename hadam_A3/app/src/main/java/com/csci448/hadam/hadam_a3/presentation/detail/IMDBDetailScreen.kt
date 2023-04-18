@@ -1,5 +1,6 @@
 package com.csci448.hadam.hadam_a3.presentation.detail
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -28,17 +29,20 @@ import com.csci448.hadam.hadam_a3.data.Video
 import com.csci448.hadam.hadam_a3.data.titlevideo.TitleVideo
 import com.csci448.hadam.hadam_a3.presentation.newvideo.NewVideoListScreen
 
+@SuppressLint("SuspiciousIndentation")
 @Composable
 fun IMDBDetailScreen(video: Video, apiButtonIsEnabled: Boolean, onFindButtonClick: () -> Unit, titleVideo: TitleVideo?, context: Context) {
     Column() {
         Row() {
-            AsyncImage(
-                model = video.imageUrl,
-                contentDescription = "",
-                modifier = Modifier
-                    .fillMaxWidth(.5f)
-                    .padding(start = 5.dp)
-            )
+            if (video.imageUrl != "") {
+                AsyncImage(
+                    model = video.imageUrl,
+                    contentDescription = "",
+                    modifier = Modifier
+                        .fillMaxWidth(.5f)
+                        .padding(start = 5.dp)
+                )
+            }
             Column() {
                 Text(text = video.name, fontWeight = FontWeight.Bold)
                 Spacer(modifier = Modifier.width(16.dp))

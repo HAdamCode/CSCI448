@@ -17,7 +17,7 @@ fun NewVideoImage(movies: Movies?) {
     Card(modifier = Modifier.fillMaxHeight(.8f).fillMaxWidth()) {
         if (movies != null) {
             AsyncImage(
-                model = movies.link.imageUrl,
+                model = movies.link?.imageUrl,
                 contentDescription = "",
                 modifier = Modifier.padding(start = 100.dp)
             )

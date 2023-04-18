@@ -15,7 +15,7 @@ import com.csci448.hadam.hadam_a3.presentation.viewmodel.IMDBViewModel
 @Composable
 fun IMDBListScreen(
     videoList: List<Video>,
-    onSelectVideo: (Video) -> Unit,
+    onSelectVideo: (String) -> Unit,
     imdbViewModel: IIMDBViewModel
 ) {
     LazyColumn(
@@ -27,7 +27,7 @@ fun IMDBListScreen(
             VideoListItem(
                 video = video,
                 onVideoClick = {
-                    onSelectVideo(video)
+                    onSelectVideo(video.id)
                 },
                 onFavoriteClick = {
                     imdbViewModel.toggleFavorite(video.id)

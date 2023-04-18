@@ -14,7 +14,12 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AddCircle
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Card
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -49,7 +54,6 @@ fun NewVideoScreen(
                 .fillMaxWidth()
                 .padding(8.dp)
         ) {
-//            Spacer(modifier = Modifier.width(16.dp))
             Column(
                 modifier = Modifier.weight(0.2f)
             ) {
@@ -60,17 +64,14 @@ fun NewVideoScreen(
                             imdbViewModel.updateSearchState(searchText = searchTextChange.value)
                         })
                     }
-
-                    NewVideoButton(
-                        text = "S",
-                        enabled = apiButtonIsEnabled,
-                        onClick = onRequestApiVideo,
+                    IconButton(
+                        onClick = { onRequestApiVideo() },
+                        enabled = apiButtonIsEnabled && searchTextChange.value != "",
                         modifier = Modifier.fillMaxWidth(.8f)
-                    )
+                    ) {
+                        Icon(imageVector = Icons.Filled.Search, contentDescription = "")
+                    }
                 }
-
-//                Spacer(modifier = Modifier.height(16.dp))
-
             }
         }
         LazyColumn(
@@ -83,15 +84,17 @@ fun NewVideoScreen(
             if (autoComplete != null) {
                 Log.d("NewVideoScreen", autoComplete.name)
                 items(autoComplete.movies) { it ->
-                    NewVideoListScreen(movies = it, onVideoClick = { imdbViewModel.updateSearchVideo(movies = it)})
+                    NewVideoListScreen(
+                        movies = it,
+                        onVideoClick = { imdbViewModel.updateSearchVideo(movies = it) })
                 }
-            }
-            else {
+            } else {
                 Log.d("NewVideoScreen", "Nothing in autoComplete")
             }
         }
-        val videoToDisplay = imdbViewModel.currentSearchVideoToDisplayState.collectAsStateWithLifecycle().value
-        NewVideoImage(movies = videoToDisplay )
+        val videoToDisplay =
+            imdbViewModel.currentSearchVideoToDisplayState.collectAsStateWithLifecycle().value
+        NewVideoImage(movies = videoToDisplay)
         NewVideoButton(
             text = "Save Video",
             onClick = {

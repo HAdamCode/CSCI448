@@ -2,6 +2,7 @@ package com.csci448.hadam.hadam_a3.presentation.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewModelScope
 import com.csci448.hadam.hadam_a3.data.IMDBRepo
 import com.csci448.hadam.hadam_a3.data.Video
@@ -70,6 +71,7 @@ class IMDBViewModel(private val imdbRepo: IMDBRepo): IIMDBViewModel, ViewModel()
     override fun addVideo(videoToAdd: Video) {
         Log.d(LOG_TAG, "adding video $videoToAdd")
         imdbRepo.addVideo(videoToAdd)
+//        mVideos.value = imdbRepo.getVideos()
     }
 
     override fun deleteVideo(videoToDelete: Video) {
