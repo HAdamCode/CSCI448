@@ -1,11 +1,9 @@
 package com.csci448.hadam.hadam_a3.presentation.navigation.specs
 
 import android.content.Context
-import android.content.Intent
 import android.util.Log
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
-import androidx.compose.material.icons.filled.Share
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
@@ -13,7 +11,6 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NamedNavArgument
 import androidx.navigation.NavBackStackEntry
@@ -26,9 +23,8 @@ import com.csci448.hadam.hadam_a3.presentation.viewmodel.IIMDBViewModel
 import com.csci448.hadam.hadam_a3.util.NetworkConnectionUtil
 import com.csci448.hadam.hadam_a3.util.api.IMDBQueryFetchr
 import kotlinx.coroutines.CoroutineScope
-import java.util.UUID
 
-object DetailScreenSpec: IScreenSpec {
+object DetailScreenSpec : IScreenSpec {
     private const val LOG_TAG = "448.DetailScreenSpec"
 
     private const val ROUTE_BASE = "detail"
@@ -75,8 +71,7 @@ object DetailScreenSpec: IScreenSpec {
         val videoState = remember {
             mutableStateOf(apiTitleVideo.value)
         }
-//        val apiVideoState = imdbFetchr.titleVideo
-//            .collectAsStateWithLifecycle(context = coroutineScope.coroutineContext)
+
         LaunchedEffect(key1 = apiTitleVideo.value) {
             val titleVideo = apiTitleVideo.value
             if (titleVideo != null) {
@@ -86,18 +81,19 @@ object DetailScreenSpec: IScreenSpec {
 
         imdbViewModel.loadVideoByUUID(uuid)
 
-        video.value?.let { IMDBDetailScreen(
-            video = it,
-            apiButtonIsEnabled = NetworkConnectionUtil.isNetworkAvailableAndConnected(context),
-            onFindButtonClick = {
-                val videoToGet = video.value
-                if (videoToGet != null) {
-                    imdbQueryFetchr.getTitleVideo(videoToGet.id)
-                }
-            },
-            titleVideo = videoState.value,
-            context = context
-        )
+        video.value?.let {
+            IMDBDetailScreen(
+                video = it,
+                apiButtonIsEnabled = NetworkConnectionUtil.isNetworkAvailableAndConnected(context),
+                onFindButtonClick = {
+                    val videoToGet = video.value
+                    if (videoToGet != null) {
+                        imdbQueryFetchr.getTitleVideo(videoToGet.id)
+                    }
+                },
+                titleVideo = videoState.value,
+                context = context
+            )
         }
     }
 

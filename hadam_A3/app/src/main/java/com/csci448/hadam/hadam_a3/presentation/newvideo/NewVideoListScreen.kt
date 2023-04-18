@@ -1,7 +1,6 @@
 package com.csci448.hadam.hadam_a3.presentation.newvideo
 
 import android.util.Log
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -15,7 +14,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.csci448.hadam.hadam_a3.data.autocomplete.AutoComplete
 import com.csci448.hadam.hadam_a3.data.autocomplete.Movies
 
 @OptIn(ExperimentalMaterial3Api::class)

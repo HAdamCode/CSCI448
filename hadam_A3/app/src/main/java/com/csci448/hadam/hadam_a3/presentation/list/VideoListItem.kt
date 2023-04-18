@@ -20,6 +20,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -36,7 +37,6 @@ fun VideoListItem(
     onVideoClick: (Video) -> Unit,
     onFavoriteClick: () -> Unit,
     isFavorite: Boolean
-//    imdbViewModel: IIMDBViewModel
 ) {
     Card(
         modifier = Modifier
@@ -63,22 +63,19 @@ fun VideoListItem(
                 modifier = Modifier
                     .fillMaxWidth()
             ) {
-//                val isFavorite = remember { mutableStateOf(true) }
-                var imageVector = Icons.Filled.FavoriteBorder
-                if (isFavorite) {
-                    imageVector = Icons.Filled.Favorite
+                var imageVector: ImageVector
+                imageVector = if (isFavorite) {
+                    Icons.Filled.Favorite
                 } else {
-                    imageVector = Icons.Filled.FavoriteBorder
+                    Icons.Filled.FavoriteBorder
                 }
                 IconToggleButton(onCheckedChange = {
                     onFavoriteClick()
 
-                    if (isFavorite) {
-                        imageVector = Icons.Filled.Favorite
-//                        isFavorite = false
+                    imageVector = if (isFavorite) {
+                        Icons.Filled.Favorite
                     } else {
-                        imageVector = Icons.Filled.FavoriteBorder
-//                        isFavorite = true
+                        Icons.Filled.FavoriteBorder
                     }
                 }, checked = true) {
                     Icon(

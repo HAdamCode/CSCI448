@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import android.util.Log
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -18,8 +17,6 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -27,11 +24,16 @@ import androidx.core.content.ContextCompat.startActivity
 import coil.compose.AsyncImage
 import com.csci448.hadam.hadam_a3.data.Video
 import com.csci448.hadam.hadam_a3.data.titlevideo.TitleVideo
-import com.csci448.hadam.hadam_a3.presentation.newvideo.NewVideoListScreen
 
 @SuppressLint("SuspiciousIndentation")
 @Composable
-fun IMDBDetailScreen(video: Video, apiButtonIsEnabled: Boolean, onFindButtonClick: () -> Unit, titleVideo: TitleVideo?, context: Context) {
+fun IMDBDetailScreen(
+    video: Video,
+    apiButtonIsEnabled: Boolean,
+    onFindButtonClick: () -> Unit,
+    titleVideo: TitleVideo?,
+    context: Context
+) {
     Column() {
         Row() {
             if (video.imageUrl != "") {
@@ -65,7 +67,7 @@ fun IMDBDetailScreen(video: Video, apiButtonIsEnabled: Boolean, onFindButtonClic
             }
         }
         Button(
-        modifier = Modifier.padding(start = 130.dp),
+            modifier = Modifier.padding(start = 130.dp),
             enabled = apiButtonIsEnabled,
             onClick = onFindButtonClick
         ) {
@@ -80,9 +82,6 @@ fun IMDBDetailScreen(video: Video, apiButtonIsEnabled: Boolean, onFindButtonClic
                 .fillMaxHeight()
                 .padding(8.dp)
         ) {
-
-//            if (autoComplete != null) {
-//            Log.d("NewVideoScreen", )
             if (titleVideo != null) {
                 items(titleVideo.resource.videos) { it ->
                     IMDBDetailListScreen(video = it, onVideoClick = {
@@ -90,17 +89,10 @@ fun IMDBDetailScreen(video: Video, apiButtonIsEnabled: Boolean, onFindButtonClic
                         val videoUrl = "https://imdb.com/video/${url[2]}"
                         val intent = Intent(Intent.ACTION_VIEW, Uri.parse(videoUrl))
                         val chooser = Intent.createChooser(intent, "Open with")
-
-//                        if (intent.resolveActivity(packageManager) != null) {
-                            startActivity(context, chooser, null)
-//                        }
+                        startActivity(context, chooser, null)
                     })
                 }
             }
-//            }
-//            else {
-//                Log.d("NewVideoScreen", "Nothing in autoComplete")
-//            }
         }
     }
 }

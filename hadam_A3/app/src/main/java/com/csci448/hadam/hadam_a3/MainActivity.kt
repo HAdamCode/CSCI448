@@ -9,18 +9,15 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.compose.rememberNavController
 import com.csci448.hadam.hadam_a3.presentation.navigation.IMDBNavHost
 import com.csci448.hadam.hadam_a3.presentation.navigation.IMDBTopBar
 import com.csci448.hadam.hadam_a3.presentation.viewmodel.IIMDBViewModel
-import com.csci448.hadam.hadam_a3.presentation.viewmodel.IMDBViewModel
 import com.csci448.hadam.hadam_a3.presentation.viewmodel.IMDBViewModelFactory
 import com.csci448.hadam.hadam_a3.ui.theme.Hadam_A3Theme
 

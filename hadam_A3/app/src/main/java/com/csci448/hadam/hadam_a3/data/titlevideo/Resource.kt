@@ -12,4 +12,4 @@ data class Resource(
     val size: Int,
     val videoCounts: List<VideoCount>,
     val videos: List<Video>
-    )
+)

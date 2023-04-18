@@ -2,16 +2,14 @@ package com.csci448.hadam.hadam_a3.presentation.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewModelScope
 import com.csci448.hadam.hadam_a3.data.IMDBRepo
 import com.csci448.hadam.hadam_a3.data.Video
 import com.csci448.hadam.hadam_a3.data.autocomplete.Movies
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
-import java.util.*
 
-class IMDBViewModel(private val imdbRepo: IMDBRepo): IIMDBViewModel, ViewModel() {
+class IMDBViewModel(private val imdbRepo: IMDBRepo) : IIMDBViewModel, ViewModel() {
     companion object {
         private const val LOG_TAG = "448.IMDBViewModel"
     }
@@ -71,7 +69,6 @@ class IMDBViewModel(private val imdbRepo: IMDBRepo): IIMDBViewModel, ViewModel()
     override fun addVideo(videoToAdd: Video) {
         Log.d(LOG_TAG, "adding video $videoToAdd")
         imdbRepo.addVideo(videoToAdd)
-//        mVideos.value = imdbRepo.getVideos()
     }
 
     override fun deleteVideo(videoToDelete: Video) {
@@ -91,8 +88,7 @@ class IMDBViewModel(private val imdbRepo: IMDBRepo): IIMDBViewModel, ViewModel()
         if (!mCurrentFavoriteState.value) {
             mCurrentFavoriteState.update { true }
             imdbRepo.toggleFavorite(id, true)
-        }
-        else {
+        } else {
             mCurrentFavoriteState.update { false }
             imdbRepo.toggleFavorite(id, false)
         }

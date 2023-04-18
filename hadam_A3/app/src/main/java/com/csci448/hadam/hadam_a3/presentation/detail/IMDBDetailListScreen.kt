@@ -1,17 +1,15 @@
 package com.csci448.hadam.hadam_a3.presentation.detail
 
-import android.graphics.drawable.Icon
+import android.util.Log
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AddCircle
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
@@ -23,7 +21,6 @@ import androidx.compose.ui.unit.dp
 import com.csci448.hadam.hadam_a3.R
 import com.csci448.hadam.hadam_a3.data.titlevideo.Video
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun IMDBDetailListScreen(video: Video, onVideoClick: () -> Unit) {
     Card(
@@ -31,11 +28,12 @@ fun IMDBDetailListScreen(video: Video, onVideoClick: () -> Unit) {
             .fillMaxWidth()
             .padding(7.dp),
         elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
-//        onClick = {onVideoClick()}
     ) {
-        Row(modifier = Modifier
-            .fillMaxWidth()
-            .fillMaxHeight()) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .fillMaxHeight()
+        ) {
             Column(
                 modifier = Modifier
                     .fillMaxWidth(.7f)
@@ -49,14 +47,10 @@ fun IMDBDetailListScreen(video: Video, onVideoClick: () -> Unit) {
             ) {
                 val minutes = video.durationInSeconds % 60
                 var minuteText = ""
-                if (minutes in 0..9) {
-                    minuteText = "0${minutes}"
-                }
-//                else if( minutes==0) {
-//                    minuteText = "00"
-//                }
-                else {
-                    minuteText = minutes.toString()
+                minuteText = if (minutes in 0..9) {
+                    "0${minutes}"
+                } else {
+                    minutes.toString()
                 }
                 val hours = video.durationInSeconds / 60
                 Text(text = "${hours}:${minuteText}")

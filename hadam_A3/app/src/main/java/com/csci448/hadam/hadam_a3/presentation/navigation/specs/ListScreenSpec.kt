@@ -8,7 +8,6 @@ import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.res.stringResource
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NamedNavArgument
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavHostController
@@ -17,7 +16,7 @@ import com.csci448.hadam.hadam_a3.presentation.list.IMDBListScreen
 import com.csci448.hadam.hadam_a3.presentation.viewmodel.IIMDBViewModel
 import kotlinx.coroutines.CoroutineScope
 
-object ListScreenSpec: IScreenSpec {
+object ListScreenSpec : IScreenSpec {
     override val route = "list"
     override val arguments: List<NamedNavArgument> = emptyList()
     override val title = R.string.list_name

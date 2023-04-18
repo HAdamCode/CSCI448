@@ -1,29 +1,21 @@
 package com.csci448.hadam.hadam_a3.presentation.navigation.specs
 
 import android.content.Context
-import android.content.Context.INPUT_METHOD_SERVICE
-import android.util.Log
-import android.view.inputmethod.InputMethodManager
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NamedNavArgument
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavHostController
 import com.csci448.hadam.hadam_a3.R
 import com.csci448.hadam.hadam_a3.data.Video
-import com.csci448.hadam.hadam_a3.data.autocomplete.AutoComplete
-import com.csci448.hadam.hadam_a3.data.autocomplete.Movies
 import com.csci448.hadam.hadam_a3.presentation.newvideo.NewVideoScreen
 import com.csci448.hadam.hadam_a3.presentation.viewmodel.IIMDBViewModel
 import com.csci448.hadam.hadam_a3.util.NetworkConnectionUtil
-import com.csci448.hadam.hadam_a3.util.api.IMDBFetchr
 import com.csci448.hadam.hadam_a3.util.api.IMDBQueryFetchr
 import kotlinx.coroutines.CoroutineScope
-import java.lang.Exception
 
 object NewVideoScreenSpec : IScreenSpec {
     private const val LOG_TAG = "448.NewVideoScreenSpec"
@@ -48,8 +40,7 @@ object NewVideoScreenSpec : IScreenSpec {
         val videoState = remember {
             mutableStateOf(apiAutoComplete.value)
         }
-//        val apiVideoState = imdbFetchr.titleVideo
-//            .collectAsStateWithLifecycle(context = coroutineScope.coroutineContext)
+
         LaunchedEffect(key1 = apiAutoComplete.value) {
             val autoComplete = apiAutoComplete.value
             if (autoComplete != null) {
@@ -93,7 +84,7 @@ object NewVideoScreenSpec : IScreenSpec {
             apiButtonIsEnabled = NetworkConnectionUtil.isNetworkAvailableAndConnected(context),
             onRequestApiVideo = {
                 imdbQueryFetchr.getVideo(searchText.value)
-                                },
+            },
             updateSearchText = { }
         )
     }

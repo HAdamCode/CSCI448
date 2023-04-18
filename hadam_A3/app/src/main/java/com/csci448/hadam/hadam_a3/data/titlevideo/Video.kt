@@ -12,4 +12,4 @@ data class Video(
     val parentTitle: ParentTitle,
     val primaryTitle: PrimaryTitle,
     val title: String
-    )
+)

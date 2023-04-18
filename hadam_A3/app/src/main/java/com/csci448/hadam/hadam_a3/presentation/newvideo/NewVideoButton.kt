@@ -1,6 +1,5 @@
 package com.csci448.hadam.hadam_a3.presentation.newvideo
 
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable

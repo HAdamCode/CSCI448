@@ -1,7 +1,6 @@
 package com.csci448.hadam.hadam_a3.util.api
 
 import com.csci448.hadam.hadam_a3.data.autocomplete.AutoComplete
-import com.csci448.hadam.hadam_a3.data.titlevideo.Resource
 import com.csci448.hadam.hadam_a3.data.titlevideo.TitleVideo
 import retrofit2.Call
 import retrofit2.http.GET

@@ -7,5 +7,4 @@ data class AutoComplete(
     val movies: List<Movies>,
     @SerializedName("q")
     val name: String,
-//    val v: Int
 )

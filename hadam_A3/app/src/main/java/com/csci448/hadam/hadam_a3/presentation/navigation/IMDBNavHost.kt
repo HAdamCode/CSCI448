@@ -9,7 +9,6 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import com.csci448.hadam.hadam_a3.presentation.navigation.specs.IScreenSpec
 import com.csci448.hadam.hadam_a3.presentation.viewmodel.IIMDBViewModel
-import com.csci448.hadam.hadam_a3.presentation.viewmodel.IMDBViewModel
 import kotlinx.coroutines.CoroutineScope
 
 @Composable
