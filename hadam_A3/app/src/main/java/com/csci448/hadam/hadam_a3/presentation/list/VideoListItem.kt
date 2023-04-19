@@ -49,37 +49,28 @@ fun VideoListItem(
             Column(
                 modifier = Modifier
                     .fillMaxWidth(.8f)
+                    .padding(start = 5.dp)
             ) {
                 Text(text = video.name, fontWeight = FontWeight.Bold)
                 Text(text = video.actors)
             }
             Column(
                 modifier = Modifier
-                    .fillMaxWidth(.8f)
+                    .fillMaxWidth(.70f)
             ) {
-                Text(text = video.year.toString())
+                if (video.year != 0) {
+                    Text(text = video.year.toString())
+                }
             }
             Column(
                 modifier = Modifier
-                    .fillMaxWidth()
+                    .fillMaxWidth().padding(end = 5.dp)
             ) {
-                var imageVector: ImageVector
-                imageVector = if (isFavorite) {
-                    Icons.Filled.Favorite
-                } else {
-                    Icons.Filled.FavoriteBorder
-                }
                 IconToggleButton(onCheckedChange = {
                     onFavoriteClick()
-
-                    imageVector = if (isFavorite) {
-                        Icons.Filled.Favorite
-                    } else {
-                        Icons.Filled.FavoriteBorder
-                    }
-                }, checked = true) {
+                }, checked = isFavorite) {
                     Icon(
-                        imageVector = imageVector,
+                        imageVector = if (isFavorite) Icons.Filled.Favorite else Icons.Filled.FavoriteBorder,
                         contentDescription = stringResource(R.string.app_name)
                     )
                 }

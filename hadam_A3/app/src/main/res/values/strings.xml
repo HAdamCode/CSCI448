@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">hadam_A3</string>
+    <string name="app_name">IMDB</string>
     <string name="list_name">IMDB Movie List</string>
     <string name="detail_name">IMDB Video</string>
     <string name="new_video_name">Add IMDB Video</string>

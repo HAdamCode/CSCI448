@@ -16,7 +16,7 @@ fun NewVideoButton(
     Button(
         modifier = modifier,
         enabled = enabled,
-        onClick = onClick
+        onClick = onClick,
     ) {
         Text(
             text = text,
