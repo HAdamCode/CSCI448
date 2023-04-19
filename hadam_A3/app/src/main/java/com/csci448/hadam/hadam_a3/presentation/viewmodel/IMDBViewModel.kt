@@ -91,4 +91,9 @@ class IMDBViewModel(private val imdbRepo: IMDBRepo) : IIMDBViewModel, ViewModel(
         imdbRepo.toggleFavorite(id, fav)
         mCurrentFavoriteState.update { fav }
     }
+
+    override fun resetSearch() {
+        mCurrentVideoSearchState.value = ""
+        mCurrentSearchVideoToDisplayState.value = null
+    }
 }

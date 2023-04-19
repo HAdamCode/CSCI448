@@ -68,7 +68,10 @@ fun NewVideoScreen(
                                 imdbViewModel.updateSearchState(searchText = searchTextChange.value)
                             },
                             keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
-                            keyboardActions = KeyboardActions(onDone = { focusManager.clearFocus() }),
+                            keyboardActions = KeyboardActions(onDone = {
+                                focusManager.clearFocus()
+                                onRequestApiVideo()
+                            }),
                             trailingIcon = {
                                 Icon(Icons.Default.Clear,
                                     contentDescription = "clear text",
@@ -102,35 +105,50 @@ fun NewVideoScreen(
                 }
             }
         }
-        LazyColumn(
-            modifier = Modifier
-                .fillMaxWidth()
-                .fillMaxHeight(.5f)
-                .padding(8.dp)
-        ) {
-
-            if (autoComplete != null) {
-                Log.d("NewVideoScreen", autoComplete.name)
-                items(autoComplete.movies) { it ->
-                    NewVideoListScreen(
-                        movies = it,
-                        onVideoClick = { imdbViewModel.updateSearchVideo(movies = it) })
-                }
-            } else {
-                Log.d("NewVideoScreen", "Nothing in autoComplete")
-            }
-        }
         val videoToDisplay =
             imdbViewModel.currentSearchVideoToDisplayState.collectAsStateWithLifecycle().value
-        NewVideoImage(movies = videoToDisplay)
         if (videoToDisplay == null) {
-            Spacer(
+            LazyColumn(
                 modifier = Modifier
-                    .fillMaxHeight(.8f)
                     .fillMaxWidth()
-                    .padding(start = 10.dp, end = 10.dp)
-            )
+                    .fillMaxHeight(.9f)
+                    .padding(8.dp)
+            ) {
+
+                if (autoComplete != null) {
+                    Log.d("NewVideoScreen", autoComplete.name)
+                    items(autoComplete.movies) { it ->
+                        NewVideoListScreen(
+                            movies = it,
+                            onVideoClick = { imdbViewModel.updateSearchVideo(movies = it) })
+                    }
+                } else {
+                    Log.d("NewVideoScreen", "Nothing in autoComplete")
+                }
+            }
         }
+        else {
+            LazyColumn(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .fillMaxHeight(.5f)
+                    .padding(8.dp)
+            ) {
+
+                if (autoComplete != null) {
+                    Log.d("NewVideoScreen", autoComplete.name)
+                    items(autoComplete.movies) { it ->
+                        NewVideoListScreen(
+                            movies = it,
+                            onVideoClick = { imdbViewModel.updateSearchVideo(movies = it) })
+                    }
+                } else {
+                    Log.d("NewVideoScreen", "Nothing in autoComplete")
+                }
+            }
+            NewVideoImage(movies = videoToDisplay)
+        }
+
         NewVideoButton(
             text = "Save Video",
             onClick = {
@@ -139,7 +157,7 @@ fun NewVideoScreen(
             },
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(top = 10.dp, start = 20.dp, end = 20.dp),
+                .padding( top = 3.dp, start = 20.dp, end = 20.dp),
             enabled = videoToDisplay != null
         )
     }
