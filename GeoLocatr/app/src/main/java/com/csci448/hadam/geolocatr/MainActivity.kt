@@ -26,7 +26,10 @@ class MainActivity : ComponentActivity() {
 
     private lateinit var locationUtility: LocationUtility
     private lateinit var permissionLauncher: ActivityResultLauncher<Array<String>>
+    private lateinit var permissionLauncherNotifications: ActivityResultLauncher<String>
     private lateinit var locationLauncher: ActivityResultLauncher<IntentSenderRequest>
+    private val locationAlarmReceiver = LocationAlarmReceiver()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         locationUtility = LocationUtility(context = this)
@@ -45,7 +48,10 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
-
+        permissionLauncherNotifications =
+            registerForActivityResult(ActivityResultContracts.RequestPermission()) {
+                locationAlarmReceiver.checkPermissionAndScheduleAlarm(this@MainActivity, permissionLauncherNotifications)
+            }
         setContent {
             GeoLocatrTheme {
                 Surface(
@@ -72,6 +78,13 @@ class MainActivity : ComponentActivity() {
                                 this@MainActivity,
                                 permissionLauncher
                             )
+                        },
+                        onNotify = {lastLocation ->
+                            locationAlarmReceiver.lastLocation = lastLocation
+                            locationAlarmReceiver.checkPermissionAndScheduleAlarm(this@MainActivity, permissionLauncherNotifications)
+
+                            Log.d(LOG_TAG, "Notify me later has been pressed")
+
                         },
                         address = addressState.value
                     )

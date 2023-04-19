@@ -28,6 +28,7 @@ fun LocationScreen(
     location: Location?,
     locationAvailable: Boolean,
     onGetLocation: () -> Unit,
+    onNotify: (Location) -> Unit,
     address: String
 ) {
     val cameraPositionState = rememberCameraPositionState {
@@ -89,6 +90,9 @@ fun LocationScreen(
         Text(text = address)
         Button(onClick = onGetLocation, enabled = locationAvailable) {
             Text("Get Current Location")
+        }
+        Button(onClick = {onNotify(location!!)}, enabled = location != null) {
+            Text("Notify Me Later")
         }
 
         Row(
@@ -179,6 +183,7 @@ private fun PreviewLocationScreen() {
             }
             addressState.value = "Singapore"
         },
+        onNotify = {},
         address = addressState.value
     )
 }
