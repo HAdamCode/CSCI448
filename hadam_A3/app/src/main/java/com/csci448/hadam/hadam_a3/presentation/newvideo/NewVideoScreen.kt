@@ -34,6 +34,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.csci448.hadam.hadam_a3.data.autocomplete.AutoComplete
 import com.csci448.hadam.hadam_a3.presentation.viewmodel.IIMDBViewModel
+import com.csci448.hadam.hadam_a3.util.api.IMDBQueryFetchr
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -44,6 +45,7 @@ fun NewVideoScreen(
     onSaveVideo: () -> Unit,
     apiButtonIsEnabled: Boolean,
     onRequestApiVideo: () -> Unit,
+    resetQuery: () -> Unit
 ) {
     Log.d("LOG_TAG", "New Video Screen")
     val searchTextChange = remember { mutableStateOf(searchText) }
@@ -78,6 +80,8 @@ fun NewVideoScreen(
                                     modifier = Modifier
                                         .clickable {
                                             searchTextChange.value = ""
+                                            imdbViewModel.resetSearch()
+                                            resetQuery()
                                         }
                                 )
                             },

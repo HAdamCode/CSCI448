@@ -91,6 +91,10 @@ object NewVideoScreenSpec : IScreenSpec {
             onRequestApiVideo = {
                 imdbQueryFetchr.getVideo(searchText.value)
             },
+            resetQuery = {
+                videoState.value = null
+                imdbQueryFetchr.resetAutoComplete()
+            }
         )
     }
 

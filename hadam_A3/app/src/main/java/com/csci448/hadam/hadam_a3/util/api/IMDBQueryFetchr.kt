@@ -69,6 +69,7 @@ class IMDBQueryFetchr {
                 if (responseTitleVideo == null) {
                     Log.d(LOG_TAG, "resource is null")
                     mTitleVideo.update { null }
+                    mBadQuery.update { true }
                 } else {
                     Log.d(LOG_TAG, responseTitleVideo.resource.title)
                     mTitleVideo.update { responseTitleVideo }
@@ -77,15 +78,22 @@ class IMDBQueryFetchr {
         })
     }
 
+    fun resetAutoComplete() {
+        mAutoComplete.update { null }
+    }
     private val imdbApiService: IMDBApiService
     private val mAutoComplete = MutableStateFlow<AutoComplete?>(null)
     private val mTitleVideo = MutableStateFlow<TitleVideo?>(null)
+    private val mBadQuery = MutableStateFlow<Boolean>(false)
 
     val AutoComplete: StateFlow<AutoComplete?>
         get() = mAutoComplete.asStateFlow()
 
     val TitleVideo: StateFlow<TitleVideo?>
         get() = mTitleVideo.asStateFlow()
+
+    val BadQuery: StateFlow<Boolean?>
+        get() = mBadQuery.asStateFlow()
 
     init {
         val retrofit = Retrofit.Builder()
