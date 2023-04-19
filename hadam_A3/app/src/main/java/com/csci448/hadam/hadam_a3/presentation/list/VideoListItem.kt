@@ -66,23 +66,11 @@ fun VideoListItem(
                 modifier = Modifier
                     .fillMaxWidth().padding(end = 5.dp)
             ) {
-                var imageVector: ImageVector
-                imageVector = if (isFavorite) {
-                    Icons.Filled.Favorite
-                } else {
-                    Icons.Filled.FavoriteBorder
-                }
                 IconToggleButton(onCheckedChange = {
                     onFavoriteClick()
-
-                    imageVector = if (isFavorite) {
-                        Icons.Filled.Favorite
-                    } else {
-                        Icons.Filled.FavoriteBorder
-                    }
-                }, checked = true) {
+                }, checked = isFavorite) {
                     Icon(
-                        imageVector = imageVector,
+                        imageVector = if (isFavorite) Icons.Filled.Favorite else Icons.Filled.FavoriteBorder,
                         contentDescription = stringResource(R.string.app_name)
                     )
                 }

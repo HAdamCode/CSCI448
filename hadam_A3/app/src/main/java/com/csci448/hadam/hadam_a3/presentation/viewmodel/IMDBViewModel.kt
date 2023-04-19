@@ -84,13 +84,11 @@ class IMDBViewModel(private val imdbRepo: IMDBRepo) : IIMDBViewModel, ViewModel(
         mCurrentSearchVideoToDisplayState.update { movies }
     }
 
-    override fun toggleFavorite(id: String) {
-        if (!mCurrentFavoriteState.value) {
-            mCurrentFavoriteState.update { true }
-            imdbRepo.toggleFavorite(id, true)
-        } else {
-            mCurrentFavoriteState.update { false }
-            imdbRepo.toggleFavorite(id, false)
-        }
+    override fun toggleFavorite(id: String, video: Video) {
+        val currFav = video.favorite
+        Log.d(LOG_TAG, currFav.toString())
+        val fav = !currFav
+        imdbRepo.toggleFavorite(id, fav)
+        mCurrentFavoriteState.update { fav }
     }
 }

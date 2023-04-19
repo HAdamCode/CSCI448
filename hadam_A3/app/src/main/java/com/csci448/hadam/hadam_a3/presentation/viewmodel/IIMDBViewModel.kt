@@ -15,5 +15,5 @@ interface IIMDBViewModel {
     fun deleteVideo(videoToDelete: Video)
     fun updateSearchState(searchText: String)
     fun updateSearchVideo(movies: Movies?)
-    fun toggleFavorite(id: String)
+    fun toggleFavorite(id: String, video: Video)
 }
