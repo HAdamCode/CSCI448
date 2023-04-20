@@ -142,4 +142,8 @@ class LocationUtility(private val context: Context) {
             }
         }
     }
+
+    fun setStartingLocation(location: Location?) {
+        mCurrentLocationStateFlow.value = location
+    }
 }

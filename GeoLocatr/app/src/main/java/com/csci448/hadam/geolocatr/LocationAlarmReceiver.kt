@@ -101,10 +101,18 @@ class LocationAlarmReceiver: BroadcastReceiver() {
                         description = "channelDesc"
                     }
                 notificationManager.createNotificationChannel(channel)
+                val startingLocation = Location("").apply {
+                    this.latitude = latitude
+                    this.longitude = longitude
+                }
+                val deepLinkPendingIntent = MainActivity
+                    .createPendingIntent(context, startingLocation)
                 val notification = NotificationCompat.Builder(context, "0")
                     .setSmallIcon(android.R.drawable.ic_dialog_map)
                     .setContentTitle(notificationTitle)
                     .setContentText(notificationText)
+                    .setContentIntent(deepLinkPendingIntent)
+                    .setAutoCancel(true)
                     .build()
                 notificationManager.notify(0, notification)
 

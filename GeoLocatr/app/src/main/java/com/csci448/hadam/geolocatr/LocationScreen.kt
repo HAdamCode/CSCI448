@@ -71,7 +71,9 @@ fun LocationScreen(
         mapType = mapType
     )
 
-    LaunchedEffect(location) {
+    val mapReadyState = remember { mutableStateOf(false) }
+
+    LaunchedEffect(location, mapReadyState.value) {
         if (location != null) {
             val bounds = LatLngBounds.Builder()
                 .include(LatLng(location.latitude, location.longitude)).build()
@@ -151,7 +153,8 @@ fun LocationScreen(
             modifier = Modifier.fillMaxSize(),
             cameraPositionState = cameraPositionState,
             uiSettings = mapUiSettings,
-            properties = mapProperties
+            properties = mapProperties,
+            onMapLoaded = { mapReadyState.value = true }
         ) {
             if (location != null) {
                 val markerState = MarkerState().apply {
