@@ -8,7 +8,9 @@ class SoundViewModel(private val beatBox: BeatBox) : ViewModel() {
     val sounds = beatBox.sounds
 
     fun onPlaySound(sound: Sound?) {
-        // TODO have the BeatBox play the sound!
+        if(sound != null) {
+            beatBox.play(sound = sound)
+        }
     }
 
     override fun onCleared() {
