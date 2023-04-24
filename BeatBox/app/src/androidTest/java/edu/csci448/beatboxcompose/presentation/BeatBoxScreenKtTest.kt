@@ -37,4 +37,31 @@ internal class BeatBoxScreenKtTest {
     fun buttonHasSoundNameAsLabel() {
         composeTestRule.onNode(hasText("1_test")).assertIsDisplayed()
     }
+
+    @Test
+    fun playbackSpeedLabelIsDisplayed() {
+        composeTestRule.onNode(hasTestTag("playbackSpeedLabel")).assertIsDisplayed()
+    }
+
+    @Test
+    fun playbackSpeedSliderIsDisplayed() {
+        composeTestRule.onNode(hasTestTag("playbackSpeedSlider")).assertIsDisplayed()
+    }
+
+    @Test
+    fun defaultPlaybackSpeedIs100() {
+        composeTestRule.onNode(hasText("Playback Speed 100%")).assertIsDisplayed()
+    }
+
+    @Test
+    fun playbackSliderMaxUpdatesText() {
+        composeTestRule.onNode(hasTestTag("playbackSpeedSlider")).performTouchInput { swipeRight(left, right + width) }
+        composeTestRule.onNode(hasText("Playback Speed 200%")).assertIsDisplayed()
+    }
+
+    @Test
+    fun playbackSliderMinUpdatesText() {
+        composeTestRule.onNode(hasTestTag("playbackSpeedSlider")).performTouchInput { swipeLeft(right, left - width) }
+        composeTestRule.onNode(hasText("Playback Speed 5%")).assertIsDisplayed()
+    }
 }

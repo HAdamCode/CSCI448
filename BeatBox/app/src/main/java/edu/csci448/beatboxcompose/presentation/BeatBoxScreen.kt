@@ -3,9 +3,13 @@ package edu.csci448.beatboxcompose.presentation
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.*
 import androidx.compose.material.Button
+import androidx.compose.material.Slider
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -15,28 +19,45 @@ private const val NUM_COLUMNS = 3
 
 @Composable
 fun BeatBoxScreen(sounds: List<Sound>, onPlaySound: (Sound) -> Unit) {
-    LazyColumn(
-        modifier = Modifier.padding(8.dp).fillMaxSize()
-    ) {
-        items(count = sounds.size / NUM_COLUMNS + 1 ) { rowIndex ->
-            Row(
-                modifier = Modifier.fillMaxWidth()
+    val playbackSpeedState = remember { mutableStateOf(1.0f) }
+    Column(modifier = Modifier.fillMaxSize()) {
+        Box(modifier = Modifier
+            .fillMaxWidth()
+            .weight(0.9f)) {
+            LazyColumn(
+                modifier = Modifier
+                    .padding(8.dp)
+                    .fillMaxSize()
             ) {
-                for(i in 0 until NUM_COLUMNS) {
-                    val idx = rowIndex * NUM_COLUMNS + i
-                    Box(
-                        modifier = Modifier
-                            .weight(0.33f)
-                            .height(128.dp)
+                items(count = sounds.size / NUM_COLUMNS + 1 ) { rowIndex ->
+                    Row(
+                        modifier = Modifier.fillMaxWidth()
                     ) {
-                        if (idx < sounds.size) {
-                            SoundItemBox(
-                                sound = sounds[idx],
-                                onPlaySound = onPlaySound
-                            )
+                        for(i in 0 until NUM_COLUMNS) {
+                            val idx = rowIndex * NUM_COLUMNS + i
+                            Box(
+                                modifier = Modifier
+                                    .weight(0.33f)
+                                    .height(128.dp)
+                            ) {
+                                if (idx < sounds.size) {
+                                    SoundItemBox(
+                                        sound = sounds[idx],
+                                        onPlaySound = onPlaySound
+                                    )
+                                }
+                            }
                         }
                     }
                 }
+            }
+        }
+        Box(modifier = Modifier
+            .fillMaxWidth()
+            .weight(0.1f)) {
+            Column() {
+                Text(text = "Playback Speed ${(playbackSpeedState.value * 100).toInt()}%", Modifier.testTag("playbackSpeedLabel"))
+                Slider(value = playbackSpeedState.value, onValueChange = { playbackSpeedState.value = it }, valueRange =  0.05f..2.0f, modifier = Modifier.testTag("playbackSpeedSlider"))
             }
         }
     }
@@ -45,7 +66,9 @@ fun BeatBoxScreen(sounds: List<Sound>, onPlaySound: (Sound) -> Unit) {
 @Composable
 private fun SoundItemBox(sound: Sound, onPlaySound: (Sound) -> Unit) {
     Button(
-        modifier = Modifier.padding(4.dp).fillMaxSize(),
+        modifier = Modifier
+            .padding(4.dp)
+            .fillMaxSize(),
         onClick = { onPlaySound(sound) },
     ) {
         Text(
