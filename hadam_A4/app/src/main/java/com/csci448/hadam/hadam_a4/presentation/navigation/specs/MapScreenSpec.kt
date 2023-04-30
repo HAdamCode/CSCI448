@@ -11,6 +11,7 @@ import androidx.navigation.NamedNavArgument
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavHostController
 import com.csci448.hadam.hadam_a4.R
+import com.csci448.hadam.hadam_a4.presentation.map.MapScreen
 import com.csci448.hadam.hadam_a4.presentation.viewmodel.HistoryViewModel
 import com.csci448.hadam.hadam_a4.presentation.viewmodel.IHistoryViewModel
 import kotlinx.coroutines.CoroutineScope
@@ -29,15 +30,13 @@ object MapScreenSpec : IScreenSpec {
         context: Context,
         coroutineScope: CoroutineScope
     ) {
-//        val videos = historyViewModel.videoListState.collectAsState()
+//        val locationState = locationUtility
+//            .currentLocationStateFlow
+//            .collectAsStateWithLifecycle(lifecycle = this@MainActivity.lifecycle)
 //        historyViewModel.resetSearch()
-//        IMDBListScreen(
-//            videoList = videos.value,
-//            onSelectVideo = { id ->
-//                navController.navigate("detail/${id}")
-//            },
-//            imdbViewModel = imdbViewModel
-//        )
+        MapScreen(
+
+        )
     }
 
 //    @Composable
