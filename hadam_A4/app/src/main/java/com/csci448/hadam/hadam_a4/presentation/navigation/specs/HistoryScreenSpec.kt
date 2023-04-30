@@ -1,7 +1,9 @@
 package com.csci448.hadam.hadam_a4.presentation.navigation.specs
 
+import android.app.Activity
 import android.content.Context
 import android.util.Log
+import androidx.activity.result.ActivityResultLauncher
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.Icon
@@ -14,7 +16,9 @@ import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
+import com.csci448.hadam.hadam_a4.MainActivity
 import com.csci448.hadam.hadam_a4.R
+import com.csci448.hadam.hadam_a4.presentation.map.LocationUtility
 import com.csci448.hadam.hadam_a4.presentation.viewmodel.IHistoryViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
@@ -54,7 +58,10 @@ object HistoryScreenSpec : IScreenSpec {
         navController: NavHostController,
         navBackStackEntry: NavBackStackEntry,
         context: Context,
-        coroutineScope: CoroutineScope
+        coroutineScope: CoroutineScope,
+        activity: MainActivity,
+        permissionLauncher: ActivityResultLauncher<Array<String>>,
+        locationUtility: LocationUtility
     ) {
 
     }

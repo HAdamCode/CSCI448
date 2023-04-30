@@ -1,9 +1,13 @@
 package com.csci448.hadam.hadam_a4
 
+import android.app.Activity
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.IntentSenderRequest
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -26,6 +30,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.compose.rememberNavController
+import com.csci448.hadam.hadam_a4.presentation.map.LocationUtility
 import com.csci448.hadam.hadam_a4.presentation.navigation.HistoryNavHost
 import com.csci448.hadam.hadam_a4.presentation.navigation.HistoryTopBar
 import com.csci448.hadam.hadam_a4.presentation.navigation.specs.AboutScreenSpec
@@ -35,6 +40,7 @@ import com.csci448.hadam.hadam_a4.presentation.navigation.specs.SettingsScreenSp
 import com.csci448.hadam.hadam_a4.presentation.viewmodel.HistoryViewModelFactory
 import com.csci448.hadam.hadam_a4.presentation.viewmodel.IHistoryViewModel
 import com.csci448.hadam.hadam_a4.ui.theme.Hadam_A4Theme
+import com.google.android.gms.location.LocationSettingsStates
 import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
@@ -42,21 +48,54 @@ class MainActivity : ComponentActivity() {
         private const val LOG_TAG = "448.MainActivity"
     }
 
+    private lateinit var locationUtility: LocationUtility
+    private lateinit var permissionLauncher: ActivityResultLauncher<Array<String>>
+    private lateinit var locationLauncher: ActivityResultLauncher<IntentSenderRequest>
     private lateinit var mHistoryViewModel: IHistoryViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         Log.d(LOG_TAG, "onCreate() called")
-
         super.onCreate(savedInstanceState)
+
+        locationUtility = LocationUtility(context = this)
+
+        permissionLauncher =
+            registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) {
+                locationUtility.checkPermissionAndGetLocation(this@MainActivity, permissionLauncher)
+            }
+
+        locationLauncher = registerForActivityResult(
+            ActivityResultContracts.StartIntentSenderForResult()
+        ) { result ->
+            if (result.resultCode == RESULT_OK) {
+
+                result.data?.let { data ->
+                    val states = LocationSettingsStates.fromIntent(data)
+                    locationUtility.verifyLocationSettingsStates(states)
+                }
+            }
+        }
+
         val factory = HistoryViewModelFactory(this)
         mHistoryViewModel = ViewModelProvider(this, factory)[factory.getViewModelClass()]
         setContent {
-            MainActivityContent(historyViewModel = mHistoryViewModel)
+            MainActivityContent(historyViewModel = mHistoryViewModel, this@MainActivity, permissionLauncher, locationUtility)
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        locationUtility.removeLocationRequest()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        Log.d(LOG_TAG, "Started up")
+        locationUtility.checkIfLocationCanBeRetrieved(this, locationLauncher)
     }
 }
 
 @Composable
-private fun MainActivityContent(historyViewModel: IHistoryViewModel) {
+private fun MainActivityContent(historyViewModel: IHistoryViewModel, activity: MainActivity, permissionLauncher: ActivityResultLauncher<Array<String>>, locationUtility: LocationUtility) {
     val navController = rememberNavController()
     val coroutineScope = rememberCoroutineScope()
     val context = LocalContext.current
@@ -127,7 +166,10 @@ private fun MainActivityContent(historyViewModel: IHistoryViewModel) {
                             navController,
                             historyViewModel,
                             context,
-                            coroutineScope
+                            coroutineScope,
+                            activity,
+                            permissionLauncher,
+                            locationUtility
                         )
                     }
                 }
