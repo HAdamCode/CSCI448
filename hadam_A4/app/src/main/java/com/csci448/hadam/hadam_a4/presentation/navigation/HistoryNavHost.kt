@@ -12,7 +12,7 @@ import com.csci448.hadam.hadam_a4.presentation.viewmodel.IHistoryViewModel
 import kotlinx.coroutines.CoroutineScope
 
 @Composable
-fun IMDBNavHost(
+fun HistoryNavHost(
     modifier: Modifier = Modifier,
     navController: NavHostController,
     historyViewModel: IHistoryViewModel,

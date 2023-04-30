@@ -8,7 +8,7 @@ import androidx.room.PrimaryKey
 data class History(
     @PrimaryKey
     val id: String,
-    val location: Location,
+//    val location: Location,
 
 //    val name: String,
 //    val rank: Int,

@@ -2,7 +2,13 @@ package com.csci448.hadam.hadam_a4.presentation.navigation.specs
 
 import android.content.Context
 import android.util.Log
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.res.stringResource
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NamedNavArgument
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavHostController
@@ -11,6 +17,7 @@ import androidx.navigation.navArgument
 import com.csci448.hadam.hadam_a4.R
 import com.csci448.hadam.hadam_a4.presentation.viewmodel.IHistoryViewModel
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 
 object HistoryScreenSpec : IScreenSpec {
     private const val LOG_TAG = "448.HistoryScreenSpec"
@@ -52,23 +59,22 @@ object HistoryScreenSpec : IScreenSpec {
 
     }
 
-//    @Composable
-//    override fun TopAppBarActions(
-//        historyViewModel: IHistoryViewModel,
-//        navController: NavHostController,
-//        navBackStackEntry: NavBackStackEntry?,
-//        context: Context
-//    ) {
-//        val video = imdbViewModel.currentVideoState
-//        IconButton(onClick =
-//        {
-//            video.value?.let { imdbViewModel.deleteVideo(it) }
-//            navController.popBackStack()
-//        }) {
-//            Icon(
-//                imageVector = Icons.Filled.Delete,
-//                contentDescription = ""
-//            )
-//        }
-//    }
+    @Composable
+    override fun TopAppBarActions(
+        historyViewModel: IHistoryViewModel,
+        navController: NavHostController,
+        navBackStackEntry: NavBackStackEntry?,
+        context: Context,
+        coroutineScope: CoroutineScope
+    ) {
+        val drawerValue = historyViewModel.currentDrawerState.collectAsStateWithLifecycle().value
+
+        IconButton(onClick = {
+            coroutineScope.launch { drawerValue.open() }}) {
+            Icon(
+                imageVector = Icons.Filled.Menu,
+                contentDescription = stringResource(R.string.about_name)
+            )
+        }
+    }
 }

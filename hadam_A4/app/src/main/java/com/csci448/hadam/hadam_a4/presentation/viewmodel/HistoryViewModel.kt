@@ -1,6 +1,8 @@
 package com.csci448.hadam.hadam_a4.presentation.viewmodel
 
 import android.util.Log
+import androidx.compose.material3.DrawerState
+import androidx.compose.material3.DrawerValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.csci448.hadam.hadam_a4.data.History
@@ -31,6 +33,12 @@ class HistoryViewModel(private val historyRepo: HistoryRepo) : IHistoryViewModel
 
     private val mCurrentHistoryIdState: MutableStateFlow<String> =
         MutableStateFlow("")
+
+    private val mCurrentDrawerState: MutableStateFlow<DrawerState> =
+        MutableStateFlow(DrawerState(DrawerValue.Closed))
+    override val currentDrawerState: StateFlow<DrawerState>
+        get() = mCurrentDrawerState.asStateFlow()
+
 
     init {
         viewModelScope.launch {

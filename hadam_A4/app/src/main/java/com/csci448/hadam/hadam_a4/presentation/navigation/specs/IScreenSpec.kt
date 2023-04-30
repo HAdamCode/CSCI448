@@ -18,6 +18,7 @@ import com.csci448.hadam.hadam_a4.R
 import com.csci448.hadam.hadam_a4.presentation.viewmodel.HistoryViewModel
 import com.csci448.hadam.hadam_a4.presentation.viewmodel.IHistoryViewModel
 import kotlinx.coroutines.CoroutineScope
+import kotlin.coroutines.coroutineContext
 
 sealed interface IScreenSpec {
     companion object {
@@ -33,19 +34,21 @@ sealed interface IScreenSpec {
         const val root = "imdb"
         val startDestination = MapScreenSpec.route
 
-//        @Composable
-//        fun TopBar(
-//            historyViewModel: IHistoryViewModel,
-//            navController: NavHostController,
-//            navBackStackEntry: NavBackStackEntry?,
-//            context: Context
-//        ) {
-//            val route = navBackStackEntry?.destination?.route ?: ""
-//            allScreens[route]?.TopAppBarContent(
-//                historyViewModel, navController,
-//                navBackStackEntry, context
-//            )
-//        }
+        @Composable
+        fun TopBar(
+            historyViewModel: IHistoryViewModel,
+            navController: NavHostController,
+            navBackStackEntry: NavBackStackEntry?,
+            context: Context,
+            coroutineScope: CoroutineScope
+        ) {
+            val route = navBackStackEntry?.destination?.route ?: ""
+            allScreens[route]?.TopAppBarContent(
+                historyViewModel, navController,
+                navBackStackEntry, context,
+                coroutineScope
+            )
+        }
     }
 
     val route: String
@@ -63,42 +66,35 @@ sealed interface IScreenSpec {
         coroutineScope: CoroutineScope
     )
 
-//    @OptIn(ExperimentalMaterial3Api::class)
-//    @Composable
-//    private fun TopAppBarContent(
-//        historyViewModel: IHistoryViewModel,
-//        navController: NavHostController,
-//        navBackStackEntry: NavBackStackEntry?,
-//        context: Context
-//    ) {
-//        TopAppBar(navigationIcon = if (navController.previousBackStackEntry != null) {
-//            {
-//                IconButton(onClick = { navController.navigateUp() }) {
-//                    Icon(
-//                        imageVector = Icons.Filled.ArrowBack,
-//                        contentDescription = stringResource(R.string.app_name)
-//                    )
-//                }
-//            }
-//        } else {
-//            { }
-//        }, title = { Text(text = stringResource(id = title)) },
-//            actions = {
-//                TopAppBarActions(
-//                    historyViewModel,
-//                    navController,
-//                    navBackStackEntry,
-//                    context
-//                )
-//            }
-//        )
-//    }
-//
-//    @Composable
-//    fun TopAppBarActions(
-//        historyViewModel: IHistoryViewModel,
-//        navController: NavHostController,
-//        navBackStackEntry: NavBackStackEntry?,
-//        context: Context
-//    )
+    @OptIn(ExperimentalMaterial3Api::class)
+    @Composable
+    private fun TopAppBarContent(
+        historyViewModel: IHistoryViewModel,
+        navController: NavHostController,
+        navBackStackEntry: NavBackStackEntry?,
+        context: Context,
+        coroutineScope: CoroutineScope
+    ) {
+        TopAppBar(
+            title = { Text(text = stringResource(id = title)) },
+            navigationIcon = {
+                TopAppBarActions(
+                    historyViewModel,
+                    navController,
+                    navBackStackEntry,
+                    context,
+                    coroutineScope
+                )
+            }
+        )
+    }
+
+    @Composable
+    fun TopAppBarActions(
+        historyViewModel: IHistoryViewModel,
+        navController: NavHostController,
+        navBackStackEntry: NavBackStackEntry?,
+        context: Context,
+        coroutineScope: CoroutineScope
+    )
 }
