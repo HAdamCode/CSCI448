@@ -11,8 +11,13 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.Button
 import androidx.compose.material3.DrawerValue
+import androidx.compose.material3.FabPosition
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.ModalNavigationDrawer
@@ -24,6 +29,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.ViewModelProvider
@@ -31,6 +37,8 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.compose.rememberNavController
 import com.csci448.hadam.hadam_a4.presentation.map.LocationUtility
+import com.csci448.hadam.hadam_a4.presentation.map.MapScreen
+import com.csci448.hadam.hadam_a4.presentation.navigation.HistoryFAB
 import com.csci448.hadam.hadam_a4.presentation.navigation.HistoryNavHost
 import com.csci448.hadam.hadam_a4.presentation.navigation.HistoryTopBar
 import com.csci448.hadam.hadam_a4.presentation.navigation.specs.AboutScreenSpec
@@ -78,7 +86,12 @@ class MainActivity : ComponentActivity() {
         val factory = HistoryViewModelFactory(this)
         mHistoryViewModel = ViewModelProvider(this, factory)[factory.getViewModelClass()]
         setContent {
-            MainActivityContent(historyViewModel = mHistoryViewModel, this@MainActivity, permissionLauncher, locationUtility)
+            MainActivityContent(
+                historyViewModel = mHistoryViewModel,
+                this@MainActivity,
+                permissionLauncher,
+                locationUtility
+            )
         }
     }
 
@@ -95,7 +108,12 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-private fun MainActivityContent(historyViewModel: IHistoryViewModel, activity: MainActivity, permissionLauncher: ActivityResultLauncher<Array<String>>, locationUtility: LocationUtility) {
+private fun MainActivityContent(
+    historyViewModel: IHistoryViewModel,
+    activity: MainActivity,
+    permissionLauncher: ActivityResultLauncher<Array<String>>,
+    locationUtility: LocationUtility
+) {
     val navController = rememberNavController()
     val coroutineScope = rememberCoroutineScope()
     val context = LocalContext.current
@@ -153,14 +171,47 @@ private fun MainActivityContent(historyViewModel: IHistoryViewModel, activity: M
                 },
                 content = {
                     // any composable can go in here, nest your Scaffold at this point
-                    Scaffold(topBar = {
-                        HistoryTopBar(
-                            historyViewModel = historyViewModel,
-                            navController = navController,
-                            context = context,
-                            coroutineScope = coroutineScope
-                        )
-                    }) {
+                    Scaffold(
+                        topBar = {
+                            HistoryTopBar(
+                                historyViewModel = historyViewModel,
+                                navController = navController,
+                                context = context,
+                                coroutineScope = coroutineScope
+                            )
+                        },
+                        floatingActionButton = {
+                            HistoryFAB(
+                                historyViewModel = historyViewModel,
+                                navController = navController,
+                                context = context,
+                                coroutineScope = coroutineScope,
+                                locationUtility = locationUtility,
+                                activity = activity,
+                                permissionLauncher = permissionLauncher
+                            )
+                            Log.d(
+                                "FAB route",
+                                navController.currentBackStackEntry?.destination?.route.toString()
+                            )
+//                            if (navController.currentDestination?.route == MapScreenSpec.route) {
+//                                FloatingActionButton(
+//                                    // on below line we are adding on click for our fab
+//                                    onClick = {
+//                                        locationUtility.checkPermissionAndGetLocation(
+//                                            activity,
+//                                            permissionLauncher
+//                                        )
+//                                    },
+//                                    contentColor = Color.White,
+//
+//                                    ) {
+//                                    Icon(Icons.Filled.Add, "")
+//                                }
+//                            }
+                        },
+                        floatingActionButtonPosition = FabPosition.End,
+                    ) {
                         HistoryNavHost(
                             Modifier.padding(it),
                             navController,

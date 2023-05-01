@@ -5,13 +5,16 @@ import android.content.Context
 import android.util.Log
 import androidx.activity.result.ActivityResultLauncher
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NamedNavArgument
 import androidx.navigation.NavBackStackEntry
@@ -51,6 +54,29 @@ sealed interface IScreenSpec {
                 historyViewModel, navController,
                 navBackStackEntry, context,
                 coroutineScope
+            )
+        }
+
+        @Composable
+        fun FAB(
+            historyViewModel: IHistoryViewModel,
+            navController: NavHostController,
+            navBackStackEntry: NavBackStackEntry?,
+            context: Context,
+            coroutineScope: CoroutineScope,
+            locationUtility: LocationUtility,
+            activity: MainActivity,
+            permissionLauncher: ActivityResultLauncher<Array<String>>
+        ) {
+            val route = navBackStackEntry?.destination?.route ?: ""
+            allScreens[route]?.FABContent(
+                historyViewModel, navController,
+                navBackStackEntry, context,
+                coroutineScope,
+                locationUtility,
+                activity,
+                permissionLauncher,
+                route
             )
         }
     }
@@ -104,4 +130,35 @@ sealed interface IScreenSpec {
         context: Context,
         coroutineScope: CoroutineScope
     )
+
+
+    @OptIn(ExperimentalMaterial3Api::class)
+    @Composable
+    private fun FABContent(
+        historyViewModel: IHistoryViewModel,
+        navController: NavHostController,
+        navBackStackEntry: NavBackStackEntry?,
+        context: Context,
+        coroutineScope: CoroutineScope,
+        locationUtility: LocationUtility,
+        activity: MainActivity,
+        permissionLauncher: ActivityResultLauncher<Array<String>>,
+        route: String
+    ) {
+        if (route == "map") {
+            FloatingActionButton(
+                // on below line we are adding on click for our fab
+                onClick = {
+                    locationUtility.checkPermissionAndGetLocation(
+                        activity,
+                        permissionLauncher
+                    )
+                },
+                contentColor = Color.White,
+
+                ) {
+                Icon(Icons.Filled.Add, "")
+            }
+        }
+    }
 }
