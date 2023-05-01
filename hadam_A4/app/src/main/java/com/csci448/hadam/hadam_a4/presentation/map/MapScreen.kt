@@ -53,17 +53,17 @@ fun MapScreen(
     }
 
     Column() {
-        Text(text = "Latitude / Longitude")
-        if (location != null) {
-            Text(text = "${location.latitude} / ${location.longitude}")
-        }
-        Text(text = "Address")
-        Text(text = address)
-        Row() {
-            Button(onClick = onGetLocation, enabled = locationAvailable) {
-                Text("Get Current Location")
-            }
-        }
+//        Text(text = "Latitude / Longitude")
+//        if (location != null) {
+//            Text(text = "${location.latitude} / ${location.longitude}")
+//        }
+//        Text(text = "Address")
+//        Text(text = address)
+//        Row() {
+//            Button(onClick = onGetLocation, enabled = locationAvailable) {
+//                Text("Get Current Location")
+//            }
+//        }
         GoogleMap(
             modifier = Modifier.fillMaxSize(),
             cameraPositionState = cameraPositionState,
