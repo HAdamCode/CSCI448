@@ -5,6 +5,7 @@ import androidx.compose.material3.DrawerState
 import androidx.compose.material3.DrawerValue
 import com.csci448.hadam.hadam_a4.data.History
 import kotlinx.coroutines.flow.StateFlow
+import java.util.UUID
 
 interface IHistoryViewModel {
     val historyListState: StateFlow<List<History>>
@@ -15,7 +16,7 @@ interface IHistoryViewModel {
     val currentLocationList: StateFlow<ArrayList<History?>>
     fun loadHistoryByUUID(uuid: String)
     fun addHistory(historyToAdd: History)
-    fun deleteHistory()
+    fun deleteHistory(historyToDelete: History)
     fun updateSaveEnabled()
     fun updateCurrentLocation(history: History?)
     fun updateCurrentLocationList(history: History?)

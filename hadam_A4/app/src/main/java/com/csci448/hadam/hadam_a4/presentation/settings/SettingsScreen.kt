@@ -19,6 +19,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.lifecycleScope
+import com.csci448.hadam.hadam_a4.data.History
 import com.csci448.hadam.hadam_a4.presentation.viewmodel.IHistoryViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
@@ -28,7 +29,8 @@ import java.text.DecimalFormat
 fun SettingsScreen(
     historyViewModel: IHistoryViewModel,
     context: Context,
-    coroutineScope: CoroutineScope
+    coroutineScope: CoroutineScope,
+    historyVMList: List<History>
 ) {
     val saveEnabled = historyViewModel.saveLocationsEnabled.collectAsStateWithLifecycle(context = coroutineScope.coroutineContext).value
     val histories = historyViewModel.currentLocationList.collectAsStateWithLifecycle().value
@@ -78,7 +80,10 @@ fun SettingsScreen(
                         onClick = {
                             showDialog.value = false
 
-                            historyViewModel.deleteHistory()
+                            historyVMList.forEach {history ->
+                                historyViewModel.deleteHistory(history)
+                            }
+
                             Toast.makeText(
                                 context,
                                 "History deleted",

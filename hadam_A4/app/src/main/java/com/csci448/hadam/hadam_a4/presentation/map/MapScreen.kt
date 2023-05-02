@@ -4,8 +4,11 @@ import android.content.Context
 import android.location.Location
 import android.util.Log
 import android.widget.Toast
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -43,6 +46,7 @@ import com.google.maps.android.compose.MapUiSettings
 import com.google.maps.android.compose.Marker
 import com.google.maps.android.compose.MarkerState
 import com.google.maps.android.compose.rememberCameraPositionState
+import kotlinx.coroutines.delay
 import java.text.DecimalFormat
 import java.time.format.DateTimeFormatter
 
@@ -58,6 +62,9 @@ fun MapScreen(
     historyViewModel: IHistoryViewModel,
     histories: List<History>
 ) {
+    val showDialog = remember { mutableStateOf(false) }
+    val historySnackBar = remember { mutableStateOf(histories.firstOrNull()) }
+
     val cameraPositionState = rememberCameraPositionState {
         if (histories.isEmpty()) {
             position =
@@ -113,19 +120,21 @@ fun MapScreen(
                     state = markerState,
                     title = "Lat/Lng: (${history.lat}, ${history.lon}\n",
                     onClick = {
-                        val current =
-                            history.dateTime.format(DateTimeFormatter.ofPattern("MM/dd/yy HH:mm"))
-                        Toast.makeText(
-                            context,
-                            "Lat/Lng: (${DecimalFormat("#.#").format(history.lat)}, ${
-                                DecimalFormat(
-                                    "#.#"
-                                ).format(history.lon)
-                            })  " +
-                                    "$current\n" +
-                                    "Temp: ${history.temp} (${history.description})",
-                            Toast.LENGTH_LONG
-                        ).show()
+//                        val current =
+//                            history.dateTime.format(DateTimeFormatter.ofPattern("MM/dd/yy HH:mm"))
+//                        Toast.makeText(
+//                            context,
+//                            "Lat/Lng: (${DecimalFormat("#.#").format(history.lat)}, ${
+//                                DecimalFormat(
+//                                    "#.#"
+//                                ).format(history.lon)
+//                            })  " +
+//                                    "$current\n" +
+//                                    "Temp: ${history.temp} (${history.description})",
+//                            Toast.LENGTH_LONG
+//                        ).show()
+                        showDialog.value = true
+                        historySnackBar.value = history
 
                         false
                     },
@@ -157,24 +166,57 @@ fun MapScreen(
                         state = markerState,
                         title = "Lat/Lng: (${history.lat}, ${history.lon}\n",
                         onClick = {
-                            val current =
-                                history.dateTime.format(DateTimeFormatter.ofPattern("MM/dd/yy HH:mm"))
-                            Toast.makeText(
-                                context,
-                                "Lat/Lng: (${DecimalFormat("#.#").format(history.lat)}, ${
-                                    DecimalFormat(
-                                        "#.#"
-                                    ).format(history.lon)
-                                })  " +
-                                        "$current\n" +
-                                        "Temp: ${history.temp} (${history.description})",
-                                Toast.LENGTH_LONG
-                            ).show()
+//                            val current =
+//                                history.dateTime.format(DateTimeFormatter.ofPattern("MM/dd/yy HH:mm"))
+//                            Toast.makeText(
+//                                context,
+//                                "Lat/Lng: (${DecimalFormat("#.#").format(history.lat)}, ${
+//                                    DecimalFormat(
+//                                        "#.#"
+//                                    ).format(history.lon)
+//                                })  " +
+//                                        "$current\n" +
+//                                        "Temp: ${history.temp} (${history.description})",
+//                                Toast.LENGTH_LONG
+//                            ).show()
+                            showDialog.value = true
+                            historySnackBar.value = history
+
                             false
                         },
                     )
                 }
             }
+        }
+    }
+    val hSB = historySnackBar.value
+    if (showDialog.value && hSB != null) {
+        Log.d("MapScreen", "In snackbar")
+        val current =
+            hSB.dateTime.format(DateTimeFormatter.ofPattern("MM/dd/yy HH:mm"))
+        Snackbar(modifier = Modifier
+            .padding(4.dp)
+            .padding(top = 550.dp),
+            action = {
+                TextButton(onClick = {
+                    historyViewModel.deleteHistory(hSB)
+                    showDialog.value = false
+                }) {
+                    Text(text = "Delete")
+                }
+            },
+        ) {
+            Text(text = "Lat/Lng: (${DecimalFormat("#.#").format(hSB.lat)}, ${
+                DecimalFormat(
+                    "#.#"
+                ).format(hSB.lon)
+            })  " +
+                    "$current\n" +
+                    "Temp: ${hSB.temp} (${hSB.description})")
+        }
+        LaunchedEffect(Unit) {
+            delay(5000) // Wait for 3 seconds
+            showDialog.value = false // Dismiss the Snackbar
         }
     }
 }

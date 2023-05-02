@@ -14,6 +14,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import java.util.UUID
 
 class HistoryViewModel(private val historyRepo: HistoryRepo) : IHistoryViewModel, ViewModel() {
     companion object {
@@ -80,11 +81,11 @@ class HistoryViewModel(private val historyRepo: HistoryRepo) : IHistoryViewModel
         historyRepo.addHistory(historyToAdd)
     }
 
-    override fun deleteHistory() {
+    override fun deleteHistory(historyToDelete: History) {
         Log.d(LOG_TAG, "deleting history")
-        mHistories.value.forEach {historyToDelete ->
+//        mHistories.value.forEach {historyToDelete ->
             historyRepo.deleteHistory(historyToDelete)
-        }
+//        }
     }
 
     override fun updateSaveEnabled() {
