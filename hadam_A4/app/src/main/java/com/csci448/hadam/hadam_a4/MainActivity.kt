@@ -146,7 +146,7 @@ private fun MainActivityContent(
                             },
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .fillMaxHeight(.05f),
+                                .fillMaxHeight(.06f),
                             shape = RoundedCornerShape(0.dp)
                         ) {
                             Text("Map", modifier = Modifier.padding(7.dp))
@@ -159,7 +159,7 @@ private fun MainActivityContent(
                             },
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .fillMaxHeight(.05f),
+                                .fillMaxHeight(.06f),
                             shape = RoundedCornerShape(0.dp)
                         ) {
                             Text("History", modifier = Modifier.padding(7.dp))
@@ -171,7 +171,7 @@ private fun MainActivityContent(
                             },
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .fillMaxHeight(.05f),
+                                .fillMaxHeight(.06f),
                             shape = RoundedCornerShape(0.dp)
                         ) {
                             Text("Settings", modifier = Modifier.padding(7.dp))
@@ -183,7 +183,7 @@ private fun MainActivityContent(
                             },
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .fillMaxHeight(.06f),
+                                .fillMaxHeight(.07f),
                             shape = RoundedCornerShape(0.dp)
                         ) {
                             Text("About", modifier = Modifier.padding(7.dp))

@@ -36,7 +36,7 @@ fun SettingsScreen(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(10.dp)
+                .padding(start = 40.dp)
         ) {
             Text(
                 text = "Save Locations to Database",
