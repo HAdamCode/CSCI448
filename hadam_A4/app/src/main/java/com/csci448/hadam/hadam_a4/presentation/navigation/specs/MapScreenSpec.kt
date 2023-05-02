@@ -63,7 +63,7 @@ object MapScreenSpec : IScreenSpec {
         permissionLauncher: ActivityResultLauncher<Array<String>>,
         locationUtility: LocationUtility
     ) {
-        val histories = historyViewModel.historyListState.collectAsState()
+        val histories = historyViewModel.historyListState.collectAsStateWithLifecycle(context = coroutineScope.coroutineContext)
 
         val weatherQueryFetchr = remember { WeatherQueryFetchr() }
 

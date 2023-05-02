@@ -50,9 +50,9 @@ class HistoryViewModel(private val historyRepo: HistoryRepo) : IHistoryViewModel
     override val currentLocation: StateFlow<Location?>
         get() = mCurrentLocation.asStateFlow()
 
-    private val mCurrentLocationList: MutableStateFlow<List<History?>> =
-        MutableStateFlow(emptyList())
-    override val currentLocationList: StateFlow<List<History?>>
+    private val mCurrentLocationList: MutableStateFlow<ArrayList<History?>> =
+        MutableStateFlow(arrayListOf())
+    override val currentLocationList: StateFlow<ArrayList<History?>>
         get() = mCurrentLocationList.asStateFlow()
 
 
@@ -101,5 +101,6 @@ class HistoryViewModel(private val historyRepo: HistoryRepo) : IHistoryViewModel
 //        mCurrentLocationList.value.forEach {
 //            hist.ap
 //        }
+        mCurrentLocationList.value.add(history)
     }
 }

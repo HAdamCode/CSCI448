@@ -2,6 +2,7 @@ package com.csci448.hadam.hadam_a4.presentation.map
 
 import android.content.Context
 import android.location.Location
+import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -65,11 +66,12 @@ fun MapScreen(
                 )
         }
     }
-    LaunchedEffect(histories) {
+    val currentLocation = historyViewModel.currentHistoryState.collectAsStateWithLifecycle().value
+    LaunchedEffect(currentLocation, histories) {
 
-        if (histories.isNotEmpty()) {
+        if (currentLocation != null) {
             val bounds = LatLngBounds.Builder()
-                .include(LatLng(histories.last().lat, histories.last().lon)).build()
+                .include(LatLng(currentLocation.lat, currentLocation.lon)).build()
             val padding = context.resources
                 .getDimensionPixelSize(R.dimen.map_inset_padding)
             val cameraUpdate = CameraUpdateFactory.newLatLngBounds(bounds, padding)
@@ -96,44 +98,61 @@ fun MapScreen(
             properties = MapProperties(),
         ) {
             histories.forEach { history ->
+                Log.d("MapScreen", history.lat.toString())
                 val markerState = MarkerState().apply {
                     position = LatLng(history.lat, history.lon)
-
                 }
-                val clicked = remember {
+                var clicked = remember {
                     mutableStateOf(false)
                 }
                 Marker(
                     state = markerState,
                     title = "Lat/Lng: (${history.lat}, ${history.lon}\n",
                     onClick = { clicked.value },
-                    onInfoWindowClick = {
-                        val current =
-                            history.dateTime.format(DateTimeFormatter.ofPattern("MM/dd/yy HH:mm"))
-                        Toast.makeText(
-                            context,
-                            "Lat/Lng: (${DecimalFormat("#.#").format(history.lat)}, ${
-                                DecimalFormat(
-                                    "#.#"
-                                ).format(history.lon)
-                            })  " +
-                                    "$current\n" +
-                                    "Temp: ${history.temp} (${history.description})",
-                            Toast.LENGTH_LONG
-                        ).show()
-                    }
+//                    onInfoWindowClick = {
+//                        val current =
+//                            history.dateTime.format(DateTimeFormatter.ofPattern("MM/dd/yy HH:mm"))
+//                        Toast.makeText(
+//                            context,
+//                            "Lat/Lng: (${DecimalFormat("#.#").format(history.lat)}, ${
+//                                DecimalFormat(
+//                                    "#.#"
+//                                ).format(history.lon)
+//                            })  " +
+//                                    "$current\n" +
+//                                    "Temp: ${history.temp} (${history.description})",
+//                            Toast.LENGTH_LONG
+//                        ).show()
+//                    }
                 )
-//                if (clicked.value == true) {
-//                    val toast = Toast.makeText(
-//                        context,
-//                        "Lat/Lng: (${history.lat}, ${history.lon}\n" +
-//                                "${history.dateTime}\n" +
-//                                "Temp: ${history.temp} (${history.description})",
-//                        Toast.LENGTH_LONG
-//                    )
-//                    toast.setMargin(.4f, .2f)
-//                    toast.show()
-//                }
+            }
+            val notSavedHistories = historyViewModel.currentLocationList.collectAsStateWithLifecycle().value
+            notSavedHistories.forEach { history ->
+                if (history != null) {
+                    val markerState = MarkerState().apply {
+                        position = LatLng(history.lat, history.lon)
+                    }
+                    Marker(
+                        state = markerState,
+                        title = "Lat/Lng: (${history.lat}, ${history.lon}\n",
+                        onClick = { false },
+                        onInfoWindowClick = {
+                            val current =
+                                history.dateTime.format(DateTimeFormatter.ofPattern("MM/dd/yy HH:mm"))
+                            Toast.makeText(
+                                context,
+                                "Lat/Lng: (${DecimalFormat("#.#").format(history.lat)}, ${
+                                    DecimalFormat(
+                                        "#.#"
+                                    ).format(history.lon)
+                                })  " +
+                                        "$current\n" +
+                                        "Temp: ${history.temp} (${history.description})",
+                                Toast.LENGTH_LONG
+                            ).show()
+                        }
+                    )
+                }
             }
         }
     }

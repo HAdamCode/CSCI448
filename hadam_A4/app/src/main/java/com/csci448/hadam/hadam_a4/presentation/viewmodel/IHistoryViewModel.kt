@@ -12,7 +12,7 @@ interface IHistoryViewModel {
     val currentDrawerState: StateFlow<DrawerState>
     val saveLocationsEnabled: StateFlow<Boolean>
     val currentLocation: StateFlow<Location?>
-    val currentLocationList: StateFlow<List<History?>>
+    val currentLocationList: StateFlow<ArrayList<History?>>
     fun loadHistoryByUUID(uuid: String)
     fun addHistory(historyToAdd: History)
     fun deleteHistory()

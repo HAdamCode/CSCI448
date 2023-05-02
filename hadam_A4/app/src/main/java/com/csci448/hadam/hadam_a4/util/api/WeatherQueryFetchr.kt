@@ -3,6 +3,7 @@ package com.csci448.hadam.hadam_a4.util.api
 import android.content.Context
 import android.util.Log
 import android.widget.Toast
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.csci448.hadam.hadam_a4.data.ApiDataClass
 import com.csci448.hadam.hadam_a4.data.History
 import com.csci448.hadam.hadam_a4.data.Weather
@@ -83,8 +84,11 @@ class WeatherQueryFetchr {
                         description = desc,
                         dateTime = current.toString()
                     )
+                    Log.d(LOG_TAG, enableSave.toString())
                     if (enableSave)
                         historyViewModel.addHistory(historyToAdd)
+                    else
+                        historyViewModel.updateCurrentLocationList(historyToAdd)
                     historyViewModel.updateCurrentLocation(historyToAdd)
                 }
             }
