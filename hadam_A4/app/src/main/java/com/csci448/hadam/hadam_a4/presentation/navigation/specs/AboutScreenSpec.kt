@@ -25,6 +25,7 @@ import androidx.navigation.NavType
 import androidx.navigation.navArgument
 import com.csci448.hadam.hadam_a4.MainActivity
 import com.csci448.hadam.hadam_a4.R
+import com.csci448.hadam.hadam_a4.presentation.about.AboutScreen
 import com.csci448.hadam.hadam_a4.presentation.map.LocationUtility
 import com.csci448.hadam.hadam_a4.presentation.viewmodel.IHistoryViewModel
 import com.csci448.hadam.hadam_a4.util.api.WeatherQueryFetchr
@@ -71,7 +72,7 @@ object AboutScreenSpec : IScreenSpec {
         permissionLauncher: ActivityResultLauncher<Array<String>>,
         locationUtility: LocationUtility
     ) {
-
+        AboutScreen()
     }
 
     @Composable
