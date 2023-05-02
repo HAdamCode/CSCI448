@@ -24,7 +24,9 @@ fun AboutScreen() {
             " time that you checked in to that location.\n\nUse the hamburger menu to navigate between" +
             " pages, but if you are here then you already figured that part out."
     val scroll = rememberScrollState(0)
-    Column(modifier = Modifier.fillMaxWidth().verticalScroll(scroll)) {
+    Column(modifier = Modifier
+        .fillMaxWidth()
+        .verticalScroll(scroll)) {
         Text(
             text = "WeathrTrackr",
             fontSize = 45.sp,

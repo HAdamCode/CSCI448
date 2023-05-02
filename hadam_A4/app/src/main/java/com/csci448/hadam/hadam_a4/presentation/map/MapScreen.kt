@@ -1,41 +1,24 @@
 package com.csci448.hadam.hadam_a4.presentation.map
 
 import android.content.Context
-import android.location.Location
 import android.util.Log
 import android.widget.Toast
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
-import androidx.compose.material3.Button
-import androidx.compose.material3.FloatingActionButton
-import androidx.compose.material3.Icon
 import androidx.compose.material3.Snackbar
-import androidx.compose.material3.SnackbarHost
-import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.csci448.hadam.hadam_a4.R
-import com.csci448.hadam.hadam_a4.data.ApiDataClass
 import com.csci448.hadam.hadam_a4.data.History
 import com.csci448.hadam.hadam_a4.presentation.viewmodel.IHistoryViewModel
-import com.csci448.hadam.hadam_a4.util.api.WeatherQueryFetchr
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
@@ -52,13 +35,7 @@ import java.time.format.DateTimeFormatter
 
 @Composable
 fun MapScreen(
-    location: Location?,
-    locationAvailable: Boolean,
-//    onGetLocation: () -> Unit,
-    address: String,
     context: Context,
-    apiDataClass: ApiDataClass?,
-    weatherQueryFetchr: WeatherQueryFetchr,
     historyViewModel: IHistoryViewModel,
     histories: List<History>
 ) {
@@ -66,15 +43,13 @@ fun MapScreen(
     val historySnackBar = remember { mutableStateOf(histories.firstOrNull()) }
 
     val cameraPositionState = rememberCameraPositionState {
-        if (histories.isEmpty()) {
-            position =
-                CameraPosition.fromLatLngZoom(LatLng(0.0, 0.0), 0f)
+        position = if (histories.isEmpty()) {
+            CameraPosition.fromLatLngZoom(LatLng(0.0, 0.0), 0f)
         } else {
-            position =
-                CameraPosition.fromLatLngZoom(
-                    LatLng(histories.last().lat, histories.last().lon),
-                    20f
-                )
+            CameraPosition.fromLatLngZoom(
+                LatLng(histories.last().lat, histories.last().lon),
+                20f
+            )
         }
     }
     val currentLocation = historyViewModel.currentHistoryState.collectAsStateWithLifecycle().value
@@ -90,18 +65,7 @@ fun MapScreen(
         }
     }
 
-    Column() {
-//        Text(text = "Latitude / Longitude")
-//        if (location != null) {
-//            Text(text = "${location.latitude} / ${location.longitude}")
-//        }
-//        Text(text = "Address")
-//        Text(text = address)
-//        Row() {
-//            Button(onClick = onGetLocation, enabled = locationAvailable) {
-//                Text("Get Current Location")
-//            }
-//        }
+    Column {
         GoogleMap(
             modifier = Modifier.fillMaxSize(),
             cameraPositionState = cameraPositionState,
@@ -120,22 +84,8 @@ fun MapScreen(
                     state = markerState,
                     title = "Lat/Lng: (${history.lat}, ${history.lon}\n",
                     onClick = {
-//                        val current =
-//                            history.dateTime.format(DateTimeFormatter.ofPattern("MM/dd/yy HH:mm"))
-//                        Toast.makeText(
-//                            context,
-//                            "Lat/Lng: (${DecimalFormat("#.#").format(history.lat)}, ${
-//                                DecimalFormat(
-//                                    "#.#"
-//                                ).format(history.lon)
-//                            })  " +
-//                                    "$current\n" +
-//                                    "Temp: ${history.temp} (${history.description})",
-//                            Toast.LENGTH_LONG
-//                        ).show()
                         showDialog.value = true
                         historySnackBar.value = history
-
                         false
                     },
                 )
@@ -166,22 +116,8 @@ fun MapScreen(
                         state = markerState,
                         title = "Lat/Lng: (${history.lat}, ${history.lon}\n",
                         onClick = {
-//                            val current =
-//                                history.dateTime.format(DateTimeFormatter.ofPattern("MM/dd/yy HH:mm"))
-//                            Toast.makeText(
-//                                context,
-//                                "Lat/Lng: (${DecimalFormat("#.#").format(history.lat)}, ${
-//                                    DecimalFormat(
-//                                        "#.#"
-//                                    ).format(history.lon)
-//                                })  " +
-//                                        "$current\n" +
-//                                        "Temp: ${history.temp} (${history.description})",
-//                                Toast.LENGTH_LONG
-//                            ).show()
                             showDialog.value = true
                             historySnackBar.value = history
-
                             false
                         },
                     )
@@ -194,9 +130,10 @@ fun MapScreen(
         Log.d("MapScreen", "In snackbar")
         val current =
             hSB.dateTime.format(DateTimeFormatter.ofPattern("MM/dd/yy HH:mm"))
-        Snackbar(modifier = Modifier
-            .padding(4.dp)
-            .padding(top = 550.dp),
+        Snackbar(
+            modifier = Modifier
+                .padding(4.dp)
+                .padding(top = 550.dp),
             action = {
                 TextButton(onClick = {
                     historyViewModel.deleteHistory(hSB)
@@ -206,17 +143,19 @@ fun MapScreen(
                 }
             },
         ) {
-            Text(text = "Lat/Lng: (${DecimalFormat("#.#").format(hSB.lat)}, ${
-                DecimalFormat(
-                    "#.#"
-                ).format(hSB.lon)
-            })  " +
-                    "$current\n" +
-                    "Temp: ${hSB.temp} (${hSB.description})")
+            Text(
+                text = "Lat/Lng: (${DecimalFormat("#.#").format(hSB.lat)}, ${
+                    DecimalFormat(
+                        "#.#"
+                    ).format(hSB.lon)
+                })  " +
+                        "$current\n" +
+                        "Temp: ${hSB.temp} (${hSB.description})"
+            )
         }
         LaunchedEffect(Unit) {
-            delay(5000) // Wait for 3 seconds
-            showDialog.value = false // Dismiss the Snackbar
+            delay(5000)
+            showDialog.value = false
         }
     }
 }

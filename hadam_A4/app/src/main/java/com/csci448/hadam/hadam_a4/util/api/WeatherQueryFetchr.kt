@@ -3,24 +3,19 @@ package com.csci448.hadam.hadam_a4.util.api
 import android.content.Context
 import android.util.Log
 import android.widget.Toast
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.csci448.hadam.hadam_a4.data.ApiDataClass
 import com.csci448.hadam.hadam_a4.data.History
-import com.csci448.hadam.hadam_a4.data.Weather
 import com.csci448.hadam.hadam_a4.presentation.viewmodel.IHistoryViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
-import okhttp3.internal.format
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.Query
 import java.text.DecimalFormat
-import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
@@ -37,11 +32,6 @@ class WeatherQueryFetchr {
         historyViewModel: IHistoryViewModel,
         enableSave: Boolean
     ) {
-//        if (searchText == null) {
-//            mWeather.update { null }
-//            return
-//        }
-//        Log.e(LOG_TAG, searchText)
         val imdbRequest = weatherApiService.getWeather(latitude, longitude, apiKey = apiKey)
 
         imdbRequest.enqueue(object : Callback<ApiDataClass> {
@@ -95,9 +85,6 @@ class WeatherQueryFetchr {
         })
     }
 
-    //    fun resetWeather() {
-//        mWeather.update { null }
-//    }
     private val weatherApiService: WeatherApiService
     private val mWeather = MutableStateFlow<ApiDataClass?>(null)
 

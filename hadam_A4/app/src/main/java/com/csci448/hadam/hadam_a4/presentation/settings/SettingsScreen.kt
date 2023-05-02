@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.Switch
@@ -18,12 +17,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.lifecycle.lifecycleScope
 import com.csci448.hadam.hadam_a4.data.History
 import com.csci448.hadam.hadam_a4.presentation.viewmodel.IHistoryViewModel
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.launch
-import java.text.DecimalFormat
 
 @Composable
 fun SettingsScreen(
@@ -32,7 +28,8 @@ fun SettingsScreen(
     coroutineScope: CoroutineScope,
     historyVMList: List<History>
 ) {
-    val saveEnabled = historyViewModel.saveLocationsEnabled.collectAsStateWithLifecycle(context = coroutineScope.coroutineContext).value
+    val saveEnabled =
+        historyViewModel.saveLocationsEnabled.collectAsStateWithLifecycle(context = coroutineScope.coroutineContext).value
     val histories = historyViewModel.currentLocationList.collectAsStateWithLifecycle().value
     Column() {
         Row(
@@ -80,7 +77,7 @@ fun SettingsScreen(
                         onClick = {
                             showDialog.value = false
 
-                            historyVMList.forEach {history ->
+                            historyVMList.forEach { history ->
                                 historyViewModel.deleteHistory(history)
                             }
 
@@ -90,10 +87,9 @@ fun SettingsScreen(
                                 Toast.LENGTH_LONG
                             ).show()
 
-                            if (histories.isEmpty()){
+                            if (histories.isEmpty()) {
                                 historyViewModel.updateCurrentLocation(null)
-                            }
-                            else {
+                            } else {
                                 historyViewModel.updateCurrentLocation(histories.first())
                             }
                         },

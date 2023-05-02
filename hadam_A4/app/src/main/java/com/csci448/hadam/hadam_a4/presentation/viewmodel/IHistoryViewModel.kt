@@ -2,10 +2,8 @@ package com.csci448.hadam.hadam_a4.presentation.viewmodel
 
 import android.location.Location
 import androidx.compose.material3.DrawerState
-import androidx.compose.material3.DrawerValue
 import com.csci448.hadam.hadam_a4.data.History
 import kotlinx.coroutines.flow.StateFlow
-import java.util.UUID
 
 interface IHistoryViewModel {
     val historyListState: StateFlow<List<History>>

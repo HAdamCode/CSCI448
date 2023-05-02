@@ -13,7 +13,7 @@ class HistoryRepo
 private constructor(
     private val historyDao: HistoryDao,
     private val coroutineScope: CoroutineScope = GlobalScope
-){
+) {
     companion object {
         private const val LOG_TAG = "448.IMDBRepo"
         private var INSTANCE: HistoryRepo? = null
@@ -49,10 +49,4 @@ private constructor(
             historyDao.deleteHistory(history)
         }
     }
-
-//    fun toggleFavorite(id: String, isFavorite: Boolean) {
-//        coroutineScope.launch {
-//            historyDao.toggleFavorite(id, isFavorite)
-//        }
-//    }
 }

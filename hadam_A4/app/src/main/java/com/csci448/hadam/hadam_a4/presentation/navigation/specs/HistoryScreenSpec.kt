@@ -1,6 +1,5 @@
 package com.csci448.hadam.hadam_a4.presentation.navigation.specs
 
-import android.app.Activity
 import android.content.Context
 import android.util.Log
 import androidx.activity.result.ActivityResultLauncher
@@ -80,7 +79,8 @@ object HistoryScreenSpec : IScreenSpec {
         val drawerValue = historyViewModel.currentDrawerState.collectAsStateWithLifecycle().value
 
         IconButton(onClick = {
-            coroutineScope.launch { drawerValue.open() }}) {
+            coroutineScope.launch { drawerValue.open() }
+        }) {
             Icon(
                 imageVector = Icons.Filled.Menu,
                 contentDescription = stringResource(R.string.about_name)

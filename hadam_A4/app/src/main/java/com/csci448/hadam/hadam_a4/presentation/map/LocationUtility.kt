@@ -36,11 +36,8 @@ class LocationUtility(private val context: Context) {
         get() = mCurrentLocationStateFlow.asStateFlow()
 
     private val mCurrentAddressStateFlow: MutableStateFlow<String> = MutableStateFlow("")
-    val currentAddressStateFlow: StateFlow<String>
-        get() = mCurrentAddressStateFlow.asStateFlow()
 
     private val mIsLocationAvailableStateFlow = MutableStateFlow(false)
-    val isLocationAvailableStateFlow: StateFlow<Boolean> = mIsLocationAvailableStateFlow
 
     private val geocoder = Geocoder(context)
 
