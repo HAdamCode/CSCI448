@@ -9,6 +9,7 @@ import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NamedNavArgument
@@ -18,6 +19,7 @@ import androidx.navigation.NavType
 import androidx.navigation.navArgument
 import com.csci448.hadam.hadam_a4.MainActivity
 import com.csci448.hadam.hadam_a4.R
+import com.csci448.hadam.hadam_a4.presentation.history.HistoryListScreen
 import com.csci448.hadam.hadam_a4.presentation.map.LocationUtility
 import com.csci448.hadam.hadam_a4.presentation.viewmodel.IHistoryViewModel
 import kotlinx.coroutines.CoroutineScope
@@ -63,7 +65,8 @@ object HistoryScreenSpec : IScreenSpec {
         permissionLauncher: ActivityResultLauncher<Array<String>>,
         locationUtility: LocationUtility
     ) {
-
+        val histories = historyViewModel.historyListState.collectAsState()
+        HistoryListScreen(histories = histories.value)
     }
 
     @Composable
@@ -83,5 +86,19 @@ object HistoryScreenSpec : IScreenSpec {
                 contentDescription = stringResource(R.string.about_name)
             )
         }
+    }
+
+    @Composable
+    override fun FABActions(
+        historyViewModel: IHistoryViewModel,
+        navController: NavHostController,
+        navBackStackEntry: NavBackStackEntry?,
+        context: Context,
+        coroutineScope: CoroutineScope,
+        locationUtility: LocationUtility,
+        activity: MainActivity,
+        permissionLauncher: ActivityResultLauncher<Array<String>>,
+        route: String
+    ) {
     }
 }

@@ -149,4 +149,8 @@ class LocationUtility(private val context: Context) {
             }
         }
     }
+
+    fun resetLocation() {
+        mCurrentLocationStateFlow.value = null
+    }
 }

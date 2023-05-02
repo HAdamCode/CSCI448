@@ -1,5 +1,6 @@
 package com.csci448.hadam.hadam_a4.util.api
 
+import com.csci448.hadam.hadam_a4.data.ApiDataClass
 import com.csci448.hadam.hadam_a4.data.Weather
 import retrofit2.Call
 import retrofit2.http.GET
@@ -25,6 +26,6 @@ interface WeatherApiService {
     @GET("weather")
     fun getWeather(@Query("lat") latitude: Double,
                    @Query("lon") longitude: Double,
-                   @Query("units") units: String = "metric",
-                   @Query("appid") apiKey: String): Call<Weather>
+                   @Query("units") units: String = "imperial",
+                   @Query("appid") apiKey: String): Call<ApiDataClass>
 }

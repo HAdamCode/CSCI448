@@ -1,5 +1,6 @@
 package com.csci448.hadam.hadam_a4.presentation.viewmodel
 
+import android.location.Location
 import android.util.Log
 import androidx.compose.material3.DrawerState
 import androidx.compose.material3.DrawerValue
@@ -39,6 +40,21 @@ class HistoryViewModel(private val historyRepo: HistoryRepo) : IHistoryViewModel
     override val currentDrawerState: StateFlow<DrawerState>
         get() = mCurrentDrawerState.asStateFlow()
 
+    private val mSaveLocationsEnabled: MutableStateFlow<Boolean> =
+        MutableStateFlow(true)
+    override val saveLocationsEnabled: StateFlow<Boolean>
+        get() = mSaveLocationsEnabled.asStateFlow()
+
+    private val mCurrentLocation: MutableStateFlow<Location?> =
+        MutableStateFlow(null)
+    override val currentLocation: StateFlow<Location?>
+        get() = mCurrentLocation.asStateFlow()
+
+    private val mCurrentLocationList: MutableStateFlow<List<History?>> =
+        MutableStateFlow(emptyList())
+    override val currentLocationList: StateFlow<List<History?>>
+        get() = mCurrentLocationList.asStateFlow()
+
 
     init {
         viewModelScope.launch {
@@ -64,8 +80,26 @@ class HistoryViewModel(private val historyRepo: HistoryRepo) : IHistoryViewModel
         historyRepo.addHistory(historyToAdd)
     }
 
-    override fun deleteHistory(historyToDelete: History) {
-        Log.d(LOG_TAG, "deleting video $historyToDelete")
-        historyRepo.deleteHistory(historyToDelete)
+    override fun deleteHistory() {
+        Log.d(LOG_TAG, "deleting history")
+        mHistories.value.forEach {historyToDelete ->
+            historyRepo.deleteHistory(historyToDelete)
+        }
+    }
+
+    override fun updateSaveEnabled() {
+        val enabled = mSaveLocationsEnabled.value
+        mSaveLocationsEnabled.value = !enabled
+    }
+
+    override fun updateCurrentLocation(history: History?) {
+        mCurrentHistoryState.value = history
+    }
+
+    override fun updateCurrentLocationList(history: History?) {
+//        var hist: List<History>
+//        mCurrentLocationList.value.forEach {
+//            hist.ap
+//        }
     }
 }

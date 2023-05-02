@@ -23,6 +23,7 @@ import androidx.navigation.navArgument
 import com.csci448.hadam.hadam_a4.MainActivity
 import com.csci448.hadam.hadam_a4.R
 import com.csci448.hadam.hadam_a4.presentation.map.LocationUtility
+import com.csci448.hadam.hadam_a4.presentation.settings.SettingsScreen
 import com.csci448.hadam.hadam_a4.presentation.viewmodel.IHistoryViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
@@ -67,7 +68,7 @@ object SettingsScreenSpec : IScreenSpec {
         permissionLauncher: ActivityResultLauncher<Array<String>>,
         locationUtility: LocationUtility
     ) {
-
+        SettingsScreen(historyViewModel = historyViewModel)
     }
 
     @Composable
@@ -87,5 +88,19 @@ object SettingsScreenSpec : IScreenSpec {
                 contentDescription = stringResource(R.string.about_name)
             )
         }
+    }
+
+    @Composable
+    override fun FABActions(
+        historyViewModel: IHistoryViewModel,
+        navController: NavHostController,
+        navBackStackEntry: NavBackStackEntry?,
+        context: Context,
+        coroutineScope: CoroutineScope,
+        locationUtility: LocationUtility,
+        activity: MainActivity,
+        permissionLauncher: ActivityResultLauncher<Array<String>>,
+        route: String
+    ) {
     }
 }

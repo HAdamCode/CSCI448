@@ -132,9 +132,8 @@ sealed interface IScreenSpec {
     )
 
 
-    @OptIn(ExperimentalMaterial3Api::class)
     @Composable
-    private fun FABContent(
+    fun FABContent(
         historyViewModel: IHistoryViewModel,
         navController: NavHostController,
         navBackStackEntry: NavBackStackEntry?,
@@ -146,19 +145,30 @@ sealed interface IScreenSpec {
         route: String
     ) {
         if (route == "map") {
-            FloatingActionButton(
-                // on below line we are adding on click for our fab
-                onClick = {
-                    locationUtility.checkPermissionAndGetLocation(
-                        activity,
-                        permissionLauncher
-                    )
-                },
-                contentColor = Color.White,
-
-                ) {
-                Icon(Icons.Filled.Add, "")
-            }
+            FABActions(
+                historyViewModel = historyViewModel,
+                navController = navController,
+                navBackStackEntry = navBackStackEntry,
+                context = context,
+                coroutineScope = coroutineScope,
+                locationUtility = locationUtility,
+                activity = activity,
+                permissionLauncher = permissionLauncher,
+                route = route
+            )
         }
     }
+
+    @Composable
+    fun FABActions(
+        historyViewModel: IHistoryViewModel,
+        navController: NavHostController,
+        navBackStackEntry: NavBackStackEntry?,
+        context: Context,
+        coroutineScope: CoroutineScope,
+        locationUtility: LocationUtility,
+        activity: MainActivity,
+        permissionLauncher: ActivityResultLauncher<Array<String>>,
+        route: String
+    )
 }
