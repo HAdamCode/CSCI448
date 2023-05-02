@@ -20,15 +20,17 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import com.csci448.hadam.hadam_a4.presentation.viewmodel.IHistoryViewModel
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import java.text.DecimalFormat
 
 @Composable
 fun SettingsScreen(
     historyViewModel: IHistoryViewModel,
-    context: Context
+    context: Context,
+    coroutineScope: CoroutineScope
 ) {
-    val saveEnabled = historyViewModel.saveLocationsEnabled.collectAsStateWithLifecycle().value
+    val saveEnabled = historyViewModel.saveLocationsEnabled.collectAsStateWithLifecycle(context = coroutineScope.coroutineContext).value
     val histories = historyViewModel.currentLocationList.collectAsStateWithLifecycle().value
     Column() {
         Row(

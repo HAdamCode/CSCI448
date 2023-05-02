@@ -94,7 +94,7 @@ fun MapScreen(
         GoogleMap(
             modifier = Modifier.fillMaxSize(),
             cameraPositionState = cameraPositionState,
-            uiSettings = MapUiSettings(zoomControlsEnabled = false),
+            uiSettings = MapUiSettings(zoomControlsEnabled = false, mapToolbarEnabled = false),
             properties = MapProperties(),
         ) {
             histories.forEach { history ->

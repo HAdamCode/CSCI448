@@ -8,13 +8,18 @@ import androidx.activity.compose.setContent
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.IntentSenderRequest
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.Button
+import androidx.compose.material3.Card
 import androidx.compose.material3.DrawerValue
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FabPosition
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
@@ -32,6 +37,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavBackStackEntry
@@ -107,6 +114,7 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun MainActivityContent(
     historyViewModel: IHistoryViewModel,
@@ -129,42 +137,56 @@ private fun MainActivityContent(
             ModalNavigationDrawer(
                 drawerState = drawerState,
                 drawerContent = {
-                    ModalDrawerSheet() {
-                        Button(
+                    ModalDrawerSheet(modifier = Modifier.fillMaxWidth(.7f)) {
+                        Text(text = "Map Menu", fontSize = 20.sp, modifier = Modifier.padding(10.dp))
+                        Card(
                             onClick = {
                                 navController.navigate(route = MapScreenSpec.route)
                                 coroutineScope.launch { drawerState.close() }
                             },
-                            modifier = Modifier.fillMaxWidth(.5f)
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .fillMaxHeight(.05f),
+                            shape = RoundedCornerShape(0.dp)
                         ) {
-                            Text("Map")
+                            Text("Map", modifier = Modifier.padding(7.dp))
                         }
-                        Button(
+//                        Spacer(modifier = Modifier.padding(5.dp))
+                        Card(
                             onClick = {
                                 navController.navigate(route = HistoryScreenSpec.route)
                                 coroutineScope.launch { drawerState.close() }
                             },
-                            modifier = Modifier.fillMaxWidth(.5f)
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .fillMaxHeight(.05f),
+                            shape = RoundedCornerShape(0.dp)
                         ) {
-                            Text("History")
+                            Text("History", modifier = Modifier.padding(7.dp))
                         }
-                        Button(
+                        Card(
                             onClick = {
                                 navController.navigate(route = SettingsScreenSpec.route)
                                 coroutineScope.launch { drawerState.close() }
                             },
-                            modifier = Modifier.fillMaxWidth(.5f)
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .fillMaxHeight(.05f),
+                            shape = RoundedCornerShape(0.dp)
                         ) {
-                            Text("Settings")
+                            Text("Settings", modifier = Modifier.padding(7.dp))
                         }
-                        Button(
+                        Card(
                             onClick = {
                                 navController.navigate(route = AboutScreenSpec.route)
                                 coroutineScope.launch { drawerState.close() }
                             },
-                            modifier = Modifier.fillMaxWidth(.5f)
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .fillMaxHeight(.06f),
+                            shape = RoundedCornerShape(0.dp)
                         ) {
-                            Text("About")
+                            Text("About", modifier = Modifier.padding(7.dp))
                         }
                         // this is already a column scope, put your drawer items in here
                     }
