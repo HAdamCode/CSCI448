@@ -29,6 +29,7 @@ fun SettingsScreen(
     context: Context
 ) {
     val saveEnabled = historyViewModel.saveLocationsEnabled.collectAsStateWithLifecycle().value
+    val histories = historyViewModel.currentLocationList.collectAsStateWithLifecycle().value
     Column() {
         Row(
             modifier = Modifier
@@ -81,6 +82,13 @@ fun SettingsScreen(
                                 "History deleted",
                                 Toast.LENGTH_LONG
                             ).show()
+
+                            if (histories.isEmpty()){
+                                historyViewModel.updateCurrentLocation(null)
+                            }
+                            else {
+                                historyViewModel.updateCurrentLocation(histories.first())
+                            }
                         },
                         content = { Text(text = "Yes") }
                     )
