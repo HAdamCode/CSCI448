@@ -68,7 +68,7 @@ object SettingsScreenSpec : IScreenSpec {
         permissionLauncher: ActivityResultLauncher<Array<String>>,
         locationUtility: LocationUtility
     ) {
-        SettingsScreen(historyViewModel = historyViewModel)
+        SettingsScreen(historyViewModel = historyViewModel, context = context)
     }
 
     @Composable
