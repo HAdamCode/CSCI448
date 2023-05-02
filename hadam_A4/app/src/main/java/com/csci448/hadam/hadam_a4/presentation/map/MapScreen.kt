@@ -102,31 +102,47 @@ fun MapScreen(
                 val markerState = MarkerState().apply {
                     position = LatLng(history.lat, history.lon)
                 }
-                var clicked = remember {
+                val clicked = remember {
                     mutableStateOf(false)
                 }
                 Marker(
                     state = markerState,
                     title = "Lat/Lng: (${history.lat}, ${history.lon}\n",
-                    onClick = { clicked.value },
-//                    onInfoWindowClick = {
-//                        val current =
-//                            history.dateTime.format(DateTimeFormatter.ofPattern("MM/dd/yy HH:mm"))
-//                        Toast.makeText(
-//                            context,
-//                            "Lat/Lng: (${DecimalFormat("#.#").format(history.lat)}, ${
-//                                DecimalFormat(
-//                                    "#.#"
-//                                ).format(history.lon)
-//                            })  " +
-//                                    "$current\n" +
-//                                    "Temp: ${history.temp} (${history.description})",
-//                            Toast.LENGTH_LONG
-//                        ).show()
-//                    }
+                    onClick = {
+                        val current =
+                            history.dateTime.format(DateTimeFormatter.ofPattern("MM/dd/yy HH:mm"))
+                        Toast.makeText(
+                            context,
+                            "Lat/Lng: (${DecimalFormat("#.#").format(history.lat)}, ${
+                                DecimalFormat(
+                                    "#.#"
+                                ).format(history.lon)
+                            })  " +
+                                    "$current\n" +
+                                    "Temp: ${history.temp} (${history.description})",
+                            Toast.LENGTH_LONG
+                        ).show()
+                        false
+                    },
                 )
+                if (clicked.value) {
+                    val current =
+                        history.dateTime.format(DateTimeFormatter.ofPattern("MM/dd/yy HH:mm"))
+                    Toast.makeText(
+                        context,
+                        "Lat/Lng: (${DecimalFormat("#.#").format(history.lat)}, ${
+                            DecimalFormat(
+                                "#.#"
+                            ).format(history.lon)
+                        })  " +
+                                "$current\n" +
+                                "Temp: ${history.temp} (${history.description})",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
             }
-            val notSavedHistories = historyViewModel.currentLocationList.collectAsStateWithLifecycle().value
+            val notSavedHistories =
+                historyViewModel.currentLocationList.collectAsStateWithLifecycle().value
             notSavedHistories.forEach { history ->
                 if (history != null) {
                     val markerState = MarkerState().apply {
@@ -135,8 +151,7 @@ fun MapScreen(
                     Marker(
                         state = markerState,
                         title = "Lat/Lng: (${history.lat}, ${history.lon}\n",
-                        onClick = { false },
-                        onInfoWindowClick = {
+                        onClick = {
                             val current =
                                 history.dateTime.format(DateTimeFormatter.ofPattern("MM/dd/yy HH:mm"))
                             Toast.makeText(
@@ -150,7 +165,8 @@ fun MapScreen(
                                         "Temp: ${history.temp} (${history.description})",
                                 Toast.LENGTH_LONG
                             ).show()
-                        }
+                            false
+                        },
                     )
                 }
             }
