@@ -23,7 +23,8 @@ fun AboutScreen() {
             " weather data that you have logged in the app. Records are sorted oldest to newest by the" +
             " time that you checked in to that location.\n\nUse the hamburger menu to navigate between" +
             " pages, but if you are here then you already figured that part out."
-    Column(modifier = Modifier.fillMaxWidth()) {
+    val scroll = rememberScrollState(0)
+    Column(modifier = Modifier.fillMaxWidth().verticalScroll(scroll)) {
         Text(
             text = "WeathrTrackr",
             fontSize = 45.sp,
@@ -69,13 +70,11 @@ fun AboutScreen() {
             modifier = Modifier.fillMaxWidth(),
             fontSize = 20.sp
         )
-        val scroll = rememberScrollState(0)
         Text(
             text = aboutText,
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(10.dp)
-                .verticalScroll(scroll),
+                .padding(10.dp),
             fontSize = 20.sp
         )
     }
