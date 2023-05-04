@@ -8,7 +8,6 @@ import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NamedNavArgument
@@ -64,8 +63,11 @@ object HistoryScreenSpec : IScreenSpec {
         permissionLauncher: ActivityResultLauncher<Array<String>>,
         locationUtility: LocationUtility
     ) {
-        val histories = historyViewModel.historyListState.collectAsState()
-        HistoryListScreen(histories = histories.value)
+        val histories =
+            historyViewModel.historyListState.collectAsStateWithLifecycle(context = coroutineScope.coroutineContext)
+        HistoryListScreen(histories = histories.value, dismissed = { history ->
+            historyViewModel.deleteHistory(history)
+        })
     }
 
     @Composable
